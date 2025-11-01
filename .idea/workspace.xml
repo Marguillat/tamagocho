@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="289412ee-9027-4cf3-b371-0a040ca3258d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/accessories.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/accessories.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/shop.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/shop.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/creature/shop-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/creature/shop-modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/models/accessory.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/models/accessory.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/accessory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/accessory.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +122,7 @@
       <workItem from="1761896817531" duration="4974000" />
       <workItem from="1761915159804" duration="6169000" />
       <workItem from="1761998794577" duration="190000" />
-      <workItem from="1761999015262" duration="2034000" />
+      <workItem from="1761999015262" duration="4301000" />
     </task>
     <servers />
   </component>

@@ -6,6 +6,9 @@ import { toast } from 'react-toastify'
 import { xpBoosts } from '@/config/shop.config'
 import { XPBoostCard } from './xp-boost-card'
 import { buyXpBoost } from '@/actions/shop.actions'
+import Button from "@/components/button";
+import {createAccessoryForMonster} from "@/actions/accessories.actions";
+import {AccessoryData} from "@/types/accessory";
 
 interface ShopModalProps {
   /** Fonction pour fermer le modal */
@@ -92,7 +95,17 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
       onClose()
     }
   }
-
+  
+  const handleAccessoryPurchase = async (): Promise<void> => {
+    //TODO changer l'implémentation de base de l'accessoire
+    const accessoryData : AccessoryData = {
+      type: 'hat',
+      mainColor: '#FF5733',
+      price: 500
+    }
+    
+    void await createAccessoryForMonster(creatureId,accessoryData)
+  }
   return (
     <div
       className='fixed inset-0 z-50 bg-black/60 backdrop-blur-md animate-fade-in'
@@ -138,6 +151,10 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
                   Faites progresser votre créature plus rapidement !
                 </p>
               </div>
+              
+              <Button onClick={()=>void handleAccessoryPurchase()}>
+                acheter un accessoire
+              </Button>
 
               {/* Grille des boosts */}
               <div className='grid grid-cols-1 md:grid-cols-4 gap-6 px-2 py-8 pb-2'>

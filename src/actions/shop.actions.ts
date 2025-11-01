@@ -7,6 +7,7 @@ import { auth } from '@/lib/auth'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import {AccessoryData} from "@/types/accessory";
+import {subtractKoins} from "@/actions/wallet.actions";
 
 export async function buyXpBoost (creatureId: string, boostId: string): Promise<void> {
   console.log(`Achat du boost ${boostId} pour la créature ${creatureId}`)
@@ -57,8 +58,6 @@ export async function buyAccessory (monsterId:string, accessoryData:AccessoryDat
   const { user } = session
 
   await connectMongooseToDatabase()
-  
-  //TODO 
-  // - enlever le prix de l'accessoire
-  // - activer creation accessoire
+
+  await subtractKoins(price)
 }

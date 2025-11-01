@@ -9,6 +9,7 @@ const accessorySchema = new Schema({
         unique: true
     },
     monsterId:{
+        type: Schema.Types.ObjectId,
         ref: 'monster',
         required: true,
     },
