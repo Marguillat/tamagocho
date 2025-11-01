@@ -6,6 +6,7 @@ import Monster from '@/db/models/monster.model'
 import { auth } from '@/lib/auth'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
+import {AccessoryData} from "@/types/accessory";
 
 export async function buyXpBoost (creatureId: string, boostId: string): Promise<void> {
   console.log(`Achat du boost ${boostId} pour la créature ${creatureId}`)
@@ -43,4 +44,21 @@ export async function buyXpBoost (creatureId: string, boostId: string): Promise<
   }
   await monster.save()
   revalidatePath(`/creature/${creatureId}`)
+}
+
+export async function buyAccessory (monsterId:string, accessoryData:AccessoryData,price:number): Promise<void> {
+  console.log(`Achat de l'accessoire ${accessoryData.type} pour le monstre ${monsterId}`)
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
+  if (session === null || session === undefined) {
+    throw new Error('User not authenticated')
+  }
+  const { user } = session
+
+  await connectMongooseToDatabase()
+  
+  //TODO 
+  // - enlever le prix de l'accessoire
+  // - activer creation accessoire
 }

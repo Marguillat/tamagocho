@@ -32,6 +32,12 @@ const monsterSchema = new Schema({
     enum: ['happy', 'sad', 'angry', 'hungry', 'sleepy'],
     default: 'happy'
   },
+  equipedAccessories: {
+      type: [Schema.Types.ObjectId],
+      ref: 'accessory',
+      default: [],
+      required: false
+  },  
   ownerId: {
     type: Schema.Types.ObjectId,
     ref: 'user',
