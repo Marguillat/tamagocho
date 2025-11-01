@@ -5,50 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="289412ee-9027-4cf3-b371-0a040ca3258d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/public/documentation/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/404.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/architecture/clean-architecture/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/architecture/clean-architecture/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/architecture/solid-principles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/architecture/solid-principles/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/0bfa9336.3b2aa0cd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/0fd7c94d.2f8982b2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/18c41134.79df8af6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/24bf877c.7adc85ea.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/2adea71c.56dcd720.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/39134e2d.75c92e58.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/4c956ea8.5e231c70.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/832e800d.8b4839d6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/8afa1596.9eb1a7dd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/b7be9b23.45a52123.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/b9152c92.d757be2b.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/dd412571.a29a10f1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/dff1c289.6703fa8a.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/e44a2883.cccbf04c.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/f6b45f25.d5f17499.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/assets/js/runtime~main.c1217609.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/authentication/auth-system/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/authentication/auth-system/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/components/ui-components/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/components/ui-components/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/cron/api-reference/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/cron/api-reference/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/cron/configuration/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/cron/configuration/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/cron/overview/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/cron/overview/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/cron/quickstart/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/cron/quickstart/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/cron/troubleshooting/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/cron/troubleshooting/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/development-guide/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/development-guide/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/intro/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/markdown-page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/markdown-page/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/monsters/monster-system/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/monsters/monster-system/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-basics/congratulations/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-basics/congratulations/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-basics/create-a-blog-post/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-basics/create-a-blog-post/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-basics/create-a-document/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-basics/create-a-document/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-basics/create-a-page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-basics/create-a-page/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-basics/deploy-your-site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-basics/deploy-your-site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-basics/markdown-features/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-basics/markdown-features/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-extras/manage-docs-versions/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-extras/manage-docs-versions/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/tutorial-extras/translate-your-site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/tutorial-extras/translate-your-site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/documentation/vercel-configuration/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/documentation/vercel-configuration/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/shop.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/shop.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/create-monster-form.validation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/create-monster-form.validation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/models/monster.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/models/monster.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/accessory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/accessory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,33 +51,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-LSP window/logMessage: errors, warnings&quot;: &quot;LSP log: errors, warnings&quot;,
-    &quot;Notification.DoNotAsk-LSP window/logMessage: errors, warnings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/user/DEV/dev-front/tamagocho&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/user/DEV/dev-front/tamagocho/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Notification.DisplayName-DoNotAsk-LSP window/logMessage: errors, warnings": "LSP log: errors, warnings",
+    "Notification.DoNotAsk-LSP window/logMessage: errors, warnings": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/user/DEV/dev-front/tamagocho",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "A:\\programation\\tamagocho\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RiderTodoViewSettings" groupByProject="false" />
   <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
@@ -157,6 +118,8 @@
       <workItem from="1761862688932" duration="14000" />
       <workItem from="1761896817531" duration="4974000" />
       <workItem from="1761915159804" duration="6169000" />
+      <workItem from="1761998794577" duration="190000" />
+      <workItem from="1761999015262" duration="2034000" />
     </task>
     <servers />
   </component>
