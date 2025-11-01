@@ -6,8 +6,9 @@ import Monster from "@/db/models/monster.model"
 import {auth} from "@/lib/auth";
 import mongoose from "mongoose";
 import {headers} from "next/headers";
-import {AccessoryData} from "@/types/accessory";
+import {AccessoryData, DBAccessory} from "@/types/accessory";
 import {buyAccessory} from "@/actions/shop.actions";
+import {ObjectId} from "mongodb";
 
 
 export async function createAccessoryForMonster(monsterId:string, accessoryData:AccessoryData): Promise<void> {
@@ -37,8 +38,8 @@ export async function createAccessoryForMonster(monsterId:string, accessoryData:
   
 }
 
-//TODO - ajouter id a monster accessoire (create server action) 
-export async function equipAccessoryToMonster(monsterId:string, accessoryId:string): Promise<void> {
+
+export async function toggleAccessoryToMonster(monsterId:string, accessoryId:string): Promise<void> {
   await connectMongooseToDatabase()
 
   const session = await auth.api.getSession({
@@ -58,8 +59,37 @@ export async function equipAccessoryToMonster(monsterId:string, accessoryId:stri
   if (accessory === null || accessory === undefined) {
     throw new Error('Accessory not found for this monster')
   }
+  
+  const accessoryObjectId = new mongoose.Types.ObjectId(accessoryId)
+  if (monster.equipedAccessories.includes(accessoryId)) {
+    monster.equipedAccessories = monster.equipedAccessories.filter((id:ObjectId) => !id.equals(accessoryObjectId))
+    monster.markModified('equipedAccessories')
+    await monster.save()
+    return
+  }
 
   monster.equipedAccessories.push(accessoryId) 
   monster.markModified('equipedAccessories')
   await monster.save()
+  return
 }  
+
+export async function getAccessoriesForMonster(monsterId:string): Promise<DBAccessory[] | void> {
+  try {
+    await connectMongooseToDatabase()
+
+    const session = await auth.api.getSession({
+      headers: await headers()
+    })
+
+    if (session === null || session === undefined) {
+      throw new Error('User not authenticated')
+    }
+
+    const accessories = await Accessory.find({monsterId: monsterId}).exec()
+    return JSON.parse(JSON.stringify(accessories))
+  } catch (error) {
+    console.error('Error fetching accessories for monster:', error)
+  }
+}
+  

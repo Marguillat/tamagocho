@@ -6,6 +6,7 @@ import type { MonsterAction } from '@/hooks/monsters'
 import { parseMonsterTraits } from '@/lib/utils'
 import { CreatureMonsterDisplay } from './creature-monster-display'
 import { CreatureStatsPanel } from './creature-stats-panel'
+import { MonsterAccessories } from './monster-accessories'
 import { LevelUpAnimation } from './level-up-animation'
 import { ShopModal } from './shop-modal'
 import { useRouter } from 'next/navigation'
@@ -96,7 +97,7 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
 
     const interval = setInterval(() => {
       void fetchMonster()
-    }, 1000)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [monster, currentMonster])
@@ -188,11 +189,12 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
               currentAction={currentAction}
               onAction={handleAction}
               monsterId={currentMonster._id}
+              equipedAccessoriesIds={currentMonster.equipedAccessories ?? []}
             />
           </div>
 
-          {/* Colonne droite : Statistiques */}
-          <div>
+          {/* Colonne droite : Statistiques + Accessoires */}
+          <div className='space-y-6'>
             <CreatureStatsPanel
               level={currentMonster.level}
               xp={currentMonster.xp ?? 0}
@@ -202,6 +204,12 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
               updatedAt={currentMonster.updatedAt}
               showXpGain={showXpGain}
               xpGained={xpGained}
+            />
+            
+            {/* Accessoires du monstre */}
+            <MonsterAccessories 
+              monsterId={currentMonster._id}
+              equipedAccessories={currentMonster.equipedAccessories ?? []}
             />
           </div>
         </div>

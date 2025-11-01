@@ -1,7 +1,13 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { AnimatedMonster, MonsterActions } from '@/components/monsters'
 import type { MonsterTraits, MonsterState } from '@/types/monster'
 import type { MonsterAction } from '@/hooks/monsters'
+import type { EquippedAccessory } from '@/components/monsters/pixel-monster'
 import { getStateLabel } from '@/lib/utils'
+import { getAccessoriesForMonster } from '@/actions/accessories.actions'
+import { accessoriesCatalog, type AccessoryType } from '@/config/accessories.config-v2'
 
 /**
  * Props pour le composant CreatureMonsterDisplay
@@ -19,6 +25,8 @@ interface CreatureMonsterDisplayProps {
   onAction: (action: MonsterAction) => void
   /** ID du monstre */
   monsterId: string
+  /** IDs des accessoires équipés */
+  equipedAccessoriesIds: string[]
 }
 
 /**
@@ -41,8 +49,43 @@ export function CreatureMonsterDisplay ({
   level,
   currentAction,
   onAction,
-  monsterId
+  monsterId,
+  equipedAccessoriesIds
 }: CreatureMonsterDisplayProps): React.ReactNode {
+  const [equippedAccessories, setEquippedAccessories] = useState<EquippedAccessory[]>([])
+
+  // Charger les accessoires équipés
+  useEffect(() => {
+    const loadAccessories = async (): Promise<void> => {
+      try {
+        const accessories = await getAccessoriesForMonster(monsterId)
+        
+        // Vérifier que accessories n'est pas undefined
+        if (accessories === undefined) return
+        
+        // Filtrer uniquement les équipés
+        const equipped = accessories.filter((acc: any) => 
+          equipedAccessoriesIds.includes(acc._id)
+        )
+
+        // Convertir en format pour le rendu
+        const accessoriesData: EquippedAccessory[] = equipped.map((acc: any) => {
+          const config = accessoriesCatalog.find(c => c.type === acc.type)
+          return {
+            type: acc.type as AccessoryType,
+            mainColor: acc.mainColor ?? config?.mainColor ?? '#CCC'
+          }
+        })
+
+        setEquippedAccessories(accessoriesData)
+      } catch (error) {
+        console.error('Erreur lors du chargement des accessoires:', error)
+      }
+    }
+
+    void loadAccessories()
+  }, [monsterId, equipedAccessoriesIds])
+
   // Couleurs selon l'état
   const stateColors: Record<string, { bg: string, text: string, emoji: string }> = {
     happy: { bg: 'from-green-400 to-emerald-500', text: 'Joyeux', emoji: '😊' },
@@ -69,6 +112,7 @@ export function CreatureMonsterDisplay ({
             traits={traits}
             level={level}
             currentAction={currentAction}
+            equippedAccessories={equippedAccessories}
           />
         </div>
 
