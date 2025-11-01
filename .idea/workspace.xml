@@ -5,12 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="289412ee-9027-4cf3-b371-0a040ca3258d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_ARCHITECTURE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_COMMANDS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_GLOBAL_OVERVIEW.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_INTEGRATION_GUIDE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_MIGRATION_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_ON_MONSTER_COMPLETE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_PIXEL_ART_SYSTEM.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_QUICK_START.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_SHOP_IMPLEMENTATION.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_SHOP_QUICKSTART.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_TESTING_GUIDE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ACCESSORIES_VISUAL_EXAMPLES.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/DOCUMENTATION_INDEX.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/FINAL_CONCLUSION.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/IMPLEMENTATION_COMPLETE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/IMPLEMENTATION_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MONSTER_ACCESSORIES_COMPONENT.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MONSTER_ACCESSORIES_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MONSTER_ACCESSORIES_TESTING.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/SHOP_MODAL_FIX_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/SHOP_MODAL_OVERFLOW_FIX.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/SHOP_MODAL_TEST_CHECKLIST.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/accessories/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/accessories/pixel-accessory.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/creature/monster-accessories.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/shop/accessories-shop-v2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/shop/accessories-shop.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/accessories.config-v2.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/accessories.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/accessories/accessory-generator.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRON_SUMMARY.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CRON_SUMMARY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MIGRATION_NOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/MIGRATION_NOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERCEL_DEPLOYMENT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/VERCEL_DEPLOYMENT.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/accessories.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/accessories.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/shop.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/shop.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/creature/creature-monster-display.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/creature/creature-monster-display.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/creature/creature-page-client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/creature/creature-page-client.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/creature/shop-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/creature/shop-modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/models/accessory.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/models/accessory.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/accessory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/accessory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/monsters/animated-monster.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/monsters/animated-monster.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/monsters/pixel-monster.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/monsters/pixel-monster.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +112,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.chat.ChatConfigurable",
     "to.speed.mode.migration.done": "true",
     "ts.external.directory.path": "A:\\programation\\tamagocho\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
@@ -122,7 +157,7 @@
       <workItem from="1761896817531" duration="4974000" />
       <workItem from="1761915159804" duration="6169000" />
       <workItem from="1761998794577" duration="190000" />
-      <workItem from="1761999015262" duration="4301000" />
+      <workItem from="1761999015262" duration="12037000" />
     </task>
     <servers />
   </component>
