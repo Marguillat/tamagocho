@@ -1,10 +1,10 @@
 'use client'
 
 import type React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { backgroundsCatalog } from '@/config/backgrounds.config'
-import { createBackgroundForMonster } from '@/actions/backgrounds.actions'
-import type { BackgroundData, BackgroundConfig } from '@/types/background'
+import { createBackgroundForMonster, getBackgroundsForMonster } from '@/actions/backgrounds.actions'
+import type { BackgroundData, BackgroundConfig, DBBackground } from '@/types/background'
 
 interface BackgroundsShopProps {
   monsterId: string
@@ -32,6 +32,26 @@ export function BackgroundsShop ({
   const [isPurchasing, setIsPurchasing] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [ownedBackgrounds, setOwnedBackgrounds] = useState<DBBackground[]>([])
+  const [isLoadingOwned, setIsLoadingOwned] = useState(true)
+
+  // Charger les backgrounds possédés au montage
+  useEffect(() => {
+    async function loadOwnedBackgrounds(): Promise<void> {
+      try {
+        const backgrounds = await getBackgroundsForMonster(monsterId)
+        if (backgrounds !== undefined) {
+          setOwnedBackgrounds(backgrounds)
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement des backgrounds possédés:', error)
+      } finally {
+        setIsLoadingOwned(false)
+      }
+    }
+
+    void loadOwnedBackgrounds()
+  }, [monsterId])
 
   const categories = [
     { id: 'all' as const, name: 'Tous', emoji: '🎨' },
@@ -45,6 +65,15 @@ export function BackgroundsShop ({
   const filteredBackgrounds = selectedCategory === 'all'
     ? backgroundsCatalog
     : backgroundsCatalog.filter(bg => bg.category === selectedCategory)
+
+  /**
+   * Vérifie si un background est déjà possédé par le monstre
+   * @param {string} url - URL du background
+   * @returns {boolean} True si le background est possédé
+   */
+  function isBackgroundOwned(url: string): boolean {
+    return ownedBackgrounds.some(bg => bg.url === url)
+  }
 
   async function handlePurchase (background: BackgroundConfig): Promise<void> {
     if (currentBalance < background.price) {
@@ -65,6 +94,12 @@ export function BackgroundsShop ({
       }
 
       await createBackgroundForMonster(monsterId, backgroundData)
+      
+      // Recharger les backgrounds possédés
+      const updatedBackgrounds = await getBackgroundsForMonster(monsterId)
+      if (updatedBackgrounds !== undefined) {
+        setOwnedBackgrounds(updatedBackgrounds)
+      }
       
       setSuccess(`${background.emoji} ${background.name} acheté !`)
       setTimeout(() => { setSuccess(null) }, 3000)
@@ -133,8 +168,10 @@ export function BackgroundsShop ({
       {/* Grille de backgrounds */}
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
         {filteredBackgrounds.map(background => {
+          const isOwned = isBackgroundOwned(background.url)
           const canAfford = currentBalance >= background.price
           const isLoading = isPurchasing === background.id
+          const canPurchase = canAfford && !isOwned && !isLoading
 
           return (
             <div
@@ -145,14 +182,22 @@ export function BackgroundsShop ({
                 p-5 shadow-lg
                 ring-2 ring-white/80
                 transition-all duration-300
-                ${canAfford ? 'hover:scale-105 hover:shadow-xl' : 'opacity-75'}
+                ${canPurchase ? 'hover:scale-105 hover:shadow-xl' : 'opacity-75'}
                 ${background.popular === true ? 'ring-4 ring-yellow-400' : ''}
+                ${isOwned ? 'ring-4 ring-green-400' : ''}
               `}
             >
               {/* Badge populaire */}
-              {background.popular === true && (
+              {background.popular === true && !isOwned && (
                 <div className='absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md z-10'>
                   ⭐ Populaire
+                </div>
+              )}
+
+              {/* Badge possédé */}
+              {isOwned && (
+                <div className='absolute top-2 right-2 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md z-10'>
+                  ✅ Possédé
                 </div>
               )}
 
@@ -205,21 +250,31 @@ export function BackgroundsShop ({
               {/* Bouton d'achat */}
               <button
                 onClick={() => { void handlePurchase(background) }}
-                disabled={!canAfford || isLoading}
+                disabled={!canPurchase || isLoadingOwned}
                 className={`
                   w-full py-2.5 rounded-xl font-bold text-sm
                   transition-all duration-300
                   flex items-center justify-center gap-2
-                  ${canAfford && !isLoading
+                  ${canPurchase && !isLoadingOwned
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:brightness-110 active:scale-95 shadow-md hover:shadow-lg'
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }
                 `}
               >
-                {isLoading ? (
+                {isLoadingOwned ? (
+                  <>
+                    <span className='animate-spin text-xl'>⏳</span>
+                    <span>Chargement...</span>
+                  </>
+                ) : isLoading ? (
                   <>
                     <span className='animate-spin text-xl'>⏳</span>
                     <span>Achat...</span>
+                  </>
+                ) : isOwned ? (
+                  <>
+                    <span className='text-xl'>✅</span>
+                    <span>Déjà possédé</span>
                   </>
                 ) : canAfford ? (
                   <>

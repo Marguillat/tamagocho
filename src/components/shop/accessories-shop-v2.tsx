@@ -1,10 +1,10 @@
 'use client'
 
 import type React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { type AccessoryConfig, accessoriesCatalog, type AccessoryType } from '@/config/accessories.config-v2'
-import { createAccessoryForMonster } from '@/actions/accessories.actions'
-import { type AccessoryData } from '@/types/accessory'
+import { createAccessoryForMonster, getAccessoriesForMonster } from '@/actions/accessories.actions'
+import { type AccessoryData, type DBAccessory } from '@/types/accessory'
 
 interface AccessoriesShopProps {
   monsterId: string
@@ -32,6 +32,26 @@ export function AccessoriesShop ({
   const [isPurchasing, setIsPurchasing] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [ownedAccessories, setOwnedAccessories] = useState<DBAccessory[]>([])
+  const [isLoadingOwned, setIsLoadingOwned] = useState(true)
+
+  // Charger les accessoires possédés au montage
+  useEffect(() => {
+    async function loadOwnedAccessories(): Promise<void> {
+      try {
+        const accessories = await getAccessoriesForMonster(monsterId)
+        if (accessories !== undefined) {
+          setOwnedAccessories(accessories)
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement des accessoires possédés:', error)
+      } finally {
+        setIsLoadingOwned(false)
+      }
+    }
+
+    void loadOwnedAccessories()
+  }, [monsterId])
 
   const categories = [
     { id: 'all' as const, name: 'Tous', emoji: '🎨' },
@@ -43,6 +63,16 @@ export function AccessoriesShop ({
   const filteredAccessories = selectedType === 'all'
     ? accessoriesCatalog
     : accessoriesCatalog.filter(acc => acc.type === selectedType)
+
+  /**
+   * Vérifie si un accessoire est déjà possédé par le monstre
+   * @param {AccessoryType} type - Type de l'accessoire
+   * @param {string} mainColor - Couleur principale de l'accessoire
+   * @returns {boolean} True si l'accessoire est possédé
+   */
+  function isAccessoryOwned(type: AccessoryType, mainColor: string): boolean {
+    return ownedAccessories.some(acc => acc.type === type && acc.mainColor === mainColor)
+  }
 
   async function handlePurchase (accessory: AccessoryConfig): Promise<void> {
     if (currentBalance < accessory.price) {
@@ -63,6 +93,12 @@ export function AccessoriesShop ({
       }
 
       await createAccessoryForMonster(monsterId, accessoryData)
+      
+      // Recharger les accessoires possédés
+      const updatedAccessories = await getAccessoriesForMonster(monsterId)
+      if (updatedAccessories !== undefined) {
+        setOwnedAccessories(updatedAccessories)
+      }
       
       setSuccess(`${accessory.emoji} ${accessory.name} acheté !`)
       setTimeout(() => { setSuccess(null) }, 3000)
@@ -130,8 +166,10 @@ export function AccessoriesShop ({
       {/* Grille d'accessoires */}
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
         {filteredAccessories.map(accessory => {
+          const isOwned = isAccessoryOwned(accessory.type, accessory.mainColor)
           const canAfford = currentBalance >= accessory.price
           const isLoading = isPurchasing === accessory.id
+          const canPurchase = canAfford && !isOwned && !isLoading
 
           return (
             <div
@@ -142,14 +180,22 @@ export function AccessoriesShop ({
                 p-5 shadow-lg
                 ring-2 ring-white/80
                 transition-all duration-300
-                ${canAfford ? 'hover:scale-105 hover:shadow-xl' : 'opacity-75'}
+                ${canPurchase ? 'hover:scale-105 hover:shadow-xl' : 'opacity-75'}
                 ${accessory.popular === true ? 'ring-4 ring-yellow-400' : ''}
+                ${isOwned ? 'ring-4 ring-green-400' : ''}
               `}
             >
               {/* Badge populaire */}
-              {accessory.popular === true && (
+              {accessory.popular === true && !isOwned && (
                 <div className='absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md z-10'>
                   ⭐ Populaire
+                </div>
+              )}
+
+              {/* Badge possédé */}
+              {isOwned && (
+                <div className='absolute top-2 right-2 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md z-10'>
+                  ✅ Possédé
                 </div>
               )}
 
@@ -215,21 +261,31 @@ export function AccessoriesShop ({
               {/* Bouton d'achat */}
               <button
                 onClick={() => { void handlePurchase(accessory) }}
-                disabled={!canAfford || isLoading}
+                disabled={!canPurchase || isLoadingOwned}
                 className={`
                   w-full py-2.5 rounded-xl font-bold text-sm
                   transition-all duration-300
                   flex items-center justify-center gap-2
-                  ${canAfford && !isLoading
+                  ${canPurchase && !isLoadingOwned
                     ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:brightness-110 active:scale-95 shadow-md hover:shadow-lg'
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }
                 `}
               >
-                {isLoading ? (
+                {isLoadingOwned ? (
+                  <>
+                    <span className='animate-spin text-xl'>⏳</span>
+                    <span>Chargement...</span>
+                  </>
+                ) : isLoading ? (
                   <>
                     <span className='animate-spin text-xl'>⏳</span>
                     <span>Achat...</span>
+                  </>
+                ) : isOwned ? (
+                  <>
+                    <span className='text-xl'>✅</span>
+                    <span>Déjà possédé</span>
                   </>
                 ) : canAfford ? (
                   <>
