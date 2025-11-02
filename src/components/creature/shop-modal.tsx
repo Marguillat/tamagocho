@@ -7,6 +7,7 @@ import { xpBoosts } from '@/config/shop.config'
 import { XPBoostCard } from './xp-boost-card'
 import { buyXpBoost } from '@/actions/shop.actions'
 import { AccessoriesShop } from '@/components/shop/accessories-shop-v2'
+import { BackgroundsShop } from '@/components/shop/backgrounds-shop'
 import { getWallet } from '@/actions/wallet.actions'
 
 interface ShopModalProps {
@@ -18,7 +19,7 @@ interface ShopModalProps {
   creatureId: string
 }
 
-type ShopTab = 'xp-boosts' | 'accessories'
+type ShopTab = 'xp-boosts' | 'accessories' | 'backgrounds'
 
 /**
  * Modal de la boutique pour la créature
@@ -197,6 +198,22 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
                 </button>
                 
                 <button
+                  onClick={() => { setActiveTab('backgrounds') }}
+                  className={`
+                    px-6 py-3 rounded-2xl font-bold text-lg
+                    transition-all duration-300
+                    flex items-center gap-2
+                    ${activeTab === 'backgrounds'
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white scale-105 shadow-xl'
+                      : 'bg-white text-gray-700 hover:scale-105 shadow-md hover:shadow-lg'
+                    }
+                  `}
+                >
+                  <span className='text-2xl'>🖼️</span>
+                  <span>Backgrounds</span>
+                </button>
+                
+                <button
                   onClick={() => { setActiveTab('xp-boosts') }}
                   className={`
                     px-6 py-3 rounded-2xl font-bold text-lg
@@ -222,7 +239,18 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
                   <AccessoriesShop 
                     monsterId={creatureId}
                     currentBalance={walletBalance}
-                    
+                    onPurchaseSuccess={refreshWallet}
+                  />
+                </div>
+              )}
+
+              {/* Boutique de backgrounds */}
+              {activeTab === 'backgrounds' && (
+                <div className='animate-fade-in-up'>
+                  <BackgroundsShop 
+                    monsterId={creatureId}
+                    currentBalance={walletBalance}
+                    onPurchaseSuccess={refreshWallet}
                   />
                 </div>
               )}
