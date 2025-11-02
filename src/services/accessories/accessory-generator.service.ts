@@ -235,7 +235,7 @@ export function drawAccessoryOnMonster (
   monsterBodyY: number,
   pixelSize: number = 6
 ): void {
-  const offset = getAccessoryPositionOffset(config.type, monsterBodyY)
+  const offset = getAccessoryPositionOffset(config.type)
   drawAccessory(
     ctx,
     config,
