@@ -104,8 +104,14 @@ export function CreatureMonsterDisplay ({
       <div className='pointer-events-none absolute -left-16 -top-12 h-48 w-48 rounded-full bg-gradient-to-br from-pink-300/30 to-purple-300/30 blur-2xl animate-float-delayed' />
 
       {/* Zone d'affichage du monstre animé - PLUS GRANDE */}
-      <div className='relative aspect-square max-w-lg mx-auto mb-8'>
-        <div className='absolute inset-0 bg-gradient-to-br from-yellow-100/50 via-pink-100/50 to-purple-100/50 rounded-3xl animate-pulse-slow' />
+      {/*TODO : faire en sorte que le background soit dynamique en fonction de celui du monstre*/}
+      <div className={`
+        relative aspect-square max-w-lg mx-auto mb-8
+        rounded-md
+         bg-[url('/backgrounds/cosy-tamagocho.png')]
+         bg-cover bg-center bg-no-repeat
+        `}>
+        <div className='absolute inset-0' />
         <div className='relative p-8'>
           <AnimatedMonster
             state={state}
