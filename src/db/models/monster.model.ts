@@ -33,11 +33,17 @@ const monsterSchema = new Schema({
     default: 'happy'
   },
   equipedAccessories: {
-      type: [Schema.Types.ObjectId],
-      ref: 'accessory',
-      default: [],
-      required: false
-  },  
+    type: [Schema.Types.ObjectId],
+    ref: 'accessory',
+    default: [],
+    required: false
+  },
+  equipedBackground:{
+    type: Schema.Types.ObjectId,
+    ref: 'background',
+    default: "",
+    required: false
+  },
   ownerId: {
     type: Schema.Types.ObjectId,
     ref: 'user',

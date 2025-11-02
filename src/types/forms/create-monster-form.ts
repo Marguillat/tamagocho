@@ -4,7 +4,8 @@ export interface CreateMonsterFormValues {
   name: string
   traits: string
   level: number
-    equipedAccessories: string[] 
+  equipedAccessories: string[]
+  equipedBackground: string
   xp: number
   maxXp: number
   state: MonsterState
