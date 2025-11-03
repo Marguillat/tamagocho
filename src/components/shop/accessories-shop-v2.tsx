@@ -14,19 +14,19 @@ interface AccessoriesShopProps {
 
 /**
  * Composant boutique d'accessoires pour une créature
- * 
+ *
  * Permet d'acheter des accessoires (chapeaux, lunettes, chaussures)
  * pour personnaliser une créature spécifique.
- * 
+ *
  * Principes SOLID :
  * - SRP : Responsabilité unique d'affichage de la boutique d'accessoires
  * - OCP : Ouvert à l'extension via la configuration
  * - DIP : Dépend des abstractions (server actions)
  */
-export function AccessoriesShop ({ 
-  monsterId, 
-  currentBalance, 
-  onPurchaseSuccess 
+export function AccessoriesShop ({
+  monsterId,
+  currentBalance,
+  onPurchaseSuccess
 }: AccessoriesShopProps): React.ReactElement {
   const [selectedType, setSelectedType] = useState<AccessoryType | 'all'>('all')
   const [isPurchasing, setIsPurchasing] = useState<string | null>(null)
@@ -37,7 +37,7 @@ export function AccessoriesShop ({
 
   // Charger les accessoires possédés au montage
   useEffect(() => {
-    async function loadOwnedAccessories(): Promise<void> {
+    async function loadOwnedAccessories (): Promise<void> {
       try {
         const accessories = await getAccessoriesForMonster(monsterId)
         if (accessories !== undefined) {
@@ -70,7 +70,7 @@ export function AccessoriesShop ({
    * @param {string} mainColor - Couleur principale de l'accessoire
    * @returns {boolean} True si l'accessoire est possédé
    */
-  function isAccessoryOwned(type: AccessoryType, mainColor: string): boolean {
+  function isAccessoryOwned (type: AccessoryType, mainColor: string): boolean {
     return ownedAccessories.some(acc => acc.type === type && acc.mainColor === mainColor)
   }
 
@@ -93,16 +93,16 @@ export function AccessoriesShop ({
       }
 
       await createAccessoryForMonster(monsterId, accessoryData)
-      
+
       // Recharger les accessoires possédés
       const updatedAccessories = await getAccessoriesForMonster(monsterId)
       if (updatedAccessories !== undefined) {
         setOwnedAccessories(updatedAccessories)
       }
-      
+
       setSuccess(`${accessory.emoji} ${accessory.name} acheté !`)
       setTimeout(() => { setSuccess(null) }, 3000)
-      
+
       if (onPurchaseSuccess !== null && onPurchaseSuccess !== undefined) {
         onPurchaseSuccess()
       }
@@ -134,7 +134,7 @@ export function AccessoriesShop ({
           {error}
         </div>
       )}
-      
+
       {success !== null && (
         <div className='bg-green-100 border-4 border-green-300 text-green-700 px-6 py-4 rounded-2xl text-center font-bold shadow-lg animate-bounce'>
           <span className='text-2xl mr-2'>✅</span>
@@ -200,7 +200,7 @@ export function AccessoriesShop ({
               )}
 
               {/* Canvas pour afficher l'accessoire */}
-              <div 
+              <div
                 className='relative w-full h-32 mb-3 rounded-xl overflow-hidden flex items-center justify-center'
                 style={{
                   backgroundColor: `${accessory.mainColor}15`,
@@ -208,18 +208,18 @@ export function AccessoriesShop ({
                 }}
               >
                 {/* Fond décoratif */}
-                <div 
+                <div
                   className='absolute inset-0 opacity-20'
                   style={{
                     background: `radial-gradient(circle at center, ${accessory.mainColor}, transparent)`
                   }}
                 />
-                
+
                 {/* Emoji géant de l'accessoire */}
                 <div className='relative z-10 text-7xl transform hover:scale-110 transition-transform duration-300'>
                   {accessory.emoji}
                 </div>
-                
+
                 {/* Badge de type */}
                 <div className='absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg text-xs font-bold text-gray-700 flex items-center gap-1'>
                   {accessory.type === 'hat' && <span>🎩</span>}
@@ -241,7 +241,7 @@ export function AccessoriesShop ({
 
               {/* Couleur principale */}
               <div className='flex items-center justify-center gap-2 mb-3'>
-                <div 
+                <div
                   className='w-6 h-6 rounded-full shadow-md ring-2 ring-white'
                   style={{ backgroundColor: accessory.mainColor }}
                 />
@@ -272,32 +272,40 @@ export function AccessoriesShop ({
                   }
                 `}
               >
-                {isLoadingOwned ? (
-                  <>
-                    <span className='animate-spin text-xl'>⏳</span>
-                    <span>Chargement...</span>
-                  </>
-                ) : isLoading ? (
-                  <>
-                    <span className='animate-spin text-xl'>⏳</span>
-                    <span>Achat...</span>
-                  </>
-                ) : isOwned ? (
-                  <>
-                    <span className='text-xl'>✅</span>
-                    <span>Déjà possédé</span>
-                  </>
-                ) : canAfford ? (
-                  <>
-                    <span className='text-xl'>🛒</span>
-                    <span>Acheter</span>
-                  </>
-                ) : (
-                  <>
-                    <span className='text-xl'>💸</span>
-                    <span>Pas assez</span>
-                  </>
-                )}
+                {isLoadingOwned
+                  ? (
+                    <>
+                      <span className='animate-spin text-xl'>⏳</span>
+                      <span>Chargement...</span>
+                    </>
+                    )
+                  : isLoading
+                    ? (
+                      <>
+                        <span className='animate-spin text-xl'>⏳</span>
+                        <span>Achat...</span>
+                      </>
+                      )
+                    : isOwned
+                      ? (
+                        <>
+                          <span className='text-xl'>✅</span>
+                          <span>Déjà possédé</span>
+                        </>
+                        )
+                      : canAfford
+                        ? (
+                          <>
+                            <span className='text-xl'>🛒</span>
+                            <span>Acheter</span>
+                          </>
+                          )
+                        : (
+                          <>
+                            <span className='text-xl'>💸</span>
+                            <span>Pas assez</span>
+                          </>
+                          )}
               </button>
             </div>
           )
@@ -311,4 +319,3 @@ export function AccessoriesShop ({
     </div>
   )
 }
-

@@ -1,14 +1,14 @@
 /**
  * Service de génération d'accessoires en pixel art
- * 
+ *
  * Ce service fournit les fonctions de dessin pour chaque type d'accessoire
  * dans le style pixel art cohérent avec les monstres.
- * 
+ *
  * Principes SOLID :
  * - SRP : Responsabilité unique de génération visuelle des accessoires
  * - OCP : Ouvert à l'extension (nouveaux accessoires) fermé à la modification
  * - DIP : Les composants dépendent de ce service, pas de détails d'implémentation
- * 
+ *
  * Architecture :
  * - Domain Layer : Logique métier de génération des accessoires
  * - Pas de dépendances UI : peut être utilisé dans différents contextes (standalone, sur monstre)
@@ -24,11 +24,11 @@ export interface AccessoryDrawConfig {
 
 /**
  * Dessine un accessoire sur un canvas à une position donnée
- * 
+ *
  * Cette fonction est conçue pour être utilisée dans deux contextes :
  * 1. Standalone : affichage d'un accessoire seul (dans la liste)
  * 2. Sur monstre : affichage de l'accessoire positionné sur le monstre
- * 
+ *
  * @param ctx - Contexte 2D du canvas
  * @param config - Configuration de l'accessoire
  * @param centerX - Position X du centre (défaut: 80 pour canvas 160x160)
@@ -95,7 +95,7 @@ function drawHat (
   ctx.fillStyle = darkColor
   ctx.fillRect(centerX - pixelSize * 4, hatY, pixelSize, pixelSize)
   ctx.fillRect(centerX - pixelSize * 3, hatY - pixelSize, pixelSize, pixelSize)
-  
+
   // Reflets
   ctx.fillStyle = lightColor
   ctx.fillRect(centerX + pixelSize * 2, hatY - pixelSize * 3, pixelSize, pixelSize)
@@ -177,7 +177,7 @@ function drawShoes (
 
 /**
  * Ajuste la luminosité d'une couleur hexadécimale
- * 
+ *
  * @param hex - Couleur au format #RRGGBB
  * @param amount - Quantité à ajouter/soustraire (-100 à +100)
  * @returns Couleur ajustée au format #RRGGBB
@@ -185,13 +185,13 @@ function drawShoes (
 function adjustColorBrightness (hex: string, amount: number): string {
   // Retirer le #
   const color = hex.replace('#', '')
-  
+
   // Convertir en RGB
   const num = parseInt(color, 16)
   const r = Math.max(0, Math.min(255, ((num >> 16) & 0xff) + amount))
   const g = Math.max(0, Math.min(255, ((num >> 8) & 0xff) + amount))
   const b = Math.max(0, Math.min(255, (num & 0xff) + amount))
-  
+
   // Reconvertir en hex
   return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`
 }
@@ -199,7 +199,7 @@ function adjustColorBrightness (hex: string, amount: number): string {
 /**
  * Calcule la position de l'accessoire sur le monstre selon son type
  * Utile pour le placement futur des accessoires sur le canvas du monstre
- * 
+ *
  * @param type - Type d'accessoire
  * @returns Offset X et Y relatif au centre du monstre
  */
@@ -219,7 +219,7 @@ export function getAccessoryPositionOffset (type: AccessoryType): { x: number, y
 /**
  * Dessine un accessoire sur le canvas d'un monstre existant
  * Cette fonction est prévue pour l'intégration future
- * 
+ *
  * @param ctx - Contexte du canvas
  * @param config - Configuration de l'accessoire
  * @param monsterCenterX - Position X du centre du monstre
@@ -244,4 +244,3 @@ export function drawAccessoryOnMonster (
     pixelSize
   )
 }
-

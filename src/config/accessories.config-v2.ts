@@ -1,9 +1,9 @@
 /**
  * Configuration du catalogue d'accessoires pour la boutique
- * 
+ *
  * Ce fichier définit tous les accessoires disponibles à l'achat
  * avec leurs propriétés (type, prix, couleur, emoji).
- * 
+ *
  * Principes SOLID :
  * - SRP : Responsabilité unique de configuration des accessoires
  * - OCP : Facile à étendre avec de nouveaux accessoires
@@ -203,4 +203,3 @@ export function getAccessoryById (id: string): AccessoryConfig | undefined {
 export function getPopularAccessories (): AccessoryConfig[] {
   return accessoriesCatalog.filter(acc => acc.popular === true)
 }
-

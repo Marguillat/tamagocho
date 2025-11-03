@@ -1,6 +1,6 @@
 /**
  * Types pour les backgrounds des monstres
- * 
+ *
  * Suivant le principe de séparation des responsabilités :
  * - Types de données uniquement
  * - Aucune logique métier
@@ -40,4 +40,3 @@ export interface BackgroundConfig {
   popular?: boolean
   category: 'cosy' | 'fantasy' | 'scifi' | 'steampunk' | 'nature'
 }
-

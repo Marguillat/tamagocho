@@ -1,9 +1,9 @@
 import {
-    DEFAULT_MONSTER_ACCESSORIES,
-    DEFAULT_MONSTER_LEVEL,
-    DEFAULT_MONSTER_BG,
-    DEFAULT_MONSTER_STATE,
-    type MonsterTraits
+  DEFAULT_MONSTER_ACCESSORIES,
+  DEFAULT_MONSTER_LEVEL,
+  DEFAULT_MONSTER_BG,
+  DEFAULT_MONSTER_STATE,
+  type MonsterTraits
 } from '@/types/monster'
 import type { CreateMonsterFormValues } from '@/types/forms/create-monster-form'
 

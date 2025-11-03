@@ -1,22 +1,22 @@
-"use server"
+'use server'
 
-import { connectMongooseToDatabase } from "@/db"
-import Background from "@/db/models/background.model"
-import Monster from "@/db/models/monster.model"
-import { auth } from "@/lib/auth"
-import mongoose from "mongoose"
-import { headers } from "next/headers"
-import type { BackgroundData, DBBackground } from "@/types/background"
-import { subtractKoins } from "@/actions/wallet.actions"
-import { revalidatePath } from "next/cache"
+import { connectMongooseToDatabase } from '@/db'
+import Background from '@/db/models/background.model'
+import Monster from '@/db/models/monster.model'
+import { auth } from '@/lib/auth'
+import mongoose from 'mongoose'
+import { headers } from 'next/headers'
+import type { BackgroundData, DBBackground } from '@/types/background'
+import { subtractKoins } from '@/actions/wallet.actions'
+import { revalidatePath } from 'next/cache'
 
 /**
  * Server Actions pour la gestion des backgrounds des monstres
- * 
+ *
  * Principes SOLID appliqués :
  * - SRP : Chaque fonction a une responsabilité unique
  * - DIP : Dépend des abstractions (types, modèles)
- * 
+ *
  * Architecture Clean :
  * - Couche application : orchestration des opérations
  * - Interaction avec la couche domaine (Monster, Background)
@@ -25,7 +25,7 @@ import { revalidatePath } from "next/cache"
 
 /**
  * Achète un background pour un monstre
- * 
+ *
  * @param {string} monsterId - ID du monstre
  * @param {BackgroundData} backgroundData - Données du background à acheter
  * @returns {Promise<void>}
@@ -33,12 +33,12 @@ import { revalidatePath } from "next/cache"
  * @throws {Error} Si le monstre n'existe pas
  * @throws {Error} Si les fonds sont insuffisants
  */
-export async function createBackgroundForMonster(
-  monsterId: string, 
+export async function createBackgroundForMonster (
+  monsterId: string,
   backgroundData: BackgroundData
 ): Promise<void> {
   await connectMongooseToDatabase()
-  
+
   const session = await auth.api.getSession({
     headers: await headers()
   })
@@ -46,43 +46,43 @@ export async function createBackgroundForMonster(
   if (session === null || session === undefined) {
     throw new Error('User not authenticated')
   }
-  
+
   // Vérifier que le monstre appartient à l'utilisateur
   const monster = await Monster.findOne({ _id: monsterId, ownerId: session.user.id })
   if (monster === null || monster === undefined) {
     throw new Error('Monster not found or not owned by user')
   }
-  
+
   // Vérifier si le background existe déjà pour ce monstre
-  const existingBackground = await Background.findOne({ 
-    monsterId: monsterId, 
-    url: backgroundData.url 
+  const existingBackground = await Background.findOne({
+    monsterId,
+    url: backgroundData.url
   })
-  
+
   if (existingBackground !== null && existingBackground !== undefined) {
     throw new Error('Background already owned')
   }
-  
+
   const newBackgroundId = new mongoose.Types.ObjectId()
-  
+
   const newBackground = new Background({
     _id: newBackgroundId,
-    monsterId: monsterId,
+    monsterId,
     url: backgroundData.url,
     description: backgroundData.description
   })
-  
+
   // Soustraire le prix du wallet
   await subtractKoins(backgroundData.price)
-  
+
   await newBackground.save()
-  
+
   revalidatePath(`/creature/${monsterId}`)
 }
 
 /**
  * Équipe un background sur un monstre
- * 
+ *
  * @param {string} monsterId - ID du monstre
  * @param {string} backgroundId - ID du background à équiper
  * @returns {Promise<void>}
@@ -90,8 +90,8 @@ export async function createBackgroundForMonster(
  * @throws {Error} Si le monstre n'existe pas
  * @throws {Error} Si le background n'existe pas ou n'appartient pas au monstre
  */
-export async function equipBackgroundToMonster(
-  monsterId: string, 
+export async function equipBackgroundToMonster (
+  monsterId: string,
   backgroundId: string
 ): Promise<void> {
   await connectMongooseToDatabase()
@@ -108,29 +108,29 @@ export async function equipBackgroundToMonster(
   if (monster === null || monster === undefined) {
     throw new Error('Monster not found')
   }
-  
-  const background = await Background.findOne({ _id: backgroundId, monsterId: monsterId })
+
+  const background = await Background.findOne({ _id: backgroundId, monsterId })
   if (background === null || background === undefined) {
     throw new Error('Background not found for this monster')
   }
-  
+
   // Équiper le background
   monster.equipedBackground = backgroundId
   monster.markModified('equipedBackground')
   await monster.save()
-  
+
   revalidatePath(`/creature/${monsterId}`)
 }
 
 /**
  * Déséquipe le background actuel d'un monstre
- * 
+ *
  * @param {string} monsterId - ID du monstre
  * @returns {Promise<void>}
  * @throws {Error} Si l'utilisateur n'est pas authentifié
  * @throws {Error} Si le monstre n'existe pas
  */
-export async function unequipBackgroundFromMonster(monsterId: string): Promise<void> {
+export async function unequipBackgroundFromMonster (monsterId: string): Promise<void> {
   await connectMongooseToDatabase()
 
   const session = await auth.api.getSession({
@@ -145,22 +145,22 @@ export async function unequipBackgroundFromMonster(monsterId: string): Promise<v
   if (monster === null || monster === undefined) {
     throw new Error('Monster not found')
   }
-  
+
   // Déséquiper le background
   monster.equipedBackground = null
   monster.markModified('equipedBackground')
   await monster.save()
-  
+
   revalidatePath(`/creature/${monsterId}`)
 }
 
 /**
  * Récupère tous les backgrounds d'un monstre
- * 
+ *
  * @param {string} monsterId - ID du monstre
  * @returns {Promise<DBBackground[] | void>} Liste des backgrounds ou void en cas d'erreur
  */
-export async function getBackgroundsForMonster(monsterId: string): Promise<DBBackground[] | void> {
+export async function getBackgroundsForMonster (monsterId: string): Promise<DBBackground[] | void> {
   try {
     await connectMongooseToDatabase()
 
@@ -172,7 +172,7 @@ export async function getBackgroundsForMonster(monsterId: string): Promise<DBBac
       throw new Error('User not authenticated')
     }
 
-    const backgrounds = await Background.find({ monsterId: monsterId }).exec()
+    const backgrounds = await Background.find({ monsterId }).exec()
     return JSON.parse(JSON.stringify(backgrounds))
   } catch (error) {
     console.error('Error fetching backgrounds for monster:', error)
@@ -181,11 +181,11 @@ export async function getBackgroundsForMonster(monsterId: string): Promise<DBBac
 
 /**
  * Récupère le background équipé d'un monstre
- * 
+ *
  * @param {string} monsterId - ID du monstre
  * @returns {Promise<DBBackground | null>} Background équipé ou null
  */
-export async function getEquippedBackground(monsterId: string): Promise<DBBackground | null> {
+export async function getEquippedBackground (monsterId: string): Promise<DBBackground | null> {
   try {
     await connectMongooseToDatabase()
 
@@ -201,11 +201,11 @@ export async function getEquippedBackground(monsterId: string): Promise<DBBackgr
     if (monster === null || monster === undefined) {
       throw new Error('Monster not found')
     }
-    
-    if (monster.equipedBackground === "" || monster.equipedBackground === null) {
+
+    if (monster.equipedBackground === '' || monster.equipedBackground === null) {
       return null
     }
-    
+
     const background = await Background.findOne({ _id: monster.equipedBackground })
     return JSON.parse(JSON.stringify(background))
   } catch (error) {
@@ -213,4 +213,3 @@ export async function getEquippedBackground(monsterId: string): Promise<DBBackgr
     return null
   }
 }
-

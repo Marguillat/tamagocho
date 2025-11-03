@@ -6,8 +6,8 @@ import Monster from '@/db/models/monster.model'
 import { auth } from '@/lib/auth'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
-import {AccessoryData} from "@/types/accessory";
-import {subtractKoins} from "@/actions/wallet.actions";
+import { AccessoryData } from '@/types/accessory'
+import { subtractKoins } from '@/actions/wallet.actions'
 
 export async function buyXpBoost (creatureId: string, boostId: string): Promise<void> {
   console.log(`Achat du boost ${boostId} pour la créature ${creatureId}`)
@@ -47,7 +47,7 @@ export async function buyXpBoost (creatureId: string, boostId: string): Promise<
   revalidatePath(`/creature/${creatureId}`)
 }
 
-export async function buyAccessory (monsterId:string, accessoryData:AccessoryData,price:number): Promise<void> {
+export async function buyAccessory (monsterId: string, accessoryData: AccessoryData, price: number): Promise<void> {
   console.log(`Achat de l'accessoire ${accessoryData.type} pour le monstre ${monsterId}`)
   const session = await auth.api.getSession({
     headers: await headers()

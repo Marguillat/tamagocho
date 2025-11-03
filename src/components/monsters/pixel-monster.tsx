@@ -251,7 +251,7 @@ function drawMonster (
   const bodyY = 55 + bounce + extraBounce
 
   // ============ ORDRE DE DESSIN (Z-INDEX) ============
-  
+
   // 1. ARRIÈRE-PLAN : Chaussures (derrière le corps)
   const shoesAccessory = equippedAccessories.find(acc => acc.type === 'shoes')
   if (shoesAccessory !== undefined) {

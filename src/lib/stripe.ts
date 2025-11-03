@@ -7,7 +7,7 @@ if (process.env.STRIPE_SECRET_KEY === undefined || process.env.STRIPE_SECRET_KEY
 
 // Stripe configuration (côté serveur uniquement)
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  typescript: true,
+  typescript: true
 })
 
 // Export de la table de prix depuis le fichier de config

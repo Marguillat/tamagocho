@@ -17,17 +17,17 @@ interface MonsterAccessoriesProps {
 
 /**
  * Composant affichant les accessoires d'un monstre avec boutons de toggle
- * 
+ *
  * Permet de voir tous les accessoires possédés par le monstre
  * et de les équiper/déséquiper facilement.
- * 
+ *
  * Principes SOLID :
  * - SRP : Responsabilité unique d'affichage et gestion des accessoires
  * - DIP : Dépend des abstractions (server actions)
  */
-export function MonsterAccessories ({ 
+export function MonsterAccessories ({
   monsterId,
-  equipedAccessories: initialEquipedAccessories,
+  equipedAccessories: initialEquipedAccessories
 }: MonsterAccessoriesProps): React.ReactElement {
   const [accessories, setAccessories] = useState<DBAccessory[]>([])
   const [equipedAccessories, setEquipedAccessories] = useState<string[]>(initialEquipedAccessories)
@@ -60,10 +60,10 @@ export function MonsterAccessories ({
    */
   const handleToggle = async (accessoryId: string): Promise<void> => {
     setTogglingId(accessoryId)
-    
+
     try {
       await toggleAccessoryToMonster(monsterId, accessoryId)
-      
+
       // Mettre à jour l'état local
       setEquipedAccessories(prev => {
         if (prev.includes(accessoryId)) {
@@ -166,14 +166,14 @@ export function MonsterAccessories ({
                 {/* Icône et info */}
                 <div className='flex items-center gap-4'>
                   {/* Canvas de l'accessoire en pixel art */}
-                  <div 
+                  <div
                     className='w-16 h-16 rounded-xl flex items-center justify-center shadow-md overflow-hidden'
                     style={{
                       backgroundColor: `${accessory.mainColor ?? '#CCC'}15`,
                       border: `2px solid ${accessory.mainColor ?? '#CCC'}40`
                     }}
                   >
-                    <PixelAccessory 
+                    <PixelAccessory
                       type={accessory.type as any}
                       mainColor={accessory.mainColor ?? '#CCC'}
                       width={64}
@@ -191,12 +191,13 @@ export function MonsterAccessories ({
                       {/* Badge de type */}
                       <span className={`text-xs font-bold px-2 py-1 rounded-full ${
                         isEquiped ? 'bg-white/30 text-white' : 'bg-gray-200 text-gray-700'
-                      }`}>
+                      }`}
+                      >
                         {accessory.type === 'hat' && '🎩 Chapeau'}
                         {accessory.type === 'sunglasses' && '😎 Lunettes'}
                         {accessory.type === 'shoes' && '👟 Chaussures'}
                       </span>
-                      
+
                       {/* Badge équipé */}
                       {isEquiped && (
                         <span className='text-xs font-bold px-2 py-1 rounded-full bg-white/40 text-white flex items-center gap-1'>
@@ -223,22 +224,26 @@ export function MonsterAccessories ({
                     }
                   `}
                 >
-                  {isToggling ? (
-                    <>
-                      <span className='animate-spin text-lg'>⏳</span>
-                      <span>...</span>
-                    </>
-                  ) : isEquiped ? (
-                    <>
-                      <span className='text-lg'>✓</span>
-                      <span>Retirer</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className='text-lg'>+</span>
-                      <span>Équiper</span>
-                    </>
-                  )}
+                  {isToggling
+                    ? (
+                      <>
+                        <span className='animate-spin text-lg'>⏳</span>
+                        <span>...</span>
+                      </>
+                      )
+                    : isEquiped
+                      ? (
+                        <>
+                          <span className='text-lg'>✓</span>
+                          <span>Retirer</span>
+                        </>
+                        )
+                      : (
+                        <>
+                          <span className='text-lg'>+</span>
+                          <span>Équiper</span>
+                        </>
+                        )}
                 </button>
               </div>
             )
@@ -259,4 +264,3 @@ export function MonsterAccessories ({
     </div>
   )
 }
-

@@ -4,12 +4,12 @@ export type { BackgroundConfig }
 
 /**
  * Catalogue des backgrounds disponibles pour les monstres
- * 
+ *
  * Principe de configuration centralisée :
  * - Configuration des backgrounds en un seul endroit
  * - Facilite l'ajout de nouveaux backgrounds
  * - Facilite la modification des prix et descriptions
- * 
+ *
  * Organisation :
  * - Les backgrounds sont basés sur les fichiers dans /public/backgrounds
  * - Chaque background a un prix, une description et une catégorie
@@ -88,4 +88,3 @@ export function filterBackgroundsByCategory (
   }
   return backgroundsCatalog.filter(bg => bg.category === category)
 }
-

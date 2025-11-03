@@ -162,20 +162,22 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
                 <h2 className='text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent mb-2'>
                   🛍️ Boutique de {creatureName}
                 </h2>
-                
+
                 {/* Affichage du solde */}
                 <div className='flex items-center justify-center gap-3 mt-4'>
-                  {isLoadingWallet ? (
-                    <div className='text-gray-500 animate-pulse'>Chargement...</div>
-                  ) : (
-                    <>
-                      <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-black px-6 py-3 rounded-2xl shadow-lg flex items-center gap-2'>
-                        <span className='text-2xl'>🪙</span>
-                        <span className='text-2xl'>{walletBalance}</span>
-                        <span className='text-sm'>Koins</span>
-                      </div>
-                    </>
-                  )}
+                  {isLoadingWallet
+                    ? (
+                      <div className='text-gray-500 animate-pulse'>Chargement...</div>
+                      )
+                    : (
+                      <>
+                        <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-black px-6 py-3 rounded-2xl shadow-lg flex items-center gap-2'>
+                          <span className='text-2xl'>🪙</span>
+                          <span className='text-2xl'>{walletBalance}</span>
+                          <span className='text-sm'>Koins</span>
+                        </div>
+                      </>
+                      )}
                 </div>
               </div>
 
@@ -196,7 +198,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
                   <span className='text-2xl'>👒</span>
                   <span>Accessoires</span>
                 </button>
-                
+
                 <button
                   onClick={() => { setActiveTab('backgrounds') }}
                   className={`
@@ -212,7 +214,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
                   <span className='text-2xl'>🖼️</span>
                   <span>Backgrounds</span>
                 </button>
-                
+
                 <button
                   onClick={() => { setActiveTab('xp-boosts') }}
                   className={`
@@ -236,7 +238,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
               {/* Boutique d'accessoires */}
               {activeTab === 'accessories' && (
                 <div className='animate-fade-in-up'>
-                  <AccessoriesShop 
+                  <AccessoriesShop
                     monsterId={creatureId}
                     currentBalance={walletBalance}
                     onPurchaseSuccess={refreshWallet}
@@ -247,7 +249,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
               {/* Boutique de backgrounds */}
               {activeTab === 'backgrounds' && (
                 <div className='animate-fade-in-up'>
-                  <BackgroundsShop 
+                  <BackgroundsShop
                     monsterId={creatureId}
                     currentBalance={walletBalance}
                     onPurchaseSuccess={refreshWallet}

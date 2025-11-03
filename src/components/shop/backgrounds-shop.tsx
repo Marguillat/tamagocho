@@ -14,19 +14,19 @@ interface BackgroundsShopProps {
 
 /**
  * Composant boutique de backgrounds pour une créature
- * 
+ *
  * Permet d'acheter des backgrounds (arrière-plans)
  * pour personnaliser l'environnement d'une créature spécifique.
- * 
+ *
  * Principes SOLID :
  * - SRP : Responsabilité unique d'affichage de la boutique de backgrounds
  * - OCP : Ouvert à l'extension via la configuration
  * - DIP : Dépend des abstractions (server actions)
  */
-export function BackgroundsShop ({ 
-  monsterId, 
-  currentBalance, 
-  onPurchaseSuccess 
+export function BackgroundsShop ({
+  monsterId,
+  currentBalance,
+  onPurchaseSuccess
 }: BackgroundsShopProps): React.ReactElement {
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'cosy' | 'fantasy' | 'scifi' | 'steampunk' | 'nature'>('all')
   const [isPurchasing, setIsPurchasing] = useState<string | null>(null)
@@ -37,7 +37,7 @@ export function BackgroundsShop ({
 
   // Charger les backgrounds possédés au montage
   useEffect(() => {
-    async function loadOwnedBackgrounds(): Promise<void> {
+    async function loadOwnedBackgrounds (): Promise<void> {
       try {
         const backgrounds = await getBackgroundsForMonster(monsterId)
         if (backgrounds !== undefined) {
@@ -71,7 +71,7 @@ export function BackgroundsShop ({
    * @param {string} url - URL du background
    * @returns {boolean} True si le background est possédé
    */
-  function isBackgroundOwned(url: string): boolean {
+  function isBackgroundOwned (url: string): boolean {
     return ownedBackgrounds.some(bg => bg.url === url)
   }
 
@@ -94,16 +94,16 @@ export function BackgroundsShop ({
       }
 
       await createBackgroundForMonster(monsterId, backgroundData)
-      
+
       // Recharger les backgrounds possédés
       const updatedBackgrounds = await getBackgroundsForMonster(monsterId)
       if (updatedBackgrounds !== undefined) {
         setOwnedBackgrounds(updatedBackgrounds)
       }
-      
+
       setSuccess(`${background.emoji} ${background.name} acheté !`)
       setTimeout(() => { setSuccess(null) }, 3000)
-      
+
       if (onPurchaseSuccess !== null && onPurchaseSuccess !== undefined) {
         onPurchaseSuccess()
       }
@@ -136,7 +136,7 @@ export function BackgroundsShop ({
           {error}
         </div>
       )}
-      
+
       {success !== null && (
         <div className='bg-green-100 border-4 border-green-300 text-green-700 px-6 py-4 rounded-2xl text-center font-bold shadow-lg animate-bounce'>
           <span className='text-2xl mr-2'>✅</span>
@@ -202,16 +202,16 @@ export function BackgroundsShop ({
               )}
 
               {/* Prévisualisation du background */}
-              <div 
+              <div
                 className='relative w-full h-48 mb-3 rounded-xl overflow-hidden shadow-inner'
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={background.url} 
+                <img
+                  src={background.url}
                   alt={background.name}
                   className='w-full h-full object-cover'
                 />
-                
+
                 {/* Overlay avec emoji */}
                 <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end justify-center pb-3'>
                   <div className='text-5xl drop-shadow-lg'>
@@ -261,32 +261,40 @@ export function BackgroundsShop ({
                   }
                 `}
               >
-                {isLoadingOwned ? (
-                  <>
-                    <span className='animate-spin text-xl'>⏳</span>
-                    <span>Chargement...</span>
-                  </>
-                ) : isLoading ? (
-                  <>
-                    <span className='animate-spin text-xl'>⏳</span>
-                    <span>Achat...</span>
-                  </>
-                ) : isOwned ? (
-                  <>
-                    <span className='text-xl'>✅</span>
-                    <span>Déjà possédé</span>
-                  </>
-                ) : canAfford ? (
-                  <>
-                    <span className='text-xl'>🛒</span>
-                    <span>Acheter</span>
-                  </>
-                ) : (
-                  <>
-                    <span className='text-xl'>💸</span>
-                    <span>Pas assez</span>
-                  </>
-                )}
+                {isLoadingOwned
+                  ? (
+                    <>
+                      <span className='animate-spin text-xl'>⏳</span>
+                      <span>Chargement...</span>
+                    </>
+                    )
+                  : isLoading
+                    ? (
+                      <>
+                        <span className='animate-spin text-xl'>⏳</span>
+                        <span>Achat...</span>
+                      </>
+                      )
+                    : isOwned
+                      ? (
+                        <>
+                          <span className='text-xl'>✅</span>
+                          <span>Déjà possédé</span>
+                        </>
+                        )
+                      : canAfford
+                        ? (
+                          <>
+                            <span className='text-xl'>🛒</span>
+                            <span>Acheter</span>
+                          </>
+                          )
+                        : (
+                          <>
+                            <span className='text-xl'>💸</span>
+                            <span>Pas assez</span>
+                          </>
+                          )}
               </button>
             </div>
           )
@@ -317,4 +325,3 @@ export function BackgroundsShop ({
     </div>
   )
 }
-

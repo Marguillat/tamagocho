@@ -2,14 +2,17 @@
 
 import { useEffect, useState, useRef } from 'react'
 import type { MonsterTraits, DBMonster } from '@/types/monster'
+import type { DBBackground } from '@/types/background'
 import type { MonsterAction } from '@/hooks/monsters'
 import { parseMonsterTraits } from '@/lib/utils'
 import { CreatureMonsterDisplay } from './creature-monster-display'
 import { CreatureStatsPanel } from './creature-stats-panel'
 import { MonsterAccessories } from './monster-accessories'
+import { MonsterBackgrounds } from './monster-backgrounds'
 import { LevelUpAnimation } from './level-up-animation'
 import { ShopModal } from './shop-modal'
 import { useRouter } from 'next/navigation'
+import { getEquippedBackground } from '@/actions/backgrounds.actions'
 
 /**
  * Props pour le composant CreaturePageClient
@@ -40,6 +43,7 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
   const [xpGained, setXpGained] = useState(0)
   const [showLevelUp, setShowLevelUp] = useState(false)
   const [showShop, setShowShop] = useState(false)
+  const [equippedBackground, setEquippedBackground] = useState<DBBackground | null>(null)
   const actionTimerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
 
@@ -55,6 +59,33 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
     eyeStyle: 'big',
     antennaStyle: 'single',
     accessory: 'none'
+  }
+
+  // Charger le background équipé au montage et quand le monstre change
+  useEffect(() => {
+    const loadEquippedBackground = async (): Promise<void> => {
+      try {
+        const bg = await getEquippedBackground(monster._id)
+        setEquippedBackground(bg)
+      } catch (error) {
+        console.error('Erreur lors du chargement du background équipé:', error)
+      }
+    }
+
+    void loadEquippedBackground()
+  }, [monster._id, currentMonster.equipedBackground])
+
+  /**
+   * Callback appelé quand un background est équipé/déséquipé
+   * Recharge immédiatement le background pour mise à jour instantanée
+   */
+  const handleBackgroundChange = async (): Promise<void> => {
+    try {
+      const bg = await getEquippedBackground(monster._id)
+      setEquippedBackground(bg)
+    } catch (error) {
+      console.error('Erreur lors du rechargement du background:', error)
+    }
   }
 
   useEffect(() => {
@@ -190,6 +221,7 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
               onAction={handleAction}
               monsterId={currentMonster._id}
               equipedAccessoriesIds={currentMonster.equipedAccessories ?? []}
+              equipedBackgroundUrl={equippedBackground?.url ?? null}
             />
           </div>
 
@@ -205,11 +237,18 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
               showXpGain={showXpGain}
               xpGained={xpGained}
             />
-            
+
             {/* Accessoires du monstre */}
-            <MonsterAccessories 
+            <MonsterAccessories
               monsterId={currentMonster._id}
               equipedAccessories={currentMonster.equipedAccessories ?? []}
+            />
+
+            {/* Backgrounds du monstre */}
+            <MonsterBackgrounds
+              monsterId={currentMonster._id}
+              equipedBackgroundId={currentMonster.equipedBackground ?? null}
+              onBackgroundChange={() => { void handleBackgroundChange() }}
             />
           </div>
         </div>

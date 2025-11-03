@@ -7,4 +7,4 @@ export interface DBAccessory {
   updatedAt: Date
 }
 
-export type AccessoryData = Omit<DBAccessory, '_id'|'monsterId'|'createdAt'|'updatedAt'> & {price: number}
+export type AccessoryData = Omit<DBAccessory, '_id' | 'monsterId' | 'createdAt' | 'updatedAt'> & { price: number }

@@ -21,25 +21,25 @@ interface PixelAccessoryProps {
 
 /**
  * Composant affichant un accessoire en pixel art sur canvas
- * 
+ *
  * Utilise le même système de génération que les monstres pour garantir
  * la cohérence visuelle du style pixel art.
- * 
+ *
  * Principes SOLID :
  * - SRP : Responsabilité unique d'affichage d'un accessoire
  * - DIP : Dépend du service de génération (abstraction)
  * - OCP : Ouvert à l'extension via les props
- * 
+ *
  * Architecture :
  * - Presentation Layer : Composant UI pur
  * - Délègue la logique de dessin au service (Domain Layer)
- * 
+ *
  * @example
  * ```tsx
- * <PixelAccessory 
- *   type="hat" 
- *   mainColor="#8B4513" 
- *   width={80} 
+ * <PixelAccessory
+ *   type="hat"
+ *   mainColor="#8B4513"
+ *   width={80}
  *   height={80}
  * />
  * ```
@@ -108,11 +108,10 @@ export function PixelAccessory ({
   }, [type, mainColor, scale, width, height])
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className={`pixel-art ${className}`}
-      style={{ imageRendering: 'pixelated' }} 
+      style={{ imageRendering: 'pixelated' }}
     />
   )
 }
-

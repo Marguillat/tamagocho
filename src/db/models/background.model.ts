@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
-const {Schema} = mongoose
+const { Schema } = mongoose
 
 const backgroundSchema = new Schema({
   monsterId: {
@@ -16,6 +16,6 @@ const backgroundSchema = new Schema({
     type: String,
     required: true
   }
-}, {timestamps: true})
+}, { timestamps: true })
 
-export default mongoose.models.Background ?? mongoose.model('Background', backgroundSchema) 
+export default mongoose.models.Background ?? mongoose.model('Background', backgroundSchema)

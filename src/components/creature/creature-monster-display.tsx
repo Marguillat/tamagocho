@@ -27,6 +27,8 @@ interface CreatureMonsterDisplayProps {
   monsterId: string
   /** IDs des accessoires équipés */
   equipedAccessoriesIds: string[]
+  /** URL du background équipé */
+  equipedBackgroundUrl?: string | null
 }
 
 /**
@@ -50,7 +52,8 @@ export function CreatureMonsterDisplay ({
   currentAction,
   onAction,
   monsterId,
-  equipedAccessoriesIds
+  equipedAccessoriesIds,
+  equipedBackgroundUrl
 }: CreatureMonsterDisplayProps): React.ReactNode {
   const [equippedAccessories, setEquippedAccessories] = useState<EquippedAccessory[]>([])
 
@@ -59,12 +62,12 @@ export function CreatureMonsterDisplay ({
     const loadAccessories = async (): Promise<void> => {
       try {
         const accessories = await getAccessoriesForMonster(monsterId)
-        
+
         // Vérifier que accessories n'est pas undefined
         if (accessories === undefined) return
-        
+
         // Filtrer uniquement les équipés
-        const equipped = accessories.filter((acc: any) => 
+        const equipped = accessories.filter((acc: any) =>
           equipedAccessoriesIds.includes(acc._id)
         )
 
@@ -104,13 +107,18 @@ export function CreatureMonsterDisplay ({
       <div className='pointer-events-none absolute -left-16 -top-12 h-48 w-48 rounded-full bg-gradient-to-br from-pink-300/30 to-purple-300/30 blur-2xl animate-float-delayed' />
 
       {/* Zone d'affichage du monstre animé - PLUS GRANDE */}
-      {/*TODO : faire en sorte que le background soit dynamique en fonction de celui du monstre*/}
-      <div className={`
-        relative aspect-square max-w-lg mx-auto mb-8
-        rounded-md
-         bg-[url('/backgrounds/cosy-tamagocho.png')]
-         bg-cover bg-center bg-no-repeat
-        `}>
+      <div
+        className={`
+          relative aspect-square max-w-lg mx-auto mb-8
+          rounded-md
+          bg-cover bg-center bg-no-repeat
+        `}
+        style={{
+          backgroundImage: equipedBackgroundUrl !== null && equipedBackgroundUrl !== undefined && equipedBackgroundUrl !== ''
+            ? `url('${equipedBackgroundUrl}')`
+            : ""
+        }}
+      >
         <div className='absolute inset-0' />
         <div className='relative p-8'>
           <AnimatedMonster
