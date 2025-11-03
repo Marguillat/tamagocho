@@ -1,4 +1,6 @@
 export { PixelMonster } from './pixel-monster'
 export { AnimatedMonster } from './animated-monster'
 export { MonsterActions } from './monster-actions'
+export { MonsterCard } from './monster-card'
+export { MonsterCardWithBackground } from './monster-card-with-background'
 export type { MonsterTraits } from '@/types/monster'

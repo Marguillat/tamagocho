@@ -1,6 +1,6 @@
 import type { DBMonster } from '@/types/monster'
 import { EmptyMonstersState } from './empty-monsters-state'
-import { MonsterCard } from './monster-card'
+import { MonsterCardWithBackground } from './monster-card-with-background'
 
 /**
  * Props pour le composant MonstersList
@@ -79,7 +79,7 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
           const cardKey = monster._id
 
           return (
-            <MonsterCard
+            <MonsterCardWithBackground
               key={cardKey}
               id={cardKey}
               name={monster.name}
@@ -88,6 +88,7 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
               level={monster.level}
               createdAt={String(monster.createdAt)}
               updatedAt={String(monster.updatedAt)}
+              equipedBackgroundId={monster.equipedBackground ?? null}
             />
           )
         })}

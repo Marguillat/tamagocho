@@ -7,7 +7,7 @@ import { parseMonsterTraits, formatAdoptionDate } from '@/lib/utils'
 /**
  * Props pour le composant MonsterCard
  */
-interface MonsterCardProps {
+export interface MonsterCardProps {
   /** Identifiant unique du monstre */
   id: string
   /** Nom du monstre */
@@ -22,6 +22,8 @@ interface MonsterCardProps {
   createdAt: string | undefined
   /** Date de dernière mise à jour du monstre */
   updatedAt: string | undefined
+  /** URL du background équipé */
+  equipedBackgroundUrl?: string | null
 }
 
 /**
@@ -46,7 +48,8 @@ export function MonsterCard ({
   state,
   level,
   createdAt,
-  updatedAt
+  updatedAt,
+  equipedBackgroundUrl
 }: MonsterCardProps): React.ReactNode {
   // Parsing des traits et normalisation des données
   const traits = parseMonsterTraits(rawTraits)
@@ -79,7 +82,14 @@ export function MonsterCard ({
 
         <div className='relative flex flex-col gap-6'>
           {/* Zone de rendu du monstre - PLUS GRANDE */}
-          <div className='relative flex items-center justify-center overflow-hidden rounded-3xl bg-white/80 p-8 ring-4 ring-white/90 shadow-inner backdrop-blur-sm group-hover:bg-white/90 transition-all duration-300 min-h-[280px]'>
+          <div 
+            className='relative flex items-center justify-center overflow-hidden rounded-3xl bg-white/80 p-8 ring-4 ring-white/90 shadow-inner backdrop-blur-sm group-hover:bg-white/90 transition-all duration-300 min-h-[280px] bg-cover bg-center bg-no-repeat'
+            style={{
+              backgroundImage: equipedBackgroundUrl !== null && equipedBackgroundUrl !== undefined && equipedBackgroundUrl !== ''
+                ? `url('${equipedBackgroundUrl}')`
+                : undefined
+            }}
+          >
             {/* Effet de fond pulsant */}
             <div className='absolute inset-0 bg-gradient-to-br from-yellow-100/50 via-pink-100/50 to-purple-100/50 animate-pulse-slow' />
 
