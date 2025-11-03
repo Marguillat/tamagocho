@@ -41,7 +41,7 @@ const monsterSchema = new Schema({
   equipedBackground: {
     type: Schema.Types.ObjectId,
     ref: 'background',
-    default: '',
+    default: null,
     required: false
   },
   ownerId: {

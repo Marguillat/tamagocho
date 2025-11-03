@@ -44,7 +44,7 @@ export async function buyXpBoost (creatureId: string, boostId: string): Promise<
     monster.markModified('xp')
   }
   await monster.save()
-  revalidatePath(`/creature/${creatureId}`)
+  revalidatePath(`/app/creatures/${creatureId}`)
 }
 
 export async function buyAccessory (monsterId: string, accessoryData: AccessoryData, price: number): Promise<void> {

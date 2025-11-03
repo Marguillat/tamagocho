@@ -60,7 +60,7 @@ export async function createMonster (monsterData: CreateMonsterFormValues): Prom
   await monster.save()
 
   // Revalidation du cache pour rafraîchir le dashboard
-  revalidatePath('/dashboard')
+  revalidatePath('/app')
 }
 
 /**
@@ -255,6 +255,8 @@ export async function doActionOnMonster (id: string, action: MonsterAction): Pro
         monster.markModified('maxXp')
         monster.markModified('level')
         await monster.save()
+        
+        revalidatePath(`/app/creatures/${id}`)
       }
     }
   } catch (error) {

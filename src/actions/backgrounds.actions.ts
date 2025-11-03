@@ -77,7 +77,7 @@ export async function createBackgroundForMonster (
 
   await newBackground.save()
 
-  revalidatePath(`/creature/${monsterId}`)
+  revalidatePath(`/app/creatures/${monsterId}`)
 }
 
 /**
@@ -119,7 +119,7 @@ export async function equipBackgroundToMonster (
   monster.markModified('equipedBackground')
   await monster.save()
 
-  revalidatePath(`/creature/${monsterId}`)
+  revalidatePath(`/app/creatures/${monsterId}`)
 }
 
 /**
@@ -151,7 +151,7 @@ export async function unequipBackgroundFromMonster (monsterId: string): Promise<
   monster.markModified('equipedBackground')
   await monster.save()
 
-  revalidatePath(`/creature/${monsterId}`)
+  revalidatePath(`/app/creatures/${monsterId}`)
 }
 
 /**
