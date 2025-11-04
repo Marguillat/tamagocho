@@ -3,6 +3,7 @@ import { stripe } from '@/lib/stripe'
 import Stripe from 'stripe'
 import Wallet from '@/db/models/wallet.model'
 import { pricingTable } from '@/config/pricing'
+import { connectMongooseToDatabase } from '@/db'
 
 export const runtime = 'nodejs'
 
@@ -14,6 +15,14 @@ export async function POST (req: Request): Promise<Response> {
     event = stripe.webhooks.constructEvent(payload, sig as string, process.env.STRIPE_WEBHOOK_SECRET as string)
   } catch (err: any) {
     return new Response(`Webhook Error: ${err.message as string}`, { status: 400 })
+  }
+
+  // Assurer la connexion DB avant toute opération Mongoose
+  try {
+    await connectMongooseToDatabase()
+  } catch (err: any) {
+    console.error('Database connection error in webhook:', err)
+    return new Response('Database connection failed', { status: 500 })
   }
 
   switch (event.type) {
