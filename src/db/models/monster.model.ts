@@ -44,6 +44,11 @@ const monsterSchema = new Schema({
     default: null,
     required: false
   },
+  isPublic: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   ownerId: {
     type: Schema.Types.ObjectId,
     ref: 'user',

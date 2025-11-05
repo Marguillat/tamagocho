@@ -6,6 +6,7 @@ export interface CreateMonsterFormValues {
   level: number
   equipedAccessories: string[]
   equipedBackground: string
+  isPublic: boolean
   xp: number
   maxXp: number
   state: MonsterState

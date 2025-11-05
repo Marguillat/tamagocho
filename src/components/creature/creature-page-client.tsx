@@ -13,6 +13,7 @@ import { LevelUpAnimation } from './level-up-animation'
 import { ShopModal } from './shop-modal'
 import { useRouter } from 'next/navigation'
 import { getEquippedBackground } from '@/actions/backgrounds.actions'
+import TogglePublicButton from './toggle-public-button'
 
 /**
  * Props pour le composant CreaturePageClient
@@ -200,13 +201,19 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
           </div>
 
           {/* Bouton boutique */}
-          <button
-            onClick={() => { setShowShop(true) }}
-            className='group relative overflow-hidden inline-flex items-center gap-2 bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-black px-4 py-2 rounded-xl shadow-lg ring-2 ring-green-200/50 transition-all duration-300 hover:scale-105 active:scale-95'
-          >
-            <span className='text-xl'>🛍️</span>
-            <span className='hidden sm:inline'>Boutique</span>
-          </button>
+          <div className='flex items-center gap-3'>
+            <TogglePublicButton
+              monsterId={currentMonster._id}
+              initialIsPublic={currentMonster.isPublic ?? false}
+            />
+            <button
+              onClick={() => { setShowShop(true) }}
+              className='group relative overflow-hidden inline-flex items-center gap-2 bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-black px-4 py-2 rounded-xl shadow-lg ring-2 ring-green-200/50 transition-all duration-300 hover:scale-105 active:scale-95'
+            >
+              <span className='text-xl'>🛍️</span>
+              <span className='hidden sm:inline'>Boutique</span>
+            </button>
+          </div>
         </div>
 
         {/* Grille principale - Alignée */}

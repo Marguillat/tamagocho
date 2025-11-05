@@ -58,6 +58,7 @@ export default function BottomNav ({ walletBalance }: BottomNavProps): React.Rea
 
   const navItems = [
     { href: '/app', label: 'Home', icon: '🏠', color: 'from-purple-400 to-pink-500' },
+    { href: '/app/public-monsters', label: 'Public', icon: '🌍', color: 'from-blue-400 to-indigo-500' },
     { href: '/app/wallet', label: String(walletBalance.toLocaleString()), icon: '🪙', color: 'from-yellow-400 to-orange-500', isWallet: true },
     { href: '#logout', label: 'Quitter', icon: '🚪', action: 'logout', color: 'from-red-400 to-rose-500' }
   ]
@@ -72,7 +73,7 @@ export default function BottomNav ({ walletBalance }: BottomNavProps): React.Rea
     <>
       {/* Barre de navigation fixée en bas - Plus fun */}
       <nav className='md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-r from-purple-100 via-pink-100 to-orange-100 border-t-4 border-purple-300 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.15)]'>
-        <div className='grid grid-cols-3 gap-2 px-4 py-3 safe-area-inset-bottom'>
+        <div className='grid grid-cols-4 gap-2 px-4 py-3 safe-area-inset-bottom'>
           {navItems.map((item) => {
             if (item.action === 'logout') {
               return (

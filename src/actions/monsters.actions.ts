@@ -54,6 +54,7 @@ export async function createMonster (monsterData: CreateMonsterFormValues): Prom
     state: monsterData.state,
     level: monsterData.level,
     xp: monsterData.xp,
+    isPublic: monsterData.isPublic,
     maxXp: monsterData.maxXp
   })
 
@@ -261,5 +262,66 @@ export async function doActionOnMonster (id: string, action: MonsterAction): Pro
     }
   } catch (error) {
     console.error('Error updating monster state:', error)
+  }
+}
+
+export async function togglePublicMonster (id:string): Promise<void> {
+  try {
+    // Connexion à la base de données
+    await connectMongooseToDatabase()
+
+    // Vérification de l'authentification
+    const session = await auth.api.getSession({
+      headers: await headers()
+    })
+    if (session === null || session === undefined) {
+      throw new Error('User not authenticated')
+    }
+
+    const { user } = session
+
+    // Extraction de l'ID depuis le tableau de route dynamique
+    const _id = id
+
+    // Validation du format ObjectId MongoDB
+    if (!Types.ObjectId.isValid(_id)) {
+      throw new Error('Invalid monster ID format')
+    }
+
+    // Récupération du monstre avec vérification de propriété
+    const monster = await Monster.findOne({ ownerId: user.id, _id }).exec()
+    
+    monster.isPublic = !monster.isPublic
+    monster.markModified('isPublic')
+    await monster.save()
+    revalidatePath(`/app/creatures/${id}`)
+  }catch (error) {
+    console.error('Error updating monster state:', error)
+  }
+}
+
+export async function getPublicMonsters (): Promise<DBMonster[]> {
+  try {
+    // Connexion à la base de données
+    await connectMongooseToDatabase()
+
+    // Vérification de l'authentification
+    const session = await auth.api.getSession({
+      headers: await headers()
+    })
+    if (session === null || session === undefined) {
+      throw new Error('User not authenticated')
+    }
+
+    const {user} = session
+
+    // Récupération des monstres de l'utilisateur
+    const monsters = await Monster.find({isPublic: true}).exec()
+
+    // Sérialisation JSON pour éviter les problèmes de typage Next.js
+    return JSON.parse(JSON.stringify(monsters))
+  } catch (error) {
+    console.error('Error fetching monsters:', error)
+    return []
   }
 }

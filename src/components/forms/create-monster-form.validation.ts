@@ -46,6 +46,7 @@ export const validateCreateMonsterForm = (
       equipedAccessories: DEFAULT_MONSTER_ACCESSORIES,
       equipedBackground: DEFAULT_MONSTER_BG,
       xp: 0,
+      isPublic: false,
       maxXp: DEFAULT_MONSTER_LEVEL * 100,
       state: DEFAULT_MONSTER_STATE
     }
