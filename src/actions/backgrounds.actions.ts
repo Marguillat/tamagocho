@@ -9,6 +9,7 @@ import { headers } from 'next/headers'
 import type { BackgroundData, DBBackground } from '@/types/background'
 import { subtractKoins } from '@/actions/wallet.actions'
 import { revalidatePath } from 'next/cache'
+import { checkAndUpdateQuest } from '@/services/quests/daily-quests.service'
 
 /**
  * Server Actions pour la gestion des backgrounds des monstres
@@ -118,6 +119,9 @@ export async function equipBackgroundToMonster (
   monster.equipedBackground = backgroundId
   monster.markModified('equipedBackground')
   await monster.save()
+
+  // Mise à jour de la quête de changement de background
+  await checkAndUpdateQuest(session.user.id, 'change_background', 1)
 
   revalidatePath(`/app/creatures/${monsterId}`)
 }

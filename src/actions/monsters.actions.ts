@@ -9,6 +9,7 @@ import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { Types } from 'mongoose'
 import { MonsterAction } from '@/hooks/monsters'
+import { checkAndUpdateQuest } from '@/services/quests/daily-quests.service'
 
 /**
  * Crée un nouveau monstre pour l'utilisateur authentifié
@@ -243,12 +244,14 @@ export async function doActionOnMonster (id: string, action: MonsterAction): Pro
         monster.xp = currentXp + xpGain
 
         // Vérification du passage de niveau
+        let leveledUp = false
         while (Number(monster.xp) >= Number(monster.maxXp)) {
           // Passage au niveau supérieur
           monster.level = Number(monster.level) + 1
           monster.xp = Number(monster.xp) - Number(monster.maxXp)
           // Nouveau palier d'XP : level * 100
           monster.maxXp = Number(monster.level) * 100
+          leveledUp = true
         }
 
         monster.markModified('state')
@@ -256,6 +259,20 @@ export async function doActionOnMonster (id: string, action: MonsterAction): Pro
         monster.markModified('maxXp')
         monster.markModified('level')
         await monster.save()
+
+        // Mise à jour des quêtes
+        // Si action "feed", mettre à jour la quête de nourriture
+        if (action === 'feed') {
+          await checkAndUpdateQuest(user.id, 'feed_monster', 1)
+        }
+
+        // Si le monstre a gagné un niveau, mettre à jour la quête d'évolution
+        if (leveledUp) {
+          await checkAndUpdateQuest(user.id, 'evolve_monster', 1)
+        }
+
+        // Mettre à jour la quête d'interaction (toutes les actions comptent)
+        await checkAndUpdateQuest(user.id, 'interact_with_monsters', 1)
         
         revalidatePath(`/app/creatures/${id}`)
       }
@@ -291,9 +308,16 @@ export async function togglePublicMonster (id:string): Promise<void> {
     // Récupération du monstre avec vérification de propriété
     const monster = await Monster.findOne({ ownerId: user.id, _id }).exec()
     
+    const wasPrivate = !monster.isPublic
     monster.isPublic = !monster.isPublic
     monster.markModified('isPublic')
     await monster.save()
+
+    // Si le monstre est devenu public, mettre à jour la quête
+    if (wasPrivate && monster.isPublic) {
+      await checkAndUpdateQuest(user.id, 'make_monster_public', 1)
+    }
+    
     revalidatePath(`/app/creatures/${id}`)
   }catch (error) {
     console.error('Error updating monster state:', error)

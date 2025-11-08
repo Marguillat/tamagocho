@@ -9,6 +9,7 @@ import { headers } from 'next/headers'
 import { AccessoryData, DBAccessory } from '@/types/accessory'
 import { buyAccessory } from '@/actions/shop.actions'
 import { ObjectId } from 'mongodb'
+import { checkAndUpdateQuest } from '@/services/quests/daily-quests.service'
 
 export async function createAccessoryForMonster (monsterId: string, accessoryData: AccessoryData): Promise<void> {
   await connectMongooseToDatabase()
@@ -33,6 +34,9 @@ export async function createAccessoryForMonster (monsterId: string, accessoryDat
   await buyAccessory(monsterId, accessoryData, accessoryData.price)
 
   await newAccessory.save()
+
+  // Mise à jour de la quête d'achat d'accessoire
+  await checkAndUpdateQuest(session.user.id, 'buy_accessory', 1)
 }
 
 export async function toggleAccessoryToMonster (monsterId: string, accessoryId: string): Promise<void> {
@@ -67,6 +71,9 @@ export async function toggleAccessoryToMonster (monsterId: string, accessoryId: 
   monster.equipedAccessories.push(accessoryId)
   monster.markModified('equipedAccessories')
   await monster.save()
+
+  // Mise à jour de la quête d'équipement d'accessoire
+  await checkAndUpdateQuest(session.user.id, 'equip_accessory', 1)
 }
 
 export async function getAccessoriesForMonster (monsterId: string): Promise<DBAccessory[] | void> {
