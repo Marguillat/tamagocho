@@ -12,5 +12,16 @@
         }
       ]
     }
+  ],
+
+  "crons": [
+    {
+      "path": "/api/cron/update-monsters",
+      "schedule": "*/3 * * * *"
+    },
+    {
+      "path": "/api/cron/reset-quests",
+      "schedule": "0 0 * * *"
+    }
   ]
 }
