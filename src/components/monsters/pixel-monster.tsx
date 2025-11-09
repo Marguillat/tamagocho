@@ -259,7 +259,6 @@ function drawMonster (
       ctx,
       { type: 'shoes', mainColor: shoesAccessory.mainColor },
       80,
-      80,
       bodyY,
       pixelSize
     )
@@ -292,7 +291,6 @@ function drawMonster (
       ctx,
       { type: 'sunglasses', mainColor: sunglassesAccessory.mainColor },
       80,
-      80,
       bodyY,
       pixelSize
     )
@@ -313,7 +311,6 @@ function drawMonster (
     drawAccessoryOnMonster(
       ctx,
       { type: 'hat', mainColor: hatAccessory.mainColor },
-      80,
       80,
       bodyY,
       pixelSize

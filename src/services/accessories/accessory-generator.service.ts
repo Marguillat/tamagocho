@@ -198,19 +198,19 @@ function adjustColorBrightness (hex: string, amount: number): string {
 
 /**
  * Calcule la position de l'accessoire sur le monstre selon son type
- * Utile pour le placement futur des accessoires sur le canvas du monstre
+ * Les positions sont relatives au corps du monstre (bodyY)
  *
  * @param type - Type d'accessoire
- * @returns Offset X et Y relatif au centre du monstre
+ * @returns Offset X et Y relatif au corps du monstre
  */
 export function getAccessoryPositionOffset (type: AccessoryType): { x: number, y: number } {
   switch (type) {
     case 'hat':
-      return { x: 0, y: -40 } // Au-dessus de la tête
+      return { x: 0, y: 40 } // Au-dessus de la tête (relatif au bodyY)
     case 'sunglasses':
-      return { x: 0, y: -5 } // Au niveau des yeux
+      return { x: 5, y: 27 } // Au niveau des yeux (relatif au bodyY)
     case 'shoes':
-      return { x: 0, y: 50 } // Aux pieds
+      return { x: 0, y: 20 } // Aux pieds (relatif au bodyY)
     default:
       return { x: 0, y: 0 }
   }
@@ -218,29 +218,31 @@ export function getAccessoryPositionOffset (type: AccessoryType): { x: number, y
 
 /**
  * Dessine un accessoire sur le canvas d'un monstre existant
- * Cette fonction est prévue pour l'intégration future
+ * Cette fonction doit être appelée DANS le contexte transformé du monstre
+ * pour que l'accessoire suive les animations (rotation, scale, translation)
  *
- * @param ctx - Contexte du canvas
+ * @param ctx - Contexte du canvas (déjà transformé)
  * @param config - Configuration de l'accessoire
- * @param monsterCenterX - Position X du centre du monstre
- * @param monsterCenterY - Position Y du centre du monstre
- * @param monsterBodyY - Position Y du corps du monstre (pour les calculs de position)
+ * @param monsterCenterX - Position X du centre du monstre (80 pour canvas 160x160)
+ * @param bodyY - Position Y du corps du monstre (inclut bounce et animations)
  * @param pixelSize - Taille d'un pixel
  */
 export function drawAccessoryOnMonster (
   ctx: CanvasRenderingContext2D,
   config: AccessoryDrawConfig,
   monsterCenterX: number,
-  monsterCenterY: number,
-  monsterBodyY: number,
+  bodyY: number,
   pixelSize: number = 6
 ): void {
   const offset = getAccessoryPositionOffset(config.type)
+  
+  // Les positions sont calculées relativement au corps du monstre
+  // centerX reste fixe horizontalement, Y est relatif au bodyY
   drawAccessory(
     ctx,
     config,
     monsterCenterX + offset.x,
-    monsterCenterY + offset.y,
+    bodyY + offset.y,
     pixelSize
   )
 }
