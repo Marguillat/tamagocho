@@ -48,9 +48,9 @@ export default function DailyQuestsSection (): React.ReactNode {
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg">
-        <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-moccaccino-500 border-t-transparent" />
+      <div className='bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg'>
+        <div className='flex items-center justify-center py-12'>
+          <div className='animate-spin rounded-full h-12 w-12 border-4 border-moccaccino-500 border-t-transparent' />
         </div>
       </div>
     )
@@ -58,12 +58,12 @@ export default function DailyQuestsSection (): React.ReactNode {
 
   if (error != null) {
     return (
-      <div className="bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg">
-        <div className="text-center py-8">
-          <div className="text-4xl mb-4">❌</div>
-          <p className="text-red-600 font-bold">{error}</p>
-          <div className="mt-4">
-            <Button onClick={() => { void refetch() }} size="md" variant="primary">
+      <div className='bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg'>
+        <div className='text-center py-8'>
+          <div className='text-4xl mb-4'>❌</div>
+          <p className='text-red-600 font-bold'>{error}</p>
+          <div className='mt-4'>
+            <Button onClick={() => { void refetch() }} size='md' variant='primary'>
               Réessayer
             </Button>
           </div>
@@ -73,38 +73,38 @@ export default function DailyQuestsSection (): React.ReactNode {
   }
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Notification de gain de bonus */}
       {showNotification && (
-        <div className="fixed top-4 right-4 bg-lochinvar-500 text-white px-6 py-4 rounded-lg shadow-xl z-50 animate-bounce">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">🎉</span>
-            <span className="font-bold">{notificationMessage}</span>
+        <div className='fixed top-4 right-4 bg-lochinvar-500 text-white px-6 py-4 rounded-lg shadow-xl z-50 animate-bounce'>
+          <div className='flex items-center gap-3'>
+            <span className='text-2xl'>🎉</span>
+            <span className='font-bold'>{notificationMessage}</span>
           </div>
         </div>
       )}
 
       {/* En-tête de la section */}
-      <div className="bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg">
-        <div className="flex items-center justify-between mb-6">
+      <div className='bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg'>
+        <div className='flex items-center justify-between mb-6'>
           <div>
-            <h2 className="text-3xl font-bold text-moccaccino-700 flex items-center gap-3">
-              <span className="text-4xl">📋</span>
+            <h2 className='text-3xl font-bold text-moccaccino-700 flex items-center gap-3'>
+              <span className='text-4xl'>📋</span>
               Quêtes du jour
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className='text-sm text-gray-600 mt-1'>
               Complète ces quêtes pour gagner des Koins !
             </p>
           </div>
           {allCompleted && (
-            <div className="text-6xl animate-bounce">
+            <div className='text-6xl animate-bounce'>
               🏆
             </div>
           )}
         </div>
 
         {/* Liste des quêtes */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6'>
           {quests.map((quest, index) => (
             <QuestCard key={index} quest={quest} />
           ))}
@@ -112,25 +112,24 @@ export default function DailyQuestsSection (): React.ReactNode {
 
         {/* Bonus de complétion */}
         {allCompleted && (
-          <div className="bg-gradient-to-r from-lochinvar-500 to-fuchsia-blue-500 rounded-xl p-6 text-white shadow-lg">
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                  <span className="text-2xl">🎁</span>
+          <div className='bg-gradient-to-r from-lochinvar-500 to-fuchsia-blue-500 rounded-xl p-6 text-white shadow-lg'>
+            <div className='flex items-center justify-between'>
+              <div className='flex-1'>
+                <h3 className='text-xl font-bold mb-2 flex items-center gap-2'>
+                  <span className='text-2xl'>🎁</span>
                   Bonus de complétion !
                 </h3>
-                <p className="text-sm opacity-90">
+                <p className='text-sm opacity-90'>
                   {bonusClaimed
                     ? `Vous avez déjà réclamé votre bonus de ${QUEST_SYSTEM_CONFIG.COMPLETE_ALL_BONUS} Koins aujourd'hui !`
-                    : `Réclamez votre bonus de ${QUEST_SYSTEM_CONFIG.COMPLETE_ALL_BONUS} Koins pour avoir complété toutes les quêtes !`
-                  }
+                    : `Réclamez votre bonus de ${QUEST_SYSTEM_CONFIG.COMPLETE_ALL_BONUS} Koins pour avoir complété toutes les quêtes !`}
                 </p>
               </div>
               {!bonusClaimed && (
                 <Button
                   onClick={() => { void handleClaimBonus() }}
-                  size="lg"
-                  variant="primary"
+                  size='lg'
+                  variant='primary'
                   disabled={claiming}
                 >
                   {claiming ? 'Réclamation...' : 'Réclamer'}
@@ -142,9 +141,9 @@ export default function DailyQuestsSection (): React.ReactNode {
       </div>
 
       {/* Statistiques */}
-      <div className="bg-gradient-to-br from-fuchsia-blue-50 to-moccaccino-50 rounded-2xl p-6 shadow-lg">
-        <h3 className="text-2xl font-bold text-moccaccino-700 mb-4 flex items-center gap-2">
-          <span className="text-3xl">📊</span>
+      <div className='bg-gradient-to-br from-fuchsia-blue-50 to-moccaccino-50 rounded-2xl p-6 shadow-lg'>
+        <h3 className='text-2xl font-bold text-moccaccino-700 mb-4 flex items-center gap-2'>
+          <span className='text-3xl'>📊</span>
           Vos statistiques
         </h3>
         <QuestStatsDisplay stats={stats} />
@@ -152,4 +151,3 @@ export default function DailyQuestsSection (): React.ReactNode {
     </div>
   )
 }
-

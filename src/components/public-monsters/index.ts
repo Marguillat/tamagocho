@@ -3,4 +3,3 @@
  */
 
 export { PublicMonsterCard } from './public-monster-card'
-

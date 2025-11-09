@@ -273,7 +273,7 @@ export async function doActionOnMonster (id: string, action: MonsterAction): Pro
 
         // Mettre à jour la quête d'interaction (toutes les actions comptent)
         await checkAndUpdateQuest(user.id, 'interact_with_monsters', 1)
-        
+
         revalidatePath(`/app/creatures/${id}`)
       }
     }
@@ -282,7 +282,7 @@ export async function doActionOnMonster (id: string, action: MonsterAction): Pro
   }
 }
 
-export async function togglePublicMonster (id:string): Promise<void> {
+export async function togglePublicMonster (id: string): Promise<void> {
   try {
     // Connexion à la base de données
     await connectMongooseToDatabase()
@@ -307,7 +307,7 @@ export async function togglePublicMonster (id:string): Promise<void> {
 
     // Récupération du monstre avec vérification de propriété
     const monster = await Monster.findOne({ ownerId: user.id, _id }).exec()
-    
+
     const wasPrivate = !monster.isPublic
     monster.isPublic = !monster.isPublic
     monster.markModified('isPublic')
@@ -317,9 +317,9 @@ export async function togglePublicMonster (id:string): Promise<void> {
     if (wasPrivate && monster.isPublic) {
       await checkAndUpdateQuest(user.id, 'make_monster_public', 1)
     }
-    
+
     revalidatePath(`/app/creatures/${id}`)
-  }catch (error) {
+  } catch (error) {
     console.error('Error updating monster state:', error)
   }
 }
@@ -337,10 +337,10 @@ export async function getPublicMonsters (): Promise<DBMonster[]> {
       throw new Error('User not authenticated')
     }
 
-    const {user} = session
+    const { user } = session
 
     // Récupération des monstres de l'utilisateur
-    const monsters = await Monster.find({isPublic: true}).exec()
+    const monsters = await Monster.find({ isPublic: true }).exec()
 
     // Sérialisation JSON pour éviter les problèmes de typage Next.js
     return JSON.parse(JSON.stringify(monsters))

@@ -45,19 +45,19 @@ export default function QuestStatsDisplay ({ stats }: QuestStatsDisplayProps): R
   ]
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
       {statItems.map((item, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg p-4 border-2 border-gray-200 hover:border-moccaccino-300 transition-all duration-300 hover:shadow-md"
+          className='bg-white rounded-lg p-4 border-2 border-gray-200 hover:border-moccaccino-300 transition-all duration-300 hover:shadow-md'
         >
-          <div className="text-3xl mb-2 text-center">
+          <div className='text-3xl mb-2 text-center'>
             {item.icon}
           </div>
           <div className={`text-2xl font-bold text-center ${item.color}`}>
             {item.value}
           </div>
-          <div className="text-xs text-gray-600 text-center mt-1">
+          <div className='text-xs text-gray-600 text-center mt-1'>
             {item.label}
           </div>
         </div>
@@ -65,4 +65,3 @@ export default function QuestStatsDisplay ({ stats }: QuestStatsDisplayProps): R
     </div>
   )
 }
-

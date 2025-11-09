@@ -33,37 +33,37 @@ export default function QuestCard ({ quest }: QuestCardProps): React.ReactNode {
     >
       {/* Badge "Complété" */}
       {isCompleted && (
-        <div className="absolute -top-2 -right-2 bg-lochinvar-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md animate-bounce">
+        <div className='absolute -top-2 -right-2 bg-lochinvar-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md animate-bounce'>
           ✓ Complété
         </div>
       )}
 
       {/* Header */}
-      <div className="flex items-start gap-3 mb-3">
-        <div className="text-4xl flex-shrink-0">
+      <div className='flex items-start gap-3 mb-3'>
+        <div className='text-4xl flex-shrink-0'>
           {quest.icon}
         </div>
-        <div className="flex-1">
-          <h3 className="font-bold text-lg text-moccaccino-700">
+        <div className='flex-1'>
+          <h3 className='font-bold text-lg text-moccaccino-700'>
             {quest.title}
           </h3>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className='text-sm text-gray-600 mt-1'>
             {quest.description}
           </p>
         </div>
       </div>
 
       {/* Barre de progression */}
-      <div className="mb-3">
-        <div className="flex justify-between items-center mb-1 text-xs text-gray-600">
+      <div className='mb-3'>
+        <div className='flex justify-between items-center mb-1 text-xs text-gray-600'>
           <span>
             Progression : {quest.currentProgress} / {quest.targetCount}
           </span>
-          <span className="font-bold text-lochinvar-600">
+          <span className='font-bold text-lochinvar-600'>
             +{quest.reward} Koins
           </span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+        <div className='w-full bg-gray-200 rounded-full h-3 overflow-hidden'>
           <div
             className={`
               h-full transition-all duration-500 rounded-full
@@ -79,11 +79,10 @@ export default function QuestCard ({ quest }: QuestCardProps): React.ReactNode {
 
       {/* Footer */}
       {isCompleted && quest.completedAt != null && (
-        <div className="text-xs text-lochinvar-600 text-right">
+        <div className='text-xs text-lochinvar-600 text-right'>
           Complété à {new Date(quest.completedAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
         </div>
       )}
     </div>
   )
 }
-

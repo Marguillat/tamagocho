@@ -1,7 +1,10 @@
 import Link from 'next/link'
 import { PixelMonster } from '@/components/monsters'
+import type { EquippedAccessory } from './pixel-monster'
 import { MonsterStateBadge, isMonsterState } from './monster-state-badge'
 import type { MonsterState } from '@/types/monster'
+import type { DBAccessory } from '@/types/accessory'
+import type { AccessoryType } from '@/config/accessories.config-v2'
 import { parseMonsterTraits, formatAdoptionDate } from '@/lib/utils'
 
 /**
@@ -24,6 +27,8 @@ export interface MonsterCardProps {
   updatedAt: string | undefined
   /** URL du background équipé */
   equipedBackgroundUrl?: string | null
+  /** Accessoires équipés du monstre */
+  equippedAccessories?: DBAccessory[]
 }
 
 /**
@@ -49,12 +54,19 @@ export function MonsterCard ({
   level,
   createdAt,
   updatedAt,
-  equipedBackgroundUrl
+  equipedBackgroundUrl,
+  equippedAccessories = []
 }: MonsterCardProps): React.ReactNode {
   // Parsing des traits et normalisation des données
   const traits = parseMonsterTraits(rawTraits)
   const adoptionDate = formatAdoptionDate(String(createdAt) ?? String(updatedAt))
   const levelLabel = level ?? 1
+
+  // Conversion des accessoires pour PixelMonster
+  const accessoriesForPixelMonster: EquippedAccessory[] = equippedAccessories.map(acc => ({
+    type: acc.type as AccessoryType,
+    mainColor: acc.mainColor ?? '#000000'
+  }))
 
   return (
     <Link href={`/app/creatures/${id}`}>
@@ -82,7 +94,7 @@ export function MonsterCard ({
 
         <div className='relative flex flex-col gap-6'>
           {/* Zone de rendu du monstre - PLUS GRANDE */}
-          <div 
+          <div
             className='relative flex items-center justify-center overflow-hidden rounded-3xl bg-white/80 p-8 ring-4 ring-white/90 shadow-inner backdrop-blur-sm group-hover:bg-white/90 transition-all duration-300 min-h-[280px] bg-cover bg-center bg-no-repeat'
             style={{
               backgroundImage: equipedBackgroundUrl !== null && equipedBackgroundUrl !== undefined && equipedBackgroundUrl !== ''
@@ -99,6 +111,7 @@ export function MonsterCard ({
                   traits={traits}
                   state={isMonsterState(state) ? state : 'happy'}
                   level={levelLabel}
+                  equippedAccessories={accessoriesForPixelMonster}
                 />
               </div>
             )}

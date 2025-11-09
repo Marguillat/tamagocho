@@ -46,7 +46,6 @@ function DashboardContent ({ session, monsters }: { session: Session, monsters: 
   const latestAdoptionLabel = useLatestAdoptionLabel(stats.latestAdoption)
   const favoriteMoodMessage = useFavoriteMoodMessage(stats.favoriteMood, stats.totalMonsters)
 
-
   useEffect(() => {
     const fetchAndUpdateMonsters = async (): Promise<void> => {
       const response = await fetch('/api/monsters')

@@ -26,7 +26,7 @@ export function useWalletPayment (): UseWalletPaymentReturn {
     setIsPurchasing(true)
 
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_APP_URL+'/api/checkout/sessions', {
+      const response = await fetch(process.env.NEXT_PUBLIC_APP_URL + '/api/checkout/sessions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

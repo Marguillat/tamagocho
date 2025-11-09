@@ -35,7 +35,7 @@ async function resetExpiredQuests (): Promise<{ processed: number, renewed: numb
   await connectMongooseToDatabase()
 
   const currentDate = new Date().toISOString().split('T')[0]
-  
+
   log('info', `Vérification des quêtes à renouveler pour la date: ${currentDate}`)
 
   // Trouver tous les documents avec une date antérieure à aujourd'hui
@@ -119,4 +119,3 @@ export async function GET (request: NextRequest): Promise<NextResponse> {
 export async function POST (request: NextRequest): Promise<NextResponse> {
   return await GET(request)
 }
-

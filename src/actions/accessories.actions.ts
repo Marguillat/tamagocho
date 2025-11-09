@@ -94,3 +94,38 @@ export async function getAccessoriesForMonster (monsterId: string): Promise<DBAc
     console.error('Error fetching accessories for monster:', error)
   }
 }
+
+/**
+ * Récupère uniquement les accessoires équipés d'un monstre
+ * @param monsterId - ID du monstre
+ * @returns Liste des accessoires équipés avec leurs détails
+ */
+export async function getEquippedAccessoriesForMonster (monsterId: string): Promise<DBAccessory[]> {
+  try {
+    await connectMongooseToDatabase()
+
+    const session = await auth.api.getSession({
+      headers: await headers()
+    })
+
+    if (session === null || session === undefined) {
+      return []
+    }
+
+    // Récupérer le monstre pour obtenir la liste des IDs équipés
+    const monster = await Monster.findOne({ _id: monsterId }).exec()
+    if (monster === null || monster === undefined || monster.equipedAccessories.length === 0) {
+      return []
+    }
+
+    // Récupérer les détails des accessoires équipés
+    const equippedAccessories = await Accessory.find({
+      _id: { $in: monster.equipedAccessories }
+    }).exec()
+
+    return JSON.parse(JSON.stringify(equippedAccessories))
+  } catch (error) {
+    console.error('Error fetching equipped accessories for monster:', error)
+    return []
+  }
+}

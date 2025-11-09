@@ -68,7 +68,7 @@ export function MonsterBackgrounds ({
     try {
       await equipBackgroundToMonster(monsterId, backgroundId)
       setEquipedBackgroundId(backgroundId)
-      
+
       // Notifier le parent du changement pour mise à jour immédiate
       if (onBackgroundChange !== undefined) {
         onBackgroundChange()
@@ -91,7 +91,7 @@ export function MonsterBackgrounds ({
     try {
       await unequipBackgroundFromMonster(monsterId)
       setEquipedBackgroundId(null)
-      
+
       // Notifier le parent du changement pour mise à jour immédiate
       if (onBackgroundChange !== undefined) {
         onBackgroundChange()

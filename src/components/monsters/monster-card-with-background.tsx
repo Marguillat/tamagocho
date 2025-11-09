@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { getEquippedBackground } from '@/actions/backgrounds.actions'
+import { getEquippedAccessoriesForMonster } from '@/actions/accessories.actions'
 import type { DBBackground } from '@/types/background'
-import { MonsterCard } from './monster-card'
+import type { DBAccessory } from '@/types/accessory'
+import { MonsterCard, type MonsterCardProps } from './monster-card'
 import type { MonsterState } from '@/types/monster'
 
 /**
@@ -48,6 +50,7 @@ export function MonsterCardWithBackground ({
   equipedBackgroundId
 }: MonsterCardWithBackgroundProps): React.ReactNode {
   const [backgroundUrl, setBackgroundUrl] = useState<string | null>(null)
+  const [equippedAccessories, setEquippedAccessories] = useState<DBAccessory[]>([])
 
   useEffect(() => {
     const loadBackground = async (): Promise<void> => {
@@ -68,6 +71,20 @@ export function MonsterCardWithBackground ({
     void loadBackground()
   }, [id, equipedBackgroundId])
 
+  useEffect(() => {
+    const loadAccessories = async (): Promise<void> => {
+      try {
+        const accessories = await getEquippedAccessoriesForMonster(id)
+        setEquippedAccessories(accessories)
+      } catch (error) {
+        console.error('Erreur lors du chargement des accessoires:', error)
+        setEquippedAccessories([])
+      }
+    }
+
+    void loadAccessories()
+  }, [id])
+
   return (
     <MonsterCard
       id={id}
@@ -78,7 +95,7 @@ export function MonsterCardWithBackground ({
       createdAt={createdAt}
       updatedAt={updatedAt}
       equipedBackgroundUrl={backgroundUrl}
+      equippedAccessories={equippedAccessories}
     />
   )
 }
-

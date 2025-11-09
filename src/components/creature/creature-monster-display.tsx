@@ -116,7 +116,7 @@ export function CreatureMonsterDisplay ({
         style={{
           backgroundImage: equipedBackgroundUrl !== null && equipedBackgroundUrl !== undefined && equipedBackgroundUrl !== ''
             ? `url('${equipedBackgroundUrl}')`
-            : ""
+            : ''
         }}
       >
         <div className='absolute inset-0' />

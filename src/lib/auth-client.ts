@@ -3,7 +3,7 @@ export const authClient = createAuthClient()
 
 export const signInWithGithub = async () => {
   await authClient.signIn.social({
-    provider: "github",
-    callbackURL: "/app"
+    provider: 'github',
+    callbackURL: '/app'
   })
 }

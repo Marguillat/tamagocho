@@ -163,4 +163,3 @@ export interface UserDailyQuests {
 }
 
 export default mongoose.models.UserDailyQuests ?? mongoose.model('UserDailyQuests', userDailyQuestsSchema)
-

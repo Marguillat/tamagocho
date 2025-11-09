@@ -7,8 +7,8 @@ import type { DBBackground } from '@/types/background'
 import type { EquippedAccessory } from '@/components/monsters/pixel-monster'
 import { parseMonsterTraits, getStateEmoji } from '@/lib/utils'
 import { getEquippedBackground } from '@/actions/backgrounds.actions'
-import { getAccessoriesForMonster } from '@/actions/accessories.actions'
-import { accessoriesCatalog, type AccessoryType } from '@/config/accessories.config-v2'
+import { getEquippedAccessoriesForMonster } from '@/actions/accessories.actions'
+import type { AccessoryType } from '@/config/accessories.config-v2'
 
 /**
  * Props pour le composant PublicMonsterCard
@@ -68,22 +68,13 @@ export function PublicMonsterCard ({ monster }: PublicMonsterCardProps): React.R
 
         // Charger les accessoires équipés
         if (monster.equipedAccessories !== null && monster.equipedAccessories !== undefined && monster.equipedAccessories.length > 0) {
-          const accessories = await getAccessoriesForMonster(monster._id)
-          
-          if (accessories !== null && accessories !== undefined && Array.isArray(accessories)) {
-            const equippedItems: EquippedAccessory[] = accessories
-              .map((acc: any) => {
-                const catalogItem = accessoriesCatalog.find((item) => item.id === acc.accessoryId)
-                if (catalogItem === null || catalogItem === undefined) {
-                  return null
-                }
+          const accessories = await getEquippedAccessoriesForMonster(monster._id)
 
-                return {
-                  type: catalogItem.type as AccessoryType,
-                  mainColor: catalogItem.mainColor
-                }
-              })
-              .filter((item): item is EquippedAccessory => item !== null)
+          if (accessories.length > 0) {
+            const equippedItems: EquippedAccessory[] = accessories.map((acc) => ({
+              type: acc.type as AccessoryType,
+              mainColor: acc.mainColor ?? '#000000'
+            }))
 
             setEquippedAccessories(equippedItems)
           }
@@ -157,4 +148,3 @@ export function PublicMonsterCard ({ monster }: PublicMonsterCardProps): React.R
     </div>
   )
 }
-

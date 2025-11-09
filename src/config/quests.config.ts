@@ -129,4 +129,3 @@ export const QUEST_SYSTEM_CONFIG = {
    */
   COMPLETE_ALL_BONUS: 50
 } as const
-

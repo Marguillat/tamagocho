@@ -239,4 +239,3 @@ export async function checkAndUpdateQuest (
     // Ne pas bloquer l'action principale en cas d'erreur de quête
   }
 }
-
