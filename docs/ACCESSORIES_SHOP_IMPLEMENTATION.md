@@ -6,7 +6,7 @@ J'ai créé un système complet de boutique d'accessoires pour les créatures du
 
 ## 🎯 Fonctionnalités Implémentées
 
-### 1. Configuration des Accessoires (`src/config/accessories.config-v2.ts`)
+### 1. Configuration des Accessoires (`src/config/accessories.config.ts`)
 
 - **Types d'accessoires** : `hat`, `sunglasses`, `shoes`
 - **15 accessoires disponibles** :
@@ -50,7 +50,7 @@ Chaque carte d'accessoire affiche :
 ### Principes SOLID Appliqués
 
 #### Single Responsibility Principle (SRP)
-- `accessories.config-v2.ts` : Configuration uniquement
+- `accessories.config.ts` : Configuration uniquement
 - `accessories-shop-v2.tsx` : Affichage de la boutique uniquement
 - `shop-modal.tsx` : Orchestration de la modale uniquement
 
@@ -90,7 +90,7 @@ Affiche message de succès
 ## 📦 Fichiers Créés/Modifiés
 
 ### Nouveaux Fichiers
-1. **`src/config/accessories.config-v2.ts`** - Configuration du catalogue
+1. **`src/config/accessories.config.ts`** - Configuration du catalogue
 2. **`src/components/shop/accessories-shop-v2.tsx`** - Composant de boutique
 
 ### Fichiers Modifiés

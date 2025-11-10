@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { drawAccessoryOnMonster } from '@/services/accessories/accessory-generator.service'
-import type { AccessoryType } from '@/config/accessories.config-v2'
+import type { AccessoryType } from '@/config/accessories.config'
 
 type MonsterState = 'happy' | 'sad' | 'hungry' | 'sleepy' | 'angry'
 type MonsterAction = 'feed' | 'comfort' | 'hug' | 'wake' | null

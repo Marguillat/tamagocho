@@ -4,7 +4,7 @@ import type { EquippedAccessory } from './pixel-monster'
 import { MonsterStateBadge, isMonsterState } from './monster-state-badge'
 import type { MonsterState } from '@/types/monster'
 import type { DBAccessory } from '@/types/accessory'
-import type { AccessoryType } from '@/config/accessories.config-v2'
+import type { AccessoryType } from '@/config/accessories.config'
 import { parseMonsterTraits, formatAdoptionDate } from '@/lib/utils'
 
 /**

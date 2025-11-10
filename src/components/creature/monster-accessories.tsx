@@ -4,7 +4,7 @@ import type React from 'react'
 import { useState, useEffect } from 'react'
 import { type DBAccessory } from '@/types/accessory'
 import { getAccessoriesForMonster, toggleAccessoryToMonster } from '@/actions/accessories.actions'
-import { type AccessoryConfig, accessoriesCatalog } from '@/config/accessories.config-v2'
+import { type AccessoryConfig, accessoriesCatalog } from '@/config/accessories.config'
 import { PixelAccessory } from '@/components/accessories/pixel-accessory'
 
 interface MonsterAccessoriesProps {

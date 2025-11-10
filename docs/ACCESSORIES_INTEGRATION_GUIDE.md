@@ -20,7 +20,7 @@ Afficher les accessoires équipés directement sur le canvas du monstre, en pixe
 Ajouter les accessoires équipés dans l'interface du monstre :
 
 ```typescript
-import type { AccessoryType } from '@/config/accessories.config-v2'
+import type { AccessoryType } from '@/config/accessories.config'
 
 export interface DBMonster {
   // ...existing fields
@@ -43,7 +43,7 @@ import {
   drawAccessoryOnMonster, 
   getAccessoryPositionOffset 
 } from '@/services/accessories/accessory-generator.service'
-import type { AccessoryType } from '@/config/accessories.config-v2'
+import type { AccessoryType } from '@/config/accessories.config'
 ```
 
 #### 2.2 Ajouter les Props
@@ -245,8 +245,8 @@ function drawMonster (
 import { useState, useEffect } from 'react'
 import { PixelMonster } from '@/components/monsters/pixel-monster'
 import { getAccessoriesForMonster } from '@/actions/accessories.actions'
-import { accessoriesCatalog } from '@/config/accessories.config-v2'
-import type { AccessoryType } from '@/config/accessories.config-v2'
+import { accessoriesCatalog } from '@/config/accessories.config'
+import type { AccessoryType } from '@/config/accessories.config'
 import type { DBMonster } from '@/types/monster'
 
 export function CreatureMonsterDisplay ({ monster }: { monster: DBMonster }) {

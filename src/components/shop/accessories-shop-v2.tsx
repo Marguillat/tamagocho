@@ -2,7 +2,7 @@
 
 import type React from 'react'
 import { useState, useEffect } from 'react'
-import { type AccessoryConfig, accessoriesCatalog, type AccessoryType } from '@/config/accessories.config-v2'
+import { type AccessoryConfig, accessoriesCatalog, type AccessoryType } from '@/config/accessories.config'
 import { createAccessoryForMonster, getAccessoriesForMonster } from '@/actions/accessories.actions'
 import { type AccessoryData, type DBAccessory } from '@/types/accessory'
 

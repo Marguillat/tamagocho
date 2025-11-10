@@ -266,6 +266,6 @@ drawAt(x: 80, y: 80 + 50) = (80, 130)
 
 - **Service** : `src/services/accessories/accessory-generator.service.ts`
 - **Composant** : `src/components/accessories/pixel-accessory.tsx`
-- **Config** : `src/config/accessories.config-v2.ts`
+- **Config** : `src/config/accessories.config.ts`
 - **Documentation** : `docs/ACCESSORIES_PIXEL_ART_SYSTEM.md`
 

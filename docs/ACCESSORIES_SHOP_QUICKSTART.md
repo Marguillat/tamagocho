@@ -17,7 +17,7 @@
 ```
 src/
 ├── config/
-│   └── accessories.config-v2.ts        # 📦 Catalogue des accessoires
+│   └── accessories.config.ts        # 📦 Catalogue des accessoires
 ├── components/
 │   ├── shop/
 │   │   └── accessories-shop-v2.tsx     # 🛒 Composant boutique
@@ -96,7 +96,7 @@ await createAccessoryForMonster(monsterId, {
 ## ⚙️ Configuration
 
 ### Ajouter un Nouvel Accessoire
-Éditer `src/config/accessories.config-v2.ts` :
+Éditer `src/config/accessories.config.ts` :
 
 ```typescript
 {

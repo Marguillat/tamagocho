@@ -33,7 +33,7 @@
 │                      DATA FLOW                                    │
 └──────────────────────────────────────────────────────────────────┘
 
-Config (accessories.config-v2.ts)
+Config (accessories.config.ts)
     │
     │  type: 'hat'
     │  mainColor: '#8B4513'
@@ -131,7 +131,7 @@ tamagocho/
 │   │           └─ Toggle equip/unequip
 │   │
 │   ├── config/
-│   │   └── accessories.config-v2.ts
+│   │   └── accessories.config.ts
 │   │       └─ Accessory catalog
 │   │
 │   └── types/

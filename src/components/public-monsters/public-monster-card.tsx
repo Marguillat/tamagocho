@@ -8,7 +8,7 @@ import type { EquippedAccessory } from '@/components/monsters/pixel-monster'
 import { parseMonsterTraits, getStateEmoji } from '@/lib/utils'
 import { getEquippedBackground } from '@/actions/backgrounds.actions'
 import { getEquippedAccessoriesForMonster } from '@/actions/accessories.actions'
-import type { AccessoryType } from '@/config/accessories.config-v2'
+import type { AccessoryType } from '@/config/accessories.config'
 
 /**
  * Props pour le composant PublicMonsterCard

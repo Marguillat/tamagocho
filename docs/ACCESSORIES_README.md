@@ -179,7 +179,7 @@ src/
 │   └── creature/
 │       └── monster-accessories.tsx         # Liste des accessoires
 └── config/
-    └── accessories.config-v2.ts            # Catalogue
+    └── accessories.config.ts            # Catalogue
 
 docs/
 ├── ACCESSORIES_README.md                   # Ce fichier
@@ -192,7 +192,7 @@ docs/
 ### Flux de Données
 
 ```
-Config (accessories.config-v2.ts)
+Config (accessories.config.ts)
     ↓
 MonsterAccessories (component)
     ↓
@@ -240,7 +240,7 @@ Canvas API (rendu)
 - **Service** : [accessory-generator.service.ts](../src/services/accessories/accessory-generator.service.ts)
 - **Composant** : [pixel-accessory.tsx](../src/components/accessories/pixel-accessory.tsx)
 - **Liste** : [monster-accessories.tsx](../src/components/creature/monster-accessories.tsx)
-- **Config** : [accessories.config-v2.ts](../src/config/accessories.config-v2.ts)
+- **Config** : [accessories.config.ts](../src/config/accessories.config.ts)
 
 ### Documentation
 

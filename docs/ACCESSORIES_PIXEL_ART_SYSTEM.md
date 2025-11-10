@@ -218,7 +218,7 @@ if (hasHat) drawAccessoryOnMonster(...)
 
 ### Processus
 
-1. **Définir le type** dans `accessories.config-v2.ts`
+1. **Définir le type** dans `accessories.config.ts`
 2. **Créer la fonction de dessin** dans `accessory-generator.service.ts`
 3. **Ajouter le case** dans la fonction `drawAccessory`
 4. **Définir la position** dans `getAccessoryPositionOffset`
@@ -329,5 +329,5 @@ Le système est conçu pour :
 
 - **Monster System** : `src/components/monsters/pixel-monster.tsx`
 - **Service Pattern** : `src/services/monsters/monster-generator.ts`
-- **Config Pattern** : `src/config/accessories.config-v2.ts`
+- **Config Pattern** : `src/config/accessories.config.ts`
 

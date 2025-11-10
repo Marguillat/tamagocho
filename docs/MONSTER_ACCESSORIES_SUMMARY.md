@@ -185,7 +185,7 @@ import { MonsterAccessories } from './monster-accessories'
 - `getAccessoriesForMonster` utilisée telle quelle
 
 ✅ **Utilisation du catalogue existant**
-- `accessoriesCatalog` de `accessories.config-v2.ts`
+- `accessoriesCatalog` de `accessories.config.ts`
 - Cohérence des emojis et noms
 
 ## 🎯 Principes SOLID Appliqués

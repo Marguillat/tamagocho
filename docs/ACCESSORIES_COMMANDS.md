@@ -79,7 +79,7 @@ npm run dev
 
 ```bash
 # Étape 1 : Définir le type dans la config
-# Éditer: src/config/accessories.config-v2.ts
+# Éditer: src/config/accessories.config.ts
 
 # Étape 2 : Créer la fonction de dessin
 # Éditer: src/services/accessories/accessory-generator.service.ts

@@ -7,7 +7,7 @@ import type { MonsterAction } from '@/hooks/monsters'
 import type { EquippedAccessory } from '@/components/monsters/pixel-monster'
 import { getStateLabel } from '@/lib/utils'
 import { getAccessoriesForMonster } from '@/actions/accessories.actions'
-import { accessoriesCatalog, type AccessoryType } from '@/config/accessories.config-v2'
+import { accessoriesCatalog, type AccessoryType } from '@/config/accessories.config'
 
 /**
  * Props pour le composant CreatureMonsterDisplay

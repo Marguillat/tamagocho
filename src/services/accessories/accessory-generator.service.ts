@@ -14,7 +14,7 @@
  * - Pas de dépendances UI : peut être utilisé dans différents contextes (standalone, sur monstre)
  */
 
-import { type AccessoryType } from '@/config/accessories.config-v2'
+import { type AccessoryType } from '@/config/accessories.config'
 
 export interface AccessoryDrawConfig {
   type: AccessoryType
