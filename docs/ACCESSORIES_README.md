@@ -57,6 +57,29 @@ Ce dossier contient toute la documentation relative à la migration des accessoi
    - Étapes détaillées
    - Code examples
 
+7. **[ACCESSORIES_POSITIONING_FIX_ANALYSIS.md](./ACCESSORIES_POSITIONING_FIX_ANALYSIS.md)** 🔧 **FIX POSITIONNEMENT** ⚡ **NOUVEAU**
+   - Analyse complète du problème de suivi des mouvements
+   - Solution implémentée avec contexte canvas transformé
+   - Documentation technique détaillée
+   - Tests de validation recommandés
+
+8. **[ACCESSORIES_POSITIONING_FIX_SUMMARY.md](./ACCESSORIES_POSITIONING_FIX_SUMMARY.md)** ⚡ **RÉSUMÉ RAPIDE**
+   - Résumé du fix en 2 minutes
+   - Modifications clés des signatures
+   - Résultats obtenus
+
+9. **[ACCESSORIES_POSITIONING_VISUAL_GUIDE.md](./ACCESSORIES_POSITIONING_VISUAL_GUIDE.md)** 📊 **GUIDE VISUEL**
+   - Schémas visuels du système de coordonnées
+   - Exemples d'animations pas à pas
+   - Flux de transformation canvas
+   - Concepts clés illustrés
+
+10. **[ACCESSORIES_POSITIONING_TEST_CHECKLIST.md](./ACCESSORIES_POSITIONING_TEST_CHECKLIST.md)** ✅ **CHECKLIST DE TEST**
+    - Tests complets pour valider le fix
+    - 14 scénarios de test détaillés
+    - Tests de rotation, scale et translation
+    - Validation de non-régression
+
 ## 🚀 Démarrage Rapide
 
 ### Pour les Développeurs
@@ -123,6 +146,7 @@ Ce dossier contient toute la documentation relative à la migration des accessoi
 - [x] Implémenter le z-ordering (10 layers)
 - [x] Gérer les positions dynamiques selon l'état du monstre
 - [x] Synchronisation avec les animations du monstre
+- [x] **Fix du suivi des mouvements** (9 nov 2025) → [ACCESSORIES_POSITIONING_FIX_ANALYSIS.md](./ACCESSORIES_POSITIONING_FIX_ANALYSIS.md)
 - [x] Tests visuels complets
 - [x] Documentation complète
 
