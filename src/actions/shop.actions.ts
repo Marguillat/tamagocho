@@ -8,6 +8,8 @@ import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { AccessoryData } from '@/types/accessory'
 import { subtractKoins } from '@/actions/wallet.actions'
+import { checkAndUpdateQuest } from '@/services/quests/daily-quests.service'
+
 
 export async function buyXpBoost (creatureId: string, boostId: string): Promise<void> {
   console.log(`Achat du boost ${boostId} pour la créature ${creatureId}`)
@@ -28,6 +30,13 @@ export async function buyXpBoost (creatureId: string, boostId: string): Promise<
   }
 
   const boost = xpBoosts.find((boost) => boost.id === boostId)
+  
+  let priceOfBoost = 0
+  if (boost !== undefined && boost !== null) {
+    priceOfBoost = boost.price
+  }
+  
+  await subtractKoins(priceOfBoost)
 
   if (boost === undefined || boost === null) {
     throw new Error('Boost not found')
@@ -35,13 +44,19 @@ export async function buyXpBoost (creatureId: string, boostId: string): Promise<
 
   monster.xp = Number(monster.xp) + Number(boost.xpAmount)
   monster.markModified('xp')
+  let leveledUp = false
   if (Number(monster.xp) >= Number(monster.maxXp)) {
+    leveledUp = true
     monster.level = Number(monster.level) + 1
     monster.maxXp = Number(monster.level) * 100
     monster.markModified('level')
     monster.markModified('maxXp')
     monster.xp = 0
     monster.markModified('xp')
+    // Si le monstre a gagné un niveau, mettre à jour la quête d'évolution
+    if (leveledUp) {
+      await checkAndUpdateQuest(user.id, 'evolve_monster', 1)
+    }
   }
   await monster.save()
   revalidatePath(`/app/creatures/${creatureId}`)
