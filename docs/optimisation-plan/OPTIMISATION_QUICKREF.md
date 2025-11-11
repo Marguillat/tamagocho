@@ -88,7 +88,7 @@ Temps: 10 min
 Vérifier: npm run lint
 ```
 
-### Tâche 2: accessories-shop-v2.tsx
+### Tâche 2: accessories-shop.tsx
 ```
 Ligne 45: Ajouter useMemo à filteredAccessories
 Ligne 85: Ajouter useCallback à handlePurchase

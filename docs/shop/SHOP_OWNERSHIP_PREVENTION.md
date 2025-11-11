@@ -94,7 +94,7 @@ disabled={!canPurchase || isLoadingOwned}
 ) : ...}
 ```
 
-### 2. `/src/components/shop/accessories-shop-v2.tsx`
+### 2. `/src/components/shop/accessories-shop.tsx`
 
 **Modifications identiques pour la cohérence :**
 

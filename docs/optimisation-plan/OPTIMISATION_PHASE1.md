@@ -12,7 +12,7 @@ Ajouter `useMemo` et `useCallback` aux 4 composants critiques pour réduire les 
 
 ### Composants à modifier
 1. `src/components/dashboard/dashboard-content.tsx`
-2. `src/components/shop/accessories-shop-v2.tsx`
+2. `src/components/shop/accessories-shop.tsx`
 3. `src/components/creature/creature-page-client.tsx`
 4. `src/components/monsters/monsters-list.tsx`
 
@@ -140,7 +140,7 @@ Devrait avoir 0 erreurs. Si vous en avez, vérifiez la syntaxe TypeScript.
 ### Étape 2.1: Ouvrir le fichier
 
 ```bash
-open src/components/shop/accessories-shop-v2.tsx
+open src/components/shop/accessories-shop.tsx
 ```
 
 ### Étape 2.2: Importer useMemo et useCallback

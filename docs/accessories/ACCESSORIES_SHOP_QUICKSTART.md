@@ -20,7 +20,7 @@ src/
 │   └── accessories.config.ts        # 📦 Catalogue des accessoires
 ├── components/
 │   ├── shop/
-│   │   └── accessories-shop-v2.tsx     # 🛒 Composant boutique
+│   │   └── accessories-shop.tsx     # 🛒 Composant boutique
 │   └── creature/
 │       └── shop-modal.tsx              # 🪟 Modale avec onglets
 └── actions/

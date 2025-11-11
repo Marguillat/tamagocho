@@ -142,7 +142,7 @@ OPTIMISATION_PLAN.md                ← COMPLETE STRATEGY (30 min read)
 
 **Composants à traiter**:
 - `dashboard-content.tsx`
-- `accessories-shop-v2.tsx`
+- `accessories-shop.tsx`
 - `creature-page-client.tsx`
 - `monsters-list.tsx`
 
@@ -156,7 +156,7 @@ OPTIMISATION_PLAN.md                ← COMPLETE STRATEGY (30 min read)
 
 **Composants à traiter**:
 - `dashboard-content.tsx`
-- `accessories-shop-v2.tsx`
+- `accessories-shop.tsx`
 - `creature-page-client.tsx`
 - `daily-quests-section.tsx`
 

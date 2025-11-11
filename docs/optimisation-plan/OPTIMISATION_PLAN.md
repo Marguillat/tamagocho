@@ -30,7 +30,7 @@ Document stratégique d'optimisation pour améliorer les performances et la main
 - **Impact**: Évite recalculs inutiles lors de re-renders du composant parent
 - **Effort**: ⏱️ 15 min
 
-#### `src/components/shop/accessories-shop-v2.tsx`
+#### `src/components/shop/accessories-shop.tsx`
 - **Problème**: Recalcul du `filteredAccessories` à chaque rendu
 - **Solution**: Memoizer le tableau filtré
   ```typescript
@@ -139,7 +139,7 @@ Document stratégique d'optimisation pour améliorer les performances et la main
 - **Impact**: Évite la création de nouvelles fonctions à chaque rendu
 - **Effort**: ⏱️ 15 min
 
-#### `src/components/shop/accessories-shop-v2.tsx`
+#### `src/components/shop/accessories-shop.tsx`
 - **Problèmes identifiés**:
   - `handlePurchase()` - appelé par des boutons
   - `setSelectedType()` - handler du filtre

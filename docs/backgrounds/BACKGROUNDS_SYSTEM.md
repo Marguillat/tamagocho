@@ -263,7 +263,7 @@ if (background) {
 
 - `/src/db/models/background.model.ts` - Modèle MongoDB
 - `/src/actions/wallet.actions.ts` - Gestion du wallet
-- `/src/components/shop/accessories-shop-v2.tsx` - Référence similaire
+- `/src/components/shop/accessories-shop.tsx` - Référence similaire
 - `/public/backgrounds/` - Images des backgrounds
 
 ---

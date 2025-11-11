@@ -14,7 +14,7 @@ J'ai créé un système complet de boutique d'accessoires pour les créatures du
   - 5 lunettes (Soleil, Geek, Cœur, Étoile, 3D)
   - 5 chaussures (Baskets, Bottes, Danse, Patins, Spatiales)
 
-### 2. Composant Boutique (`src/components/shop/accessories-shop-v2.tsx`)
+### 2. Composant Boutique (`src/components/shop/accessories-shop.tsx`)
 
 #### Affichage des Accessoires
 Chaque carte d'accessoire affiche :
@@ -51,7 +51,7 @@ Chaque carte d'accessoire affiche :
 
 #### Single Responsibility Principle (SRP)
 - `accessories.config.ts` : Configuration uniquement
-- `accessories-shop-v2.tsx` : Affichage de la boutique uniquement
+- `accessories-shop.tsx` : Affichage de la boutique uniquement
 - `shop-modal.tsx` : Orchestration de la modale uniquement
 
 #### Open/Closed Principle (OCP)
@@ -91,7 +91,7 @@ Affiche message de succès
 
 ### Nouveaux Fichiers
 1. **`src/config/accessories.config.ts`** - Configuration du catalogue
-2. **`src/components/shop/accessories-shop-v2.tsx`** - Composant de boutique
+2. **`src/components/shop/accessories-shop.tsx`** - Composant de boutique
 
 ### Fichiers Modifiés
 1. **`src/components/creature/shop-modal.tsx`** - Ajout des onglets et intégration

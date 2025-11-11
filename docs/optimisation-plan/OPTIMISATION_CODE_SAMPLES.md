@@ -48,7 +48,7 @@ function DashboardContent ({ session, monsters }) {
 
 ### Exemple 2: Shop Filtered Accessories
 
-**Fichier**: `src/components/shop/accessories-shop-v2.tsx`
+**Fichier**: `src/components/shop/accessories-shop.tsx`
 
 ```typescript
 'use client'
@@ -258,7 +258,7 @@ function DashboardContent ({ session, monsters }) {
 
 ### Exemple 2: Shop Purchase Handler
 
-**Fichier**: `src/components/shop/accessories-shop-v2.tsx`
+**Fichier**: `src/components/shop/accessories-shop.tsx`
 
 ```typescript
 'use client'

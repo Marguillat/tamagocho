@@ -16,7 +16,7 @@ Document stratégique d'optimisation pour **Tamagotcho** - Application Next.js 1
 
 **Composants Prioritaires (CRITICAL)**:
 - `dashboard-content.tsx` - Stats recalculées à chaque rendu ❌
-- `accessories-shop-v2.tsx` - Filtres recalculés ❌
+- `accessories-shop.tsx` - Filtres recalculés ❌
 - `monsters-list.tsx` - Mapping inutile ❌
 - `creature-page-client.tsx` - Parsing JSON répété ❌
 
@@ -123,8 +123,8 @@ Réduire la taille du bundle initial.
 ```
 1. useMemo dans dashboard-content.tsx
 2. useCallback dans dashboard-content.tsx
-3. useMemo dans accessories-shop-v2.tsx
-4. useCallback dans accessories-shop-v2.tsx
+3. useMemo dans accessories-shop.tsx
+4. useCallback dans accessories-shop.tsx
 5. React Query pour /api/monsters
 ```
 
