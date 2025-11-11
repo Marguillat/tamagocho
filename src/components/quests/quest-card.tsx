@@ -9,16 +9,23 @@
  * - Un badge "Complété" si applicable
  *
  * Responsabilité unique : Afficher visuellement une quête journalière
+ *
+ * Optimisé avec React.memo et useMemo.
  */
 
+import { memo, useMemo } from 'react'
 import type { DailyQuest } from '@/hooks/use-daily-quests'
 
 interface QuestCardProps {
   quest: DailyQuest
 }
 
-export default function QuestCard ({ quest }: QuestCardProps): React.ReactNode {
-  const progressPercentage = Math.min((quest.currentProgress / quest.targetCount) * 100, 100)
+const QuestCard = memo(function QuestCard ({ quest }: QuestCardProps): React.ReactNode {
+  // Optimisation : mémoriser les calculs de progression
+  const progressPercentage = useMemo(() =>
+    Math.min((quest.currentProgress / quest.targetCount) * 100, 100),
+  [quest.currentProgress, quest.targetCount]
+  )
   const isCompleted = quest.completed
 
   return (
@@ -85,4 +92,6 @@ export default function QuestCard ({ quest }: QuestCardProps): React.ReactNode {
       )}
     </div>
   )
-}
+})
+
+export default QuestCard

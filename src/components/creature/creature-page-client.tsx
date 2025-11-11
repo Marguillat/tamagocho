@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import type { MonsterTraits, DBMonster } from '@/types/monster'
 import type { DBBackground } from '@/types/background'
 import type { MonsterAction } from '@/hooks/monsters'
@@ -48,8 +48,8 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
   const actionTimerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
 
-  // Parse des traits depuis le JSON stocké en base
-  const traits: MonsterTraits = parseMonsterTraits(monster.traits) ?? {
+  // Parse des traits depuis le JSON stocké en base - Optimisé avec useMemo
+  const traits: MonsterTraits = useMemo(() => parseMonsterTraits(currentMonster.traits) ?? {
     bodyColor: '#FFB5E8',
     accentColor: '#FF9CEE',
     eyeColor: '#2C2C2C',
@@ -60,7 +60,7 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
     eyeStyle: 'big',
     antennaStyle: 'single',
     accessory: 'none'
-  }
+  }, [currentMonster.traits])
 
   // Charger le background équipé au montage et quand le monstre change
   useEffect(() => {

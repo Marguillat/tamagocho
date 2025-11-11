@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import type { DBMonster } from '@/types/monster'
 import { EmptyMonstersState } from './empty-monsters-state'
 import { MonsterCardWithBackground } from './monster-card-with-background'
@@ -75,23 +76,26 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
 
       {/* Grille de monstres - Plus spacieuse */}
       <div className='grid gap-8 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3'>
-        {monsters.map((monster) => {
-          const cardKey = monster._id
+        {useMemo(() =>
+          monsters.map((monster) => {
+            const cardKey = monster._id
 
-          return (
-            <MonsterCardWithBackground
-              key={cardKey}
-              id={cardKey}
-              name={monster.name}
-              traits={monster.traits}
-              state={monster.state}
-              level={monster.level}
-              createdAt={String(monster.createdAt)}
-              updatedAt={String(monster.updatedAt)}
-              equipedBackgroundId={monster.equipedBackground ?? null}
-            />
-          )
-        })}
+            return (
+              <MonsterCardWithBackground
+                key={cardKey}
+                id={cardKey}
+                name={monster.name}
+                traits={monster.traits}
+                state={monster.state}
+                level={monster.level}
+                createdAt={String(monster.createdAt)}
+                updatedAt={String(monster.updatedAt)}
+                equipedBackgroundId={monster.equipedBackground ?? null}
+              />
+            )
+          }),
+        [monsters]
+        )}
       </div>
 
       {/* Message d'encouragement en bas */}

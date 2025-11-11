@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react'
 import { getStateLabel } from '@/lib/utils'
 import { XpProgressBar } from './xp-progress-bar'
 
@@ -21,10 +22,12 @@ interface StatItemProps {
  * Responsabilité unique : afficher une paire label/valeur
  * dans un format de ligne de statistique coloré et fun.
  *
+ * Optimisé avec React.memo.
+ *
  * @param {StatItemProps} props - Props du composant
  * @returns {React.ReactNode} Ligne de statistique
  */
-export function StatItem ({ label, value, emoji, color }: StatItemProps): React.ReactNode {
+export const StatItem = memo(function StatItem ({ label, value, emoji, color }: StatItemProps): React.ReactNode {
   return (
     <div className={`flex justify-between items-center py-4 px-6 rounded-2xl bg-gradient-to-r ${color} shadow-lg ring-2 ring-white/50 transform hover:scale-105 transition-all duration-300`}>
       <div className='flex items-center gap-3'>
@@ -34,7 +37,7 @@ export function StatItem ({ label, value, emoji, color }: StatItemProps): React.
       <span className='text-white font-black text-xl'>{value}</span>
     </div>
   )
-}
+})
 
 /**
  * Props pour le composant CreatureStatsPanel
@@ -69,10 +72,12 @@ interface CreatureStatsPanelProps {
  * - Émojis partout
  * - Animations hover
  *
+ * Optimisé avec React.memo et useMemo pour les calculs de dates.
+ *
  * @param {CreatureStatsPanelProps} props - Props du composant
  * @returns {React.ReactNode} Panneau de statistiques
  */
-export function CreatureStatsPanel ({
+export const CreatureStatsPanel = memo(function CreatureStatsPanel ({
   level,
   xp,
   maxXp,
@@ -82,6 +87,11 @@ export function CreatureStatsPanel ({
   showXpGain = false,
   xpGained = 0
 }: CreatureStatsPanelProps): React.ReactNode {
+  // Optimisation : mémoriser les calculs de dates et labels pour éviter les recalculs
+  const stateLabel = useMemo(() => getStateLabel(state), [state])
+  const createdAtFormatted = useMemo(() => new Date(createdAt).toLocaleDateString('fr-FR'), [createdAt])
+  const updatedAtFormatted = useMemo(() => new Date(updatedAt).toLocaleDateString('fr-FR'), [updatedAt])
+
   return (
     <div className='relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-white via-yellow-50 to-orange-100 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.2)] ring-8 ring-white/80'>
       {/* Effet de fond */}
@@ -118,19 +128,19 @@ export function CreatureStatsPanel ({
           />
           <StatItem
             label='État'
-            value={getStateLabel(state)}
+            value={stateLabel}
             emoji='💖'
             color='from-pink-400 to-rose-500'
           />
           <StatItem
             label='Adopté le'
-            value={new Date(createdAt).toLocaleDateString('fr-FR')}
+            value={createdAtFormatted}
             emoji='📅'
             color='from-blue-400 to-cyan-500'
           />
           <StatItem
             label='Dernière activité'
-            value={new Date(updatedAt).toLocaleDateString('fr-FR')}
+            value={updatedAtFormatted}
             emoji='🔄'
             color='from-purple-400 to-indigo-500'
           />
@@ -149,4 +159,4 @@ export function CreatureStatsPanel ({
       </style>
     </div>
   )
-}
+})

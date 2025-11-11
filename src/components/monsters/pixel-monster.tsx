@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useMemo, memo } from 'react'
 import { drawAccessoryOnMonster } from '@/services/accessories/accessory-generator.service'
 import type { AccessoryType } from '@/config/accessories.config'
 
@@ -64,7 +64,7 @@ interface Particle {
   rotationSpeed: number
 }
 
-export function PixelMonster ({
+export const PixelMonster = memo(function PixelMonster ({
   state,
   traits = defaultTraits,
   level = 1,
@@ -76,6 +76,9 @@ export function PixelMonster ({
   const actionFrameRef = useRef(0)
   const particlesRef = useRef<Particle[]>([])
   const currentActionRef = useRef<MonsterAction>(null)
+
+  // Optimisation : mémoriser les traits combinés pour éviter les allocations
+  const finalTraits = useMemo(() => ({ ...defaultTraits, ...traits }), [traits])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -101,7 +104,7 @@ export function PixelMonster ({
         }
       }
 
-      drawMonster(ctx, state, frameRef.current, traits, level, currentActionRef.current, actionFrameRef.current, particlesRef.current, equippedAccessories)
+      drawMonster(ctx, state, frameRef.current, finalTraits, level, currentActionRef.current, actionFrameRef.current, particlesRef.current, equippedAccessories)
       animationId = requestAnimationFrame(animate)
     }
 
@@ -112,7 +115,7 @@ export function PixelMonster ({
         cancelAnimationFrame(animationId)
       }
     }
-  }, [state, traits, level, equippedAccessories])
+  }, [state, finalTraits, level, equippedAccessories])
 
   useEffect(() => {
     if (currentAction !== null && currentAction !== currentActionRef.current) {
@@ -123,7 +126,7 @@ export function PixelMonster ({
   }, [currentAction])
 
   return <canvas ref={canvasRef} className='pixel-art w-full h-full mx-auto' style={{ imageRendering: 'pixelated' }} />
-}
+})
 
 function createParticles (action: MonsterAction): Particle[] {
   const particles: Particle[] = []

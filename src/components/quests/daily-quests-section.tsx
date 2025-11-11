@@ -16,7 +16,7 @@ import { useDailyQuests } from '@/hooks/use-daily-quests'
 import QuestCard from './quest-card'
 import QuestStatsDisplay from './quest-stats-display'
 import Button from '@/components/button'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { QUEST_SYSTEM_CONFIG } from '@/config/quests.config'
 
 export default function DailyQuestsSection (): React.ReactNode {

@@ -41,8 +41,8 @@ function DashboardContent ({ session, monsters }: { session: Session, monsters: 
   // Extraction des informations utilisateur
   const userDisplay = useUserDisplay(session)
 
-  // Calcul des statistiques des monstres
-  const stats = useMonsterStats(monsters)
+  // Calcul des statistiques des monstres (déjà optimisés avec useMemo dans les hooks)
+  const stats = useMonsterStats(monsterList)
   const latestAdoptionLabel = useLatestAdoptionLabel(stats.latestAdoption)
   const favoriteMoodMessage = useFavoriteMoodMessage(stats.favoriteMood, stats.totalMonsters)
 

@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react'
 import Link from 'next/link'
 import { PixelMonster } from '@/components/monsters'
 import type { EquippedAccessory } from './pixel-monster'
@@ -43,10 +44,12 @@ export interface MonsterCardProps {
  * - Effets de hover spectaculaires
  * - Style jeu vidéo coloré
  *
+ * Optimisé avec React.memo et useMemo pour éviter les re-renders et recalculs inutiles.
+ *
  * @param {MonsterCardProps} props - Props du composant
  * @returns {React.ReactNode} Carte de monstre interactive
  */
-export function MonsterCard ({
+export const MonsterCard = memo(function MonsterCard ({
   id,
   name,
   traits: rawTraits,
@@ -57,16 +60,25 @@ export function MonsterCard ({
   equipedBackgroundUrl,
   equippedAccessories = []
 }: MonsterCardProps): React.ReactNode {
-  // Parsing des traits et normalisation des données
-  const traits = parseMonsterTraits(rawTraits)
-  const adoptionDate = formatAdoptionDate(String(createdAt) ?? String(updatedAt))
+  // Optimisation : mémoriser le parsing des traits pour éviter le parsing JSON répété
+  const traits = useMemo(() => parseMonsterTraits(rawTraits), [rawTraits])
+
+  // Optimisation : mémoriser le formatage de la date
+  const adoptionDate = useMemo(() =>
+    formatAdoptionDate(String(createdAt) ?? String(updatedAt)),
+  [createdAt, updatedAt]
+  )
+
   const levelLabel = level ?? 1
 
-  // Conversion des accessoires pour PixelMonster
-  const accessoriesForPixelMonster: EquippedAccessory[] = equippedAccessories.map(acc => ({
-    type: acc.type as AccessoryType,
-    mainColor: acc.mainColor ?? '#000000'
-  }))
+  // Optimisation : mémoriser la conversion des accessoires pour éviter le map à chaque render
+  const accessoriesForPixelMonster: EquippedAccessory[] = useMemo(() =>
+    equippedAccessories.map(acc => ({
+      type: acc.type as AccessoryType,
+      mainColor: acc.mainColor ?? '#000000'
+    })),
+  [equippedAccessories]
+  )
 
   return (
     <Link href={`/app/creatures/${id}`}>
@@ -330,4 +342,4 @@ export function MonsterCard ({
       </style>
     </Link>
   )
-}
+})

@@ -235,7 +235,7 @@ export function drawAccessoryOnMonster (
   pixelSize: number = 6
 ): void {
   const offset = getAccessoryPositionOffset(config.type)
-  
+
   // Les positions sont calculées relativement au corps du monstre
   // centerX reste fixe horizontalement, Y est relatif au bodyY
   drawAccessory(

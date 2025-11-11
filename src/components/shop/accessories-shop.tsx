@@ -1,7 +1,7 @@
 'use client'
 
 import type React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { type AccessoryConfig, accessoriesCatalog, type AccessoryType } from '@/config/accessories.config'
 import { createAccessoryForMonster, getAccessoriesForMonster } from '@/actions/accessories.actions'
 import { type AccessoryData, type DBAccessory } from '@/types/accessory'
@@ -24,10 +24,10 @@ interface AccessoriesShopProps {
  * - DIP : Dépend des abstractions (server actions)
  */
 export function AccessoriesShop ({
-                                   monsterId,
-                                   currentBalance,
-                                   onPurchaseSuccess
-                                 }: AccessoriesShopProps): React.ReactElement {
+  monsterId,
+  currentBalance,
+  onPurchaseSuccess
+}: AccessoriesShopProps): React.ReactElement {
   const [selectedType, setSelectedType] = useState<AccessoryType | 'all'>('all')
   const [isPurchasing, setIsPurchasing] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -60,9 +60,13 @@ export function AccessoriesShop ({
     { id: 'shoes' as const, name: 'Chaussures', emoji: '👟' }
   ]
 
-  const filteredAccessories = selectedType === 'all'
-    ? accessoriesCatalog
-    : accessoriesCatalog.filter(acc => acc.type === selectedType)
+  // Optimisation : Mémoriser le filtrage pour éviter les allocations mémoire répétées
+  const filteredAccessories = useMemo(() =>
+    selectedType === 'all'
+      ? accessoriesCatalog
+      : accessoriesCatalog.filter(acc => acc.type === selectedType),
+  [selectedType]
+  )
 
   /**
    * Vérifie si un accessoire est déjà possédé par le monstre
@@ -278,34 +282,34 @@ export function AccessoriesShop ({
                       <span className='animate-spin text-xl'>⏳</span>
                       <span>Chargement...</span>
                     </>
-                  )
+                    )
                   : isLoading
                     ? (
                       <>
                         <span className='animate-spin text-xl'>⏳</span>
                         <span>Achat...</span>
                       </>
-                    )
+                      )
                     : isOwned
                       ? (
                         <>
                           <span className='text-xl'>✅</span>
                           <span>Déjà possédé</span>
                         </>
-                      )
+                        )
                       : canAfford
                         ? (
                           <>
                             <span className='text-xl'>🛒</span>
                             <span>Acheter</span>
                           </>
-                        )
+                          )
                         : (
                           <>
                             <span className='text-xl'>💸</span>
                             <span>Pas assez</span>
                           </>
-                        )}
+                          )}
               </button>
             </div>
           )

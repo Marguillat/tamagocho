@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { UserDisplay } from '@/hooks/dashboard'
 
 /**
@@ -21,10 +22,12 @@ interface WelcomeHeroProps {
  * - Animation et effets visuels
  * - Style jeu vidéo kawaii
  *
+ * Optimisé avec React.memo pour éviter les re-renders inutiles.
+ *
  * @param {WelcomeHeroProps} props - Props du composant
  * @returns {React.ReactNode} Section de bienvenue
  */
-export function WelcomeHero ({
+export const WelcomeHero = memo(function WelcomeHero ({
   userDisplay,
   onCreateMonster
 }: WelcomeHeroProps): React.ReactNode {
@@ -104,4 +107,4 @@ export function WelcomeHero ({
       </style>
     </div>
   )
-}
+})

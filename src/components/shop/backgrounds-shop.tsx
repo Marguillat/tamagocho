@@ -1,7 +1,7 @@
 'use client'
 
 import type React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { backgroundsCatalog } from '@/config/backgrounds.config'
 import { createBackgroundForMonster, getBackgroundsForMonster } from '@/actions/backgrounds.actions'
 import type { BackgroundData, BackgroundConfig, DBBackground } from '@/types/background'
@@ -62,9 +62,13 @@ export function BackgroundsShop ({
     { id: 'nature' as const, name: 'Nature', emoji: '🌲' }
   ]
 
-  const filteredBackgrounds = selectedCategory === 'all'
-    ? backgroundsCatalog
-    : backgroundsCatalog.filter(bg => bg.category === selectedCategory)
+  // Optimisation : mémoriser le filtrage pour éviter les allocations mémoire répétées
+  const filteredBackgrounds = useMemo(() =>
+    selectedCategory === 'all'
+      ? backgroundsCatalog
+      : backgroundsCatalog.filter(bg => bg.category === selectedCategory),
+  [selectedCategory]
+  )
 
   /**
    * Vérifie si un background est déjà possédé par le monstre

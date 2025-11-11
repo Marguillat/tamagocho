@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import { PixelMonster, type EquippedAccessory } from '@/components/monsters/pixel-monster'
 import type { MonsterTraits, MonsterState } from '@/types/monster'
 import type { MonsterAction } from '@/hooks/monsters'
@@ -30,6 +31,8 @@ interface AnimatedMonsterProps {
  * Ce composant sert d'adaptateur entre l'API de haut niveau
  * et le composant de rendu Canvas bas niveau.
  *
+ * Optimisé avec React.memo pour éviter les re-renders inutiles.
+ *
  * @param {AnimatedMonsterProps} props - Props du composant
  * @returns {React.ReactNode} Monstre animé dans son conteneur
  *
@@ -41,7 +44,7 @@ interface AnimatedMonsterProps {
  *   currentAction="feed"
  * />
  */
-export function AnimatedMonster ({
+export const AnimatedMonster = memo(function AnimatedMonster ({
   state,
   traits,
   level,
@@ -59,4 +62,4 @@ export function AnimatedMonster ({
       />
     </div>
   )
-}
+})
