@@ -16,10 +16,6 @@
 
   "crons": [
     {
-      "path": "/api/cron/update-monsters",
-      "schedule": "*/1 * * * *"
-    },
-    {
       "path": "/api/cron/reset-quests",
       "schedule": "0 0 * * *"
     }
