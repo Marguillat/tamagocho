@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { xpBoosts } from '@/config/shop.config'
 import { XPBoostCard } from './xp-boost-card'
 import { buyXpBoost } from '@/actions/shop.actions'
-import { AccessoriesShop } from '@/components/shop/accessories-shop-v2'
+import { AccessoriesShop } from '@/components/shop/accessories-shop'
 import { BackgroundsShop } from '@/components/shop/backgrounds-shop'
 import { getWallet } from '@/actions/wallet.actions'
 
