@@ -16,7 +16,7 @@ import { useDailyQuests } from '@/hooks/use-daily-quests'
 import QuestCard from './quest-card'
 import QuestStatsDisplay from './quest-stats-display'
 import Button from '@/components/button'
-import { useState, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { QUEST_SYSTEM_CONFIG } from '@/config/quests.config'
 
 export default function DailyQuestsSection (): React.ReactNode {
@@ -35,7 +35,11 @@ export default function DailyQuestsSection (): React.ReactNode {
   const [showNotification, setShowNotification] = useState(false)
   const [notificationMessage, setNotificationMessage] = useState('')
 
-  const handleClaimBonus = async (): Promise<void> => {
+  /**
+   * Handler de réclamation du bonus - Optimisé avec useCallback
+   * Évite la re-création de la fonction à chaque render
+   */
+  const handleClaimBonus = useCallback(async (): Promise<void> => {
     const result = await claimBonus()
     if (result != null) {
       setNotificationMessage(result.message)
@@ -44,7 +48,7 @@ export default function DailyQuestsSection (): React.ReactNode {
         setShowNotification(false)
       }, 5000)
     }
-  }
+  }, [claimBonus])
 
   if (loading) {
     return (

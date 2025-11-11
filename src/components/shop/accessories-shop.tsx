@@ -1,7 +1,7 @@
 'use client'
 
 import type React from 'react'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { type AccessoryConfig, accessoriesCatalog, type AccessoryType } from '@/config/accessories.config'
 import { createAccessoryForMonster, getAccessoriesForMonster } from '@/actions/accessories.actions'
 import { type AccessoryData, type DBAccessory } from '@/types/accessory'
@@ -78,7 +78,11 @@ export function AccessoriesShop ({
     return ownedAccessories.some(acc => acc.type === type && acc.mainColor === mainColor)
   }
 
-  async function handlePurchase (accessory: AccessoryConfig): Promise<void> {
+  /**
+   * Handler d'achat d'accessoire - Optimisé avec useCallback
+   * Évite la re-création de la fonction à chaque render
+   */
+  const handlePurchase = useCallback(async (accessory: AccessoryConfig): Promise<void> => {
     if (currentBalance < accessory.price) {
       setError('Pas assez de Koins !')
       setTimeout(() => { setError(null) }, 3000)
@@ -117,7 +121,7 @@ export function AccessoriesShop ({
     } finally {
       setIsPurchasing(null)
     }
-  }
+  }, [currentBalance, monsterId, onPurchaseSuccess])
 
   return (
     <div className='space-y-6'>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef, useMemo } from 'react'
+import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import type { MonsterTraits, DBMonster } from '@/types/monster'
 import type { DBBackground } from '@/types/background'
 import type { MonsterAction } from '@/hooks/monsters'
@@ -79,15 +79,16 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
   /**
    * Callback appelé quand un background est équipé/déséquipé
    * Recharge immédiatement le background pour mise à jour instantanée
+   * Optimisé avec useCallback pour éviter les re-renders des composants enfants
    */
-  const handleBackgroundChange = async (): Promise<void> => {
+  const handleBackgroundChange = useCallback(async (): Promise<void> => {
     try {
       const bg = await getEquippedBackground(monster._id)
       setEquippedBackground(bg)
     } catch (error) {
       console.error('Erreur lors du rechargement du background:', error)
     }
-  }
+  }, [monster._id])
 
   useEffect(() => {
     const fetchMonster = async (): Promise<void> => {
@@ -145,9 +146,10 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
 
   /**
    * Gère le déclenchement d'une action sur le monstre
+   * Optimisé avec useCallback pour éviter les re-renders des boutons d'action
    * @param {MonsterAction} action - Action déclenchée
    */
-  const handleAction = (action: MonsterAction): void => {
+  const handleAction = useCallback((action: MonsterAction): void => {
     // Nettoyer le timer précédent si existant
     if (actionTimerRef.current !== null) {
       clearTimeout(actionTimerRef.current)
@@ -162,7 +164,7 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
     }, 2500)
 
     actionTimerRef.current = timer
-  }
+  }, [])
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-200 py-6 relative overflow-hidden'>

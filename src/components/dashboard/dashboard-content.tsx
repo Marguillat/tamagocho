@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { authClient } from '@/lib/auth-client'
 import { createMonster } from '@/actions/monsters.actions'
 import type { CreateMonsterFormValues } from '@/types/forms/create-monster-form'
@@ -62,27 +62,30 @@ function DashboardContent ({ session, monsters }: { session: Session, monsters: 
 
   /**
    * Ouvre le modal de création de monstre
+   * Optimisé avec useCallback pour éviter les re-renders des composants enfants
    */
-  const handleCreateMonster = (): void => {
+  const handleCreateMonster = useCallback((): void => {
     setIsModalOpen(true)
-  }
+  }, [])
 
   /**
    * Ferme le modal de création de monstre
+   * Optimisé avec useCallback pour stabilité de la référence
    */
-  const handleCloseModal = (): void => {
+  const handleCloseModal = useCallback((): void => {
     setIsModalOpen(false)
-  }
+  }, [])
 
   /**
    * Soumet le formulaire de création de monstre
+   * Optimisé avec useCallback - pas de dépendances externes
    * @param {CreateMonsterFormValues} values - Valeurs du formulaire
    */
-  const handleMonsterSubmit = (values: CreateMonsterFormValues): void => {
+  const handleMonsterSubmit = useCallback((values: CreateMonsterFormValues): void => {
     void createMonster(values).then(() => {
       window.location.reload()
     })
-  }
+  }, [])
 
   return (
     <div className='relative min-h-screen overflow-hidden bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-200'>
