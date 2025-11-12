@@ -88,82 +88,65 @@ function DashboardContent ({ session, monsters }: { session: Session, monsters: 
   }, [])
 
   return (
-    <div className='relative min-h-screen overflow-hidden bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-200'>
-      {/* Bulles décoratives de fond plus colorées */}
-      <div className='pointer-events-none absolute -right-32 top-24 h-96 w-96 rounded-full bg-gradient-to-br from-yellow-300/40 to-orange-400/40 blur-3xl animate-float' aria-hidden='true' />
-      <div className='pointer-events-none absolute -left-32 bottom-24 h-96 w-96 rounded-full bg-gradient-to-br from-pink-300/40 to-purple-400/40 blur-3xl animate-float-delayed' aria-hidden='true' />
-      <div className='pointer-events-none absolute top-1/2 left-1/2 h-80 w-80 rounded-full bg-gradient-to-br from-blue-300/30 to-indigo-400/30 blur-3xl animate-pulse-slow' aria-hidden='true' />
-
-      {/* Étoiles décoratives */}
-      <div className='pointer-events-none absolute top-20 right-40 text-6xl animate-twinkle'>⭐</div>
-      <div className='pointer-events-none absolute top-40 left-20 text-5xl animate-twinkle-delayed'>✨</div>
-      <div className='pointer-events-none absolute bottom-40 right-60 text-4xl animate-twinkle'>💫</div>
-
-      <main className='relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 pt-8 sm:px-6 lg:px-8'>
-        {/* Section héro avec bienvenue - EN HAUT */}
-        <section className='relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-white/95 via-purple-50/90 to-pink-50/90 px-8 py-10 shadow-2xl ring-4 ring-white/80 backdrop-blur-lg mb-12'>
-          {/* Bulles décoratives internes */}
-          <div className='pointer-events-none absolute -right-20 -top-10 h-48 w-48 rounded-full bg-gradient-to-br from-yellow-200/50 to-orange-300/50 blur-2xl' aria-hidden='true' />
-          <div className='pointer-events-none absolute -left-24 bottom-0 h-48 w-48 rounded-full bg-gradient-to-tr from-pink-200/50 to-purple-300/50 blur-2xl' aria-hidden='true' />
-
-          <div className='relative space-y-8'>
+    <div className='min-h-screen bg-gray-50'>
+      <main className='mx-auto w-full max-w-7xl px-4 pb-24 pt-8 sm:px-6 lg:px-8'>
+        {/* Section héro avec bienvenue */}
+        <section className='rounded-lg bg-white px-6 py-8 shadow-sm border border-gray-200 mb-8'>
+          <div className='space-y-6'>
             {/* Message de bienvenue */}
             <WelcomeHero
               userDisplay={userDisplay}
               onCreateMonster={handleCreateMonster}
             />
 
-            {/* Statistiques en grille horizontale - AMÉLIORÉ */}
-            <div className='grid grid-cols-1 gap-6 sm:grid-cols-3'>
+            {/* Statistiques en grille horizontale */}
+            <div className='grid grid-cols-1 gap-4 sm:grid-cols-3'>
               {/* Stat 1: Total Compagnons */}
-              <div className='group relative overflow-hidden rounded-3xl bg-gradient-to-br from-yellow-400 via-orange-400 to-orange-500 p-6 shadow-xl ring-4 ring-yellow-200/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
-                <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-shine' />
-                <div className='relative flex items-center justify-between'>
+              <div className='rounded-lg bg-moccaccino-50 border-2 border-moccaccino-200 p-5'>
+                <div className='flex items-center justify-between'>
                   <div>
-                    <div className='text-6xl font-black text-white drop-shadow-2xl'>
+                    <div className='text-3xl font-bold text-moccaccino-700'>
                       {stats.totalMonsters}
                     </div>
-                    <div className='mt-2 text-base font-bold text-white/95 uppercase tracking-wide'>
+                    <div className='mt-1 text-sm font-medium text-moccaccino-600'>
                       Compagnons
                     </div>
                   </div>
-                  <div className='text-6xl opacity-20 group-hover:opacity-30 transition-opacity'>
+                  <div className='text-3xl opacity-40'>
                     🎮
                   </div>
                 </div>
               </div>
 
               {/* Stat 2: Niveau Max */}
-              <div className='group relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-400 via-purple-400 to-purple-500 p-6 shadow-xl ring-4 ring-pink-200/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
-                <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-shine' />
-                <div className='relative flex items-center justify-between'>
+              <div className='rounded-lg bg-fuchsia-blue-50 border-2 border-fuchsia-blue-200 p-5'>
+                <div className='flex items-center justify-between'>
                   <div>
-                    <div className='text-6xl font-black text-white drop-shadow-2xl'>
+                    <div className='text-3xl font-bold text-fuchsia-blue-700'>
                       {stats.highestLevel}
                     </div>
-                    <div className='mt-2 text-base font-bold text-white/95 uppercase tracking-wide'>
+                    <div className='mt-1 text-sm font-medium text-fuchsia-blue-600'>
                       Niveau Max
                     </div>
                   </div>
-                  <div className='text-6xl opacity-20 group-hover:opacity-30 transition-opacity group-hover:animate-bounce'>
+                  <div className='text-3xl opacity-40'>
                     ⭐
                   </div>
                 </div>
               </div>
 
               {/* Stat 3: Dernière Adoption */}
-              <div className='group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-400 via-indigo-400 to-indigo-500 p-6 shadow-xl ring-4 ring-blue-200/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
-                <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-shine' />
-                <div className='relative flex items-center justify-between'>
+              <div className='rounded-lg bg-lochinvar-50 border-2 border-lochinvar-200 p-5'>
+                <div className='flex items-center justify-between'>
                   <div>
-                    <div className='text-3xl font-black text-white drop-shadow-2xl'>
+                    <div className='text-xl font-bold text-lochinvar-700'>
                       {latestAdoptionLabel}
                     </div>
-                    <div className='mt-2 text-base font-bold text-white/95 uppercase tracking-wide'>
+                    <div className='mt-1 text-sm font-medium text-lochinvar-600'>
                       Dernière Adoption
                     </div>
                   </div>
-                  <div className='text-6xl opacity-20 group-hover:opacity-30 transition-opacity'>
+                  <div className='text-3xl opacity-40'>
                     🗓️
                   </div>
                 </div>
@@ -196,80 +179,6 @@ function DashboardContent ({ session, monsters }: { session: Session, monsters: 
         onSubmit={handleMonsterSubmit}
       />
 
-      {/* Styles pour les animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-30px);
-          }
-        }
-
-        @keyframes float-delayed {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-25px);
-          }
-        }
-
-        @keyframes pulse-slow {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: scale(1.1);
-          }
-        }
-
-        @keyframes twinkle {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(0.8) rotate(0deg);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.2) rotate(180deg);
-          }
-        }
-
-        @keyframes twinkle-delayed {
-          0%, 100% {
-            opacity: 0.4;
-            transform: scale(0.9) rotate(0deg);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.1) rotate(-180deg);
-          }
-        }
-
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        .animate-float-delayed {
-          animation: float-delayed 7s ease-in-out infinite;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-
-        .animate-twinkle {
-          animation: twinkle 3s ease-in-out infinite;
-        }
-
-        .animate-twinkle-delayed {
-          animation: twinkle-delayed 4s ease-in-out infinite;
-        }
-      `}
-      </style>
     </div>
   )
 }

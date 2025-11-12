@@ -71,19 +71,19 @@ export default function BottomNav ({ walletBalance }: BottomNavProps): React.Rea
 
   return (
     <>
-      {/* Barre de navigation fixée en bas - Plus fun */}
-      <nav className='md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-r from-purple-100 via-pink-100 to-orange-100 border-t-4 border-purple-300 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.15)]'>
-        <div className='grid grid-cols-4 gap-2 px-4 py-3 safe-area-inset-bottom'>
+      {/* Barre de navigation fixée en bas */}
+      <nav className='md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 shadow-sm'>
+        <div className='grid grid-cols-4 gap-1 px-3 py-2 safe-area-inset-bottom'>
           {navItems.map((item) => {
             if (item.action === 'logout') {
               return (
                 <button
                   key={item.label}
                   onClick={() => { handleNavClick(item) }}
-                  className={`flex flex-col items-center justify-center gap-2 py-3 rounded-2xl font-black transition-all duration-300 active:scale-95 bg-gradient-to-br ${item.color} text-white shadow-lg ring-2 ring-white/50 hover:shadow-xl transform hover:scale-105`}
+                  className='flex flex-col items-center justify-center gap-1 py-2 rounded-lg font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300'
                 >
-                  <span className='text-3xl'>{item.icon}</span>
-                  <span className='text-xs uppercase'>{item.label}</span>
+                  <span className='text-xl'>{item.icon}</span>
+                  <span className='text-xs'>{item.label}</span>
                 </button>
               )
             }
@@ -92,13 +92,13 @@ export default function BottomNav ({ walletBalance }: BottomNavProps): React.Rea
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center gap-2 py-3 rounded-2xl font-black transition-all duration-300 active:scale-95 ${
+                className={`flex flex-col items-center justify-center gap-1 py-2 rounded-lg font-medium transition-colors ${
                   isActive(item.href)
-                    ? `bg-gradient-to-br ${item.color} text-white shadow-xl ring-4 ring-white/70 transform scale-110`
-                    : 'bg-white/80 text-gray-700 hover:bg-white hover:shadow-lg ring-2 ring-gray-200 transform hover:scale-105'
+                    ? 'bg-moccaccino-500 text-white shadow-sm'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                <span className={`text-3xl ${isActive(item.href) ? 'animate-bounce-slow' : ''}`}>
+                <span className='text-xl'>
                   {item.icon}
                 </span>
                 <span className='text-xs uppercase'>{item.label}</span>
@@ -171,27 +171,6 @@ export default function BottomNav ({ walletBalance }: BottomNavProps): React.Rea
           }
         }
 
-        @keyframes wave {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(20deg); }
-          75% { transform: rotate(-20deg); }
-        }
-
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
-        }
-
-        @keyframes shine {
-          0% { transform: translateX(-100%) skewX(-12deg); }
-          100% { transform: translateX(200%) skewX(-12deg); }
-        }
-
-        .animate-fade-in { animation: fade-in 0.2s ease-out; }
-        .animate-slide-up { animation: slide-up 0.3s ease-out; }
-        .animate-wave { animation: wave 2s ease-in-out infinite; }
-        .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
-        .animate-shine { animation: shine 1.5s ease-in-out; }
 
         .safe-area-inset-bottom {
           padding-bottom: env(safe-area-inset-bottom);

@@ -34,7 +34,7 @@ export function ErrorModalContent ({ onClose }: ErrorModalContentProps): React.R
         </div>
 
         {/* Titre */}
-        <h2 className='text-6xl font-black text-center mb-4 text-transparent bg-gradient-to-r from-red-600 via-orange-600 to-pink-600 bg-clip-text drop-shadow-lg'>
+        <h2 className='text-4xl font-bold text-center mb-4 text-red-700'>
           Oups !
         </h2>
 

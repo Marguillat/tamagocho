@@ -127,10 +127,10 @@ export function AccessoriesShop ({
     <div className='space-y-6'>
       {/* Header */}
       <div className='text-center'>
-        <h2 className='text-4xl font-black text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text mb-2'>
+        <h2 className='text-3xl font-bold text-gray-900 mb-2'>
           🛍️ Boutique d'Accessoires
         </h2>
-        <p className='text-gray-600 text-lg'>
+        <p className='text-gray-600 text-base'>
           Personnalise ta créature avec style !
         </p>
       </div>
@@ -260,10 +260,10 @@ export function AccessoriesShop ({
 
               {/* Prix */}
               <div className='flex items-center justify-center gap-2 mb-3'>
-                <span className='text-2xl font-black text-transparent bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text'>
+                <span className='text-xl font-bold text-lochinvar-700'>
                   {accessory.price}
                 </span>
-                <span className='text-xl'>🪙</span>
+                <span className='text-lg'>🪙</span>
               </div>
 
               {/* Bouton d'achat */}

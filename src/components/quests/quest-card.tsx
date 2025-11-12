@@ -76,7 +76,7 @@ const QuestCard = memo(function QuestCard ({ quest }: QuestCardProps): React.Rea
               h-full transition-all duration-500 rounded-full
               ${isCompleted
                 ? 'bg-lochinvar-500'
-                : 'bg-gradient-to-r from-moccaccino-400 to-moccaccino-600'
+                : 'bg-moccaccino-500'
               }
             `}
             style={{ width: `${progressPercentage}%` }}

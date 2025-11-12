@@ -24,7 +24,7 @@ export default function Header ({ isLoggedIn = false }: HeaderProps): React.Reac
   }
 
   return (
-    <header className='bg-white shadow-sm sticky top-0 z-50'>
+    <header className='bg-white border-b border-gray-200 sticky top-0 z-50'>
       <nav className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center h-16'>
           {/* Logo */}
@@ -35,10 +35,10 @@ export default function Header ({ isLoggedIn = false }: HeaderProps): React.Reac
                 alt='Tamagotcho Logo'
                 width={40}
                 height={40}
-                className='w-10 h-10'
+                className='w-10 h-10 rounded-lg'
                 priority
               />
-              <span className='text-2xl font-bold text-moccaccino-600'>
+              <span className='text-xl font-bold text-moccaccino-600'>
                 Tamagotcho
               </span>
             </div>
@@ -46,7 +46,7 @@ export default function Header ({ isLoggedIn = false }: HeaderProps): React.Reac
 
           {/* Navigation Menu */}
           <div className='hidden md:block'>
-            <div className='ml-10 flex items-baseline space-x-8'>
+            <div className='ml-10 flex items-baseline space-x-6'>
               {navigationItems.map((item) => (
                 <a
                   key={item.href}

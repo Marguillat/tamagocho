@@ -30,19 +30,14 @@ export function WalletBalance ({ balance }: WalletBalanceProps): React.ReactElem
             Ton Trésor Actuel
             <span className='text-2xl'>💎</span>
           </p>
-          <div className='flex items-center justify-center gap-6'>
-            <AnimatedEmoji emoji='🪙' size='lg' animation='animate-spin-slow' />
-            <h2 className='text-9xl font-black text-transparent bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text drop-shadow-2xl transition-all duration-300'>
+          <div className='flex items-center justify-center gap-4'>
+            <span className='text-5xl'>🪙</span>
+            <h2 className='text-6xl font-bold text-lochinvar-700 transition-all duration-300'>
               {animatedBalance.toLocaleString('fr-FR')}
             </h2>
-            <AnimatedEmoji
-              emoji='🪙'
-              size='lg'
-              animation='animate-spin-slow'
-              className='[animation-delay:1s]'
-            />
+            <span className='text-5xl'>🪙</span>
           </div>
-          <p className='text-3xl font-black text-orange-600 mt-6'>
+          <p className='text-xl font-bold text-lochinvar-600 mt-4'>
             {getKoinLabel()}
           </p>
         </div>

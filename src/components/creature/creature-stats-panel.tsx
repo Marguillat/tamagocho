@@ -100,7 +100,7 @@ export const CreatureStatsPanel = memo(function CreatureStatsPanel ({
       <div className='relative'>
         {/* Titre du panneau */}
         <div className='text-center mb-8'>
-          <h2 className='text-4xl font-black text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text flex items-center justify-center gap-3'>
+          <h2 className='text-3xl font-bold text-gray-900 flex items-center justify-center gap-2'>
             <span className='text-5xl'>📊</span>
             Statistiques
             <span className='text-5xl'>📊</span>

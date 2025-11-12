@@ -36,12 +36,12 @@ export function BenefitCard ({
   const colors = getColorClasses(colorTheme)
 
   return (
-    <div className={`text-center p-8 rounded-2xl ${colors.background} border ${colors.border}`}>
-      <div className={`w-16 h-16 ${colors.iconBackground} rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-6`}>
+    <div className={`text-center p-8 rounded-lg ${colors.background} border-2 ${colors.border}`}>
+      <div className={`w-14 h-14 ${colors.iconBackground} rounded-lg flex items-center justify-center text-white text-xl mx-auto mb-5`}>
         {icon}
       </div>
-      <h3 className='text-xl font-semibold text-gray-900 mb-4'>{title}</h3>
-      <p className='text-gray-600'>{description}</p>
+      <h3 className='text-lg font-semibold text-gray-900 mb-3'>{title}</h3>
+      <p className='text-gray-600 text-sm leading-relaxed'>{description}</p>
     </div>
   )
 }
@@ -70,18 +70,18 @@ export default function BenefitsSection (): React.ReactNode {
   ]
 
   return (
-    <section id='benefits' className='py-20 bg-white'>
+    <section id='benefits' className='py-16 bg-gray-50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='text-center mb-16'>
+        <div className='text-center mb-12'>
           <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-4'>
             Pourquoi choisir Tamagotcho ?
           </h2>
-          <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
+          <p className='text-lg text-gray-600 max-w-2xl mx-auto'>
             Une expérience de jeu unique qui combine nostalgie et innovation moderne
           </p>
         </div>
 
-        <div className='grid md:grid-cols-3 gap-8'>
+        <div className='grid md:grid-cols-3 gap-6'>
           {benefits.map((benefit, index) => (
             <BenefitCard key={index} {...benefit} />
           ))}

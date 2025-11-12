@@ -21,7 +21,7 @@ export default function NewsletterSection (): React.ReactNode {
   }
 
   return (
-    <section id='newsletter' className='py-20 bg-gradient-to-r from-moccaccino-500 to-fuchsia-blue-500'>
+    <section id='newsletter' className='py-20 bg-moccaccino-500'>
       <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
         <h2 className='text-3xl md:text-4xl font-bold text-white mb-4'>
           Rejoignez notre communauté !

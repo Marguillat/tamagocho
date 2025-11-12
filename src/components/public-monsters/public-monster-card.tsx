@@ -103,21 +103,21 @@ export function PublicMonsterCard ({ monster }: PublicMonsterCardProps): React.R
       <div className='relative z-10 p-6'>
         {/* En-tête avec nom et niveau */}
         <div className='text-center mb-4'>
-          <h3 className='text-2xl font-black text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text mb-2'>
+          <h3 className='text-2xl font-bold text-gray-900 mb-2'>
             {monster.name}
           </h3>
           <div className='flex items-center justify-center gap-2'>
-            <span className='px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-bold rounded-full shadow-md'>
+            <span className='px-3 py-1 bg-moccaccino-500 text-white text-sm font-semibold rounded-lg'>
               ⭐ Niveau {monster.level}
             </span>
-            <span className='px-3 py-1 bg-gradient-to-r from-blue-400 to-purple-500 text-white text-sm font-bold rounded-full shadow-md'>
+            <span className='px-3 py-1 bg-lochinvar-500 text-white text-sm font-semibold rounded-lg'>
               {getStateEmoji(monster.state)} {monster.state}
             </span>
           </div>
         </div>
 
         {/* Zone du monstre */}
-        <div className='relative bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4 mb-4 min-h-[300px] flex items-center justify-center border-2 border-purple-200'>
+        <div className='relative bg-gray-50 rounded-lg p-4 mb-4 min-h-[300px] flex items-center justify-center border-2 border-gray-200'>
           {isLoading
             ? (
               <div className='text-center'>
@@ -137,14 +137,11 @@ export function PublicMonsterCard ({ monster }: PublicMonsterCardProps): React.R
 
         {/* Badge public */}
         <div className='text-center'>
-          <span className='inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-sm font-bold rounded-full shadow-md'>
+          <span className='inline-flex items-center gap-2 px-4 py-2 bg-lochinvar-500 text-white text-sm font-semibold rounded-lg'>
             🌍 Public
           </span>
         </div>
       </div>
-
-      {/* Effet de brillance au hover */}
-      <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none' />
     </div>
   )
 }

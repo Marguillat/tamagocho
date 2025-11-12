@@ -167,16 +167,7 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
   }, [])
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-200 py-6 relative overflow-hidden'>
-      {/* Bulles décoratives animées */}
-      <div className='pointer-events-none absolute inset-0'>
-        <div className='absolute -right-32 top-20 h-96 w-96 rounded-full bg-gradient-to-br from-yellow-300/30 to-orange-400/30 blur-3xl animate-float' />
-        <div className='absolute -left-32 bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-pink-300/30 to-purple-400/30 blur-3xl animate-float-delayed' />
-        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-gradient-to-br from-blue-300/20 to-indigo-400/20 blur-3xl animate-pulse-slow' />
-      </div>
-
-      {/* Étoiles décoratives */}
-      <div className='pointer-events-none absolute top-20 right-40 text-6xl animate-twinkle'>⭐</div>
+    <div className='min-h-screen bg-gray-50 py-6'>
       <div className='pointer-events-none absolute top-40 left-20 text-5xl animate-twinkle-delayed'>✨</div>
       <div className='pointer-events-none absolute bottom-40 right-60 text-4xl animate-twinkle'>💫</div>
 
@@ -196,7 +187,7 @@ export function CreaturePageClient ({ monster }: CreaturePageClientProps): React
             {/* Nom du monstre inline */}
             <div className='flex items-center gap-2'>
               <span className='text-3xl'>👋</span>
-              <h1 className='text-3xl sm:text-4xl font-black text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text'>
+              <h1 className='text-3xl sm:text-4xl font-bold text-gray-900'>
                 {currentMonster.name}
               </h1>
             </div>

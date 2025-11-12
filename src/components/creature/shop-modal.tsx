@@ -159,7 +159,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
 
               {/* En-tête du modal */}
               <div className='text-center pr-12'>
-                <h2 className='text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent mb-2'>
+                <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-2'>
                   🛍️ Boutique de {creatureName}
                 </h2>
 

@@ -12,10 +12,13 @@ interface BadgeProps {
  * Principe LSP: Peut être remplacé par n'importe quelle variante de badge
  */
 export function Badge ({ text, gradient, isPopular = false }: BadgeProps): React.ReactElement {
+  // Convertir le gradient en couleur solide
+  const bgColor = isPopular ? 'bg-moccaccino-500' : 'bg-lochinvar-500'
+  
   if (isPopular) {
     return (
       <div className='absolute -top-6 -right-6 z-20'>
-        <div className={`bg-gradient-to-r ${gradient} text-white font-black text-sm px-6 py-2 rounded-full shadow-xl ring-4 ring-white transform rotate-12 animate-bounce`}>
+        <div className={`${bgColor} text-white font-bold text-sm px-6 py-2 rounded-lg shadow-lg border-2 border-white transform rotate-12`}>
           ⭐ {text} ⭐
         </div>
       </div>
@@ -24,7 +27,7 @@ export function Badge ({ text, gradient, isPopular = false }: BadgeProps): React
 
   return (
     <div className='absolute top-4 right-4 z-10'>
-      <div className={`bg-gradient-to-r ${gradient} text-white font-black text-xs px-4 py-2 rounded-full shadow-lg`}>
+      <div className={`${bgColor} text-white font-semibold text-xs px-4 py-2 rounded-lg shadow-sm`}>
         {text}
       </div>
     </div>

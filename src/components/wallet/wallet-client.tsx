@@ -41,22 +41,17 @@ export default function WalletClient ({ initialWallet }: WalletClientProps): Rea
       <div className='relative max-w-6xl mx-auto'>
         {/* En-tête */}
         <div className='text-center mb-12'>
-          <div className='inline-flex items-center gap-4 mb-6'>
-            <AnimatedEmoji emoji='💰' size='md' animation='animate-bounce' />
-            <h1 className='text-6xl font-black text-transparent bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text'>
+          <div className='inline-flex items-center gap-3 mb-4'>
+            <span className='text-4xl'>💰</span>
+            <h1 className='text-4xl font-bold text-gray-900'>
               Boutique de Koins
             </h1>
-            <AnimatedEmoji
-              emoji='🪙'
-              size='md'
-              animation='animate-bounce'
-              className='[animation-delay:0.2s]'
-            />
+            <span className='text-4xl'>🪙</span>
           </div>
-          <p className='text-2xl font-bold text-orange-600 flex items-center justify-center gap-3'>
-            <span className='text-3xl'>✨</span>
+          <p className='text-lg font-medium text-gray-700 flex items-center justify-center gap-2'>
+            <span>✨</span>
             Achète des Koins pour ton aventure !
-            <span className='text-3xl'>✨</span>
+            <span>✨</span>
           </p>
         </div>
 
@@ -65,18 +60,18 @@ export default function WalletClient ({ initialWallet }: WalletClientProps): Rea
 
         {/* Message d'erreur */}
         {error !== null && (
-          <div className='bg-red-100 border-4 border-red-300 text-red-700 px-8 py-5 rounded-3xl mb-8 text-center text-xl font-bold shadow-xl'>
-            <span className='text-4xl mr-3'>⚠️</span>
+          <div className='bg-red-100 border-2 border-red-300 text-red-700 px-6 py-4 rounded-lg mb-8 text-center text-base font-semibold'>
+            <span className='text-2xl mr-2'>⚠️</span>
             {error}
           </div>
         )}
 
         {/* Titre de la boutique */}
         <div className='text-center mb-8'>
-          <h2 className='text-5xl font-black text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text mb-4'>
+          <h2 className='text-3xl font-bold text-gray-900 mb-4'>
             Choisis ton Pack de Koins ! 🎁
           </h2>
-          <p className='text-xl text-gray-700 font-bold'>
+          <p className='text-base text-gray-700 font-medium'>
             Paiement sécurisé par Stripe 🔒
           </p>
         </div>

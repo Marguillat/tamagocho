@@ -79,7 +79,7 @@ export function LevelUpAnimation ({
     <div className='fixed inset-0 z-50 flex items-center justify-center'>
       {/* Overlay avec effet de flash - cliquable pour fermer */}
       <div
-        className='absolute inset-0 bg-gradient-to-br from-yellow-300/30 via-purple-400/30 to-pink-400/30 animate-pulse cursor-pointer'
+        className='absolute inset-0 bg-moccaccino-300/40 animate-pulse cursor-pointer'
         onClick={handleClose}
         role='button'
         tabIndex={0}
@@ -126,16 +126,16 @@ export function LevelUpAnimation ({
 
         {/* Texte "LEVEL UP!" */}
         <div className='mb-6 animate-level-up-scale'>
-          <h1 className='text-8xl font-bold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 text-transparent bg-clip-text drop-shadow-2xl'>
+          <h1 className='text-6xl font-bold text-moccaccino-600'>
             LEVEL UP!
           </h1>
         </div>
 
         {/* Nouveau niveau */}
         <div className='animate-level-up-scale' style={{ animationDelay: '0.2s' }}>
-          <div className='bg-white/90 backdrop-blur-sm rounded-3xl px-12 py-6 shadow-2xl border-4 border-yellow-400 inline-block'>
-            <p className='text-gray-600 text-xl font-medium mb-2'>Nouveau niveau</p>
-            <p className='text-7xl font-bold bg-gradient-to-br from-moccaccino-500 to-lochinvar-500 text-transparent bg-clip-text'>
+          <div className='bg-white rounded-lg px-10 py-5 shadow-lg border-4 border-moccaccino-400 inline-block'>
+            <p className='text-gray-600 text-lg font-medium mb-2'>Nouveau niveau</p>
+            <p className='text-5xl font-bold text-moccaccino-700'>
               {newLevel}
             </p>
           </div>

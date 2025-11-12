@@ -24,7 +24,7 @@ export function EmptyMonstersState ({ className }: EmptyMonstersStateProps): Rea
   return (
     <div
       className={mergeClasses(
-        'mt-10 w-full rounded-3xl bg-gradient-to-br from-white/90 via-lochinvar-50/80 to-fuchsia-blue-50/80 p-8 text-center shadow-[0_16px_40px_rgba(15,23,42,0.12)] ring-1 ring-white/70 backdrop-blur',
+        'mt-10 w-full rounded-lg bg-white p-8 text-center shadow-sm border-2 border-gray-200',
         className
       )}
     >

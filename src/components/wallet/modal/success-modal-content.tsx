@@ -34,7 +34,7 @@ export function SuccessModalContent ({ onClose }: SuccessModalContentProps): Rea
         </div>
 
         {/* Titre */}
-        <h2 className='text-6xl font-black text-center mb-4 text-transparent bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text drop-shadow-lg'>
+        <h2 className='text-4xl font-bold text-center mb-4 text-green-700'>
           Succès !
         </h2>
 

@@ -30,12 +30,12 @@ export function KoinPackageCard ({
   return (
     <div
       className={`
-        group relative rounded-[2rem] 
-        bg-gradient-to-br from-white via-pink-50 to-purple-100 
-        p-8 shadow-[0_20px_60px_rgba(0,0,0,0.15)] 
-        ring-4 ring-white/80 
-        transition-all duration-300 hover:scale-105 hover:shadow-[0_30px_90px_rgba(0,0,0,0.25)]
-        ${pkg.popular ? 'ring-8 ring-yellow-400 transform scale-105' : ''}
+        rounded-lg 
+        bg-white 
+        p-6 shadow-sm 
+        border-2
+        transition-all duration-200 hover:shadow-md
+        ${pkg.popular ? 'border-moccaccino-500' : 'border-gray-200'}
       `}
     >
       {/* Badge */}
@@ -45,53 +45,42 @@ export function KoinPackageCard ({
         isPopular={pkg.popular}
       />
 
-      {/* Bulles décoratives */}
-      <div className='pointer-events-none absolute -right-8 top-8 h-24 w-24 rounded-full bg-gradient-to-br from-yellow-300/30 to-orange-300/30 blur-xl group-hover:scale-150 transition-transform duration-500 overflow-hidden' />
 
       {/* Contenu */}
-      <div className='relative text-center'>
+      <div className='text-center'>
         {/* Emoji du pack */}
-        <AnimatedEmoji emoji={pkg.emoji} size='lg' className='mb-6' />
+        <div className='text-4xl mb-4'>{pkg.emoji}</div>
 
         {/* Montant de Koins */}
-        <div className='mb-6'>
-          <div className={`inline-block bg-gradient-to-r ${pkg.color} text-white font-black text-5xl px-8 py-4 rounded-3xl shadow-2xl ring-4 ring-white/50`}>
+        <div className='mb-4'>
+          <div className='text-3xl font-bold text-gray-900'>
             {pkg.amount.toLocaleString('fr-FR')}
           </div>
-          <p className='text-2xl font-bold text-purple-600 mt-3'>Koins</p>
+          <p className='text-sm font-medium text-gray-600 mt-1'>Koins</p>
         </div>
 
         {/* Prix */}
-        <div className='mb-8'>
-          <div className='text-5xl font-black text-transparent bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text mb-2'>
+        <div className='mb-6'>
+          <div className='text-2xl font-bold text-lochinvar-700 mb-1'>
             {pkg.price}€
           </div>
-          <p className='text-sm text-gray-600 font-medium'>
-            Soit {(pkg.price / pkg.amount).toFixed(2)}€ par Koin
+          <p className='text-xs text-gray-500'>
+            {(pkg.price / pkg.amount).toFixed(2)}€ par Koin
           </p>
         </div>
 
         {/* Bouton d'achat */}
-        <GradientButton
+        <button
           onClick={() => { onPurchase(pkg.amount) }}
           disabled={isPurchasing}
-          gradient={pkg.color}
+          className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            pkg.popular
+              ? 'bg-moccaccino-500 text-white hover:bg-moccaccino-600'
+              : 'bg-lochinvar-500 text-white hover:bg-lochinvar-600'
+          } disabled:opacity-50 disabled:cursor-not-allowed`}
         >
-          {isPurchasing
-            ? (
-              <>
-                <span className='animate-spin text-2xl'>⏳</span>
-                <span>Chargement...</span>
-              </>
-              )
-            : (
-              <>
-                <span className='text-2xl'>🛒</span>
-                <span>Acheter</span>
-                <span className='text-2xl'>✨</span>
-              </>
-              )}
-        </GradientButton>
+          {isPurchasing ? '⏳ Chargement...' : '🛒 Acheter'}
+        </button>
       </div>
     </div>
   )

@@ -38,7 +38,7 @@ export default async function PublicMonstersPage (): Promise<React.ReactNode> {
       <div className='container relative z-10 mx-auto px-4 max-w-7xl'>
         {/* En-tête de la page */}
         <div className='text-center mb-12'>
-          <h1 className='text-5xl sm:text-6xl font-black text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text mb-4'>
+          <h1 className='text-4xl sm:text-5xl font-bold text-gray-900 mb-4'>
             🌍 Monstres Publics
           </h1>
           <p className='text-xl text-gray-700 font-medium'>

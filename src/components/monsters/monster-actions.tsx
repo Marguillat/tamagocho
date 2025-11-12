@@ -97,20 +97,22 @@ function ActionButton ({
       ? 'opacity-50 cursor-not-allowed'
       : 'hover:scale-105 active:scale-95 cursor-pointer hover:shadow-2xl'
 
+  // Convertir les classes de couleur gradient en couleurs solides
+  const solidColorClass = colorClass.includes('yellow') ? 'bg-yellow-500'
+    : colorClass.includes('blue') ? 'bg-blue-500'
+    : colorClass.includes('purple') ? 'bg-purple-500'
+    : colorClass.includes('pink') ? 'bg-pink-500'
+    : 'bg-moccaccino-500'
+
   return (
     <button
-      className={`${baseClass} bg-gradient-to-br ${colorClass} ring-4 ring-white/50 ${activeClass}`}
+      className={`${baseClass} ${solidColorClass} border-2 border-white ${activeClass}`}
       onClick={onClick}
       disabled={isDisabled}
       type='button'
     >
-      {/* Effet de brillance */}
-      {!isActive && !isDisabled && (
-        <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-shine' />
-      )}
-
-      <span className='relative text-5xl group-hover:scale-110 transition-transform duration-300'>{emoji}</span>
-      <span className='relative text-sm uppercase tracking-wider'>{label}</span>
+      <span className='relative text-4xl'>{emoji}</span>
+      <span className='relative text-xs uppercase tracking-wider'>{label}</span>
     </button>
   )
 }
@@ -147,7 +149,7 @@ export function MonsterActions ({ onAction, monsterId }: MonsterActionsProps): R
     <div className='space-y-6'>
       {/* Titre des actions */}
       <div className='text-center'>
-        <h3 className='text-3xl font-black text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text mb-2'>
+        <h3 className='text-2xl font-bold text-gray-900 mb-2'>
           Actions
         </h3>
         <p className='text-sm text-gray-600 font-medium'>

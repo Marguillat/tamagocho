@@ -52,7 +52,7 @@ export default function DailyQuestsSection (): React.ReactNode {
 
   if (loading) {
     return (
-      <div className='bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg'>
+      <div className='bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200'>
         <div className='flex items-center justify-center py-12'>
           <div className='animate-spin rounded-full h-12 w-12 border-4 border-moccaccino-500 border-t-transparent' />
         </div>
@@ -62,7 +62,7 @@ export default function DailyQuestsSection (): React.ReactNode {
 
   if (error != null) {
     return (
-      <div className='bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg'>
+      <div className='bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200'>
         <div className='text-center py-8'>
           <div className='text-4xl mb-4'>❌</div>
           <p className='text-red-600 font-bold'>{error}</p>
@@ -89,11 +89,11 @@ export default function DailyQuestsSection (): React.ReactNode {
       )}
 
       {/* En-tête de la section */}
-      <div className='bg-gradient-to-br from-moccaccino-50 to-lochinvar-50 rounded-2xl p-6 shadow-lg'>
+      <div className='bg-moccaccino-50 rounded-lg p-6 shadow-sm border-2 border-moccaccino-200'>
         <div className='flex items-center justify-between mb-6'>
           <div>
-            <h2 className='text-3xl font-bold text-moccaccino-700 flex items-center gap-3'>
-              <span className='text-4xl'>📋</span>
+            <h2 className='text-2xl font-bold text-moccaccino-700 flex items-center gap-2'>
+              <span className='text-3xl'>📋</span>
               Quêtes du jour
             </h2>
             <p className='text-sm text-gray-600 mt-1'>
@@ -116,11 +116,11 @@ export default function DailyQuestsSection (): React.ReactNode {
 
         {/* Bonus de complétion */}
         {allCompleted && (
-          <div className='bg-gradient-to-r from-lochinvar-500 to-fuchsia-blue-500 rounded-xl p-6 text-white shadow-lg'>
+          <div className='bg-lochinvar-500 rounded-lg p-6 text-white shadow-sm'>
             <div className='flex items-center justify-between'>
               <div className='flex-1'>
-                <h3 className='text-xl font-bold mb-2 flex items-center gap-2'>
-                  <span className='text-2xl'>🎁</span>
+                <h3 className='text-lg font-bold mb-2 flex items-center gap-2'>
+                  <span className='text-xl'>🎁</span>
                   Bonus de complétion !
                 </h3>
                 <p className='text-sm opacity-90'>
@@ -145,9 +145,9 @@ export default function DailyQuestsSection (): React.ReactNode {
       </div>
 
       {/* Statistiques */}
-      <div className='bg-gradient-to-br from-fuchsia-blue-50 to-moccaccino-50 rounded-2xl p-6 shadow-lg'>
-        <h3 className='text-2xl font-bold text-moccaccino-700 mb-4 flex items-center gap-2'>
-          <span className='text-3xl'>📊</span>
+      <div className='bg-fuchsia-blue-50 rounded-lg p-6 shadow-sm border-2 border-fuchsia-blue-200'>
+        <h3 className='text-xl font-bold text-fuchsia-blue-700 mb-4 flex items-center gap-2'>
+          <span className='text-2xl'>📊</span>
           Vos statistiques
         </h3>
         <QuestStatsDisplay stats={stats} />
