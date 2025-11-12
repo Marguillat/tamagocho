@@ -13,8 +13,9 @@ export async function POST (req: Request): Promise<Response> {
   let event: Stripe.Event
   try {
     event = stripe.webhooks.constructEvent(payload, sig as string, process.env.STRIPE_WEBHOOK_SECRET as string)
-  } catch (err: any) {
-    return new Response(`Webhook Error: ${err.message as string}`, { status: 400 })
+  } catch (err) {
+    const error = err as Error
+    return new Response(`Webhook Error: ${error.message}`, { status: 400 })
   }
 
   // Assurer la connexion DB avant toute opération Mongoose

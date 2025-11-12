@@ -14,7 +14,7 @@ interface StatItemProps {
   emoji: string
   /** Couleur du gradient */
   colorBG: string
-  
+
   colorText?: string
 }
 

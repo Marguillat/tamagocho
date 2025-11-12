@@ -8,6 +8,7 @@ import type { EquippedAccessory } from '@/components/monsters/pixel-monster'
 import { getStateLabel } from '@/lib/utils'
 import { getAccessoriesForMonster } from '@/actions/accessories.actions'
 import { accessoriesCatalog, type AccessoryType } from '@/config/accessories.config'
+import type { DBAccessory } from '@/types/accessory'
 
 /**
  * Props pour le composant CreatureMonsterDisplay
@@ -67,12 +68,12 @@ export function CreatureMonsterDisplay ({
         if (accessories === undefined) return
 
         // Filtrer uniquement les équipés
-        const equipped = accessories.filter((acc: any) =>
+        const equipped = accessories.filter((acc: DBAccessory) =>
           equipedAccessoriesIds.includes(acc._id)
         )
 
         // Convertir en format pour le rendu
-        const accessoriesData: EquippedAccessory[] = equipped.map((acc: any) => {
+        const accessoriesData: EquippedAccessory[] = equipped.map((acc: DBAccessory) => {
           const config = accessoriesCatalog.find(c => c.type === acc.type)
           return {
             type: acc.type as AccessoryType,

@@ -10,12 +10,10 @@ import { AccessoryData } from '@/types/accessory'
 import { subtractKoins } from '@/actions/wallet.actions'
 import { checkAndUpdateQuest } from '@/services/quests/daily-quests.service'
 
-
 export async function buyXpBoost (creatureId: string, boostId: string): Promise<void> {
   try {
-    
     console.log(`Achat du boost ${boostId} pour la créature ${creatureId}`)
-    
+
     const session = await auth.api.getSession({
       headers: await headers()
     })
@@ -23,28 +21,28 @@ export async function buyXpBoost (creatureId: string, boostId: string): Promise<
       throw new Error('User not authenticated')
     }
     const { user } = session
-  
+
     await connectMongooseToDatabase()
-  
+
     const monster = await Monster.findOne({ _id: creatureId, ownerId: user.id })
-  
+
     if (monster === null || monster === undefined) {
       throw new Error('Monster not found')
     }
-  
+
     const boost = xpBoosts.find((boost) => boost.id === boostId)
-    
+
     let priceOfBoost = 0
     if (boost !== undefined && boost !== null) {
       priceOfBoost = boost.price
     }
-    
+
     await subtractKoins(priceOfBoost)
-  
+
     if (boost === undefined || boost === null) {
       throw new Error('Boost not found')
     }
-  
+
     monster.xp = Number(monster.xp) + Number(boost.xpAmount)
     monster.markModified('xp')
     let leveledUp = false
@@ -63,7 +61,7 @@ export async function buyXpBoost (creatureId: string, boostId: string): Promise<
     }
     await monster.save()
     revalidatePath(`/app/creatures/${creatureId}`)
-  }catch (error) {
+  } catch (error) {
     console.error('Error buying xp boost:', error)
   }
 }
@@ -78,12 +76,11 @@ export async function buyAccessory (monsterId: string, accessoryData: AccessoryD
       throw new Error('User not authenticated')
     }
     const { user } = session
-  
+
     await connectMongooseToDatabase()
-  
+
     await subtractKoins(price)
-    
-  }catch (error) {
+  } catch (error) {
     console.error('Error buying accessory:', error)
   }
 }

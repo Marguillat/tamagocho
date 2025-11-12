@@ -39,7 +39,7 @@ export async function createMonster (monsterData: CreateMonsterFormValues): Prom
   try {
     // Connexion à la base de données
     await connectMongooseToDatabase()
-  
+
     // Vérification de l'authentification
     const session = await auth.api.getSession({
       headers: await headers()
@@ -47,7 +47,7 @@ export async function createMonster (monsterData: CreateMonsterFormValues): Prom
     if (session === null || session === undefined) {
       throw new Error('User not authenticated')
     }
-  
+
     // Création et sauvegarde du monstre
     const monster = new Monster({
       ownerId: session.user.id,
@@ -59,13 +59,12 @@ export async function createMonster (monsterData: CreateMonsterFormValues): Prom
       isPublic: monsterData.isPublic,
       maxXp: monsterData.maxXp
     })
-  
+
     await monster.save()
-  
+
     // Revalidation du cache pour rafraîchir le dashboard
     revalidatePath('/app')
-    
-  }catch (error) {
+  } catch (error) {
     console.error('Error creating monster:', error)
   }
 }
@@ -342,8 +341,6 @@ export async function getPublicMonsters (): Promise<DBMonster[]> {
     if (session === null || session === undefined) {
       throw new Error('User not authenticated')
     }
-
-    const { user } = session
 
     // Récupération des monstres de l'utilisateur
     const monsters = await Monster.find({ isPublic: true }).exec()

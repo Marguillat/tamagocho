@@ -8,19 +8,19 @@ export async function POST (request: Request): Promise<Response> {
     const session = await auth.api.getSession({
       headers: await headers()
     })
-  
+
     if (session === null || session === undefined) {
       return new Response('Unauthorized', { status: 401 })
     }
-  
+
     const { amount } = await request.json()
-  
+
     const product = pricingTable[amount]
-  
+
     if (product === undefined || product === null) {
       return new Response('Product not found', { status: 404 })
     }
-  
+
     const checkoutSession = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -42,9 +42,9 @@ export async function POST (request: Request): Promise<Response> {
         productId: product.productId
       }
     })
-  
+
     return new Response(JSON.stringify({ url: checkoutSession.url }), { status: 200 })
-  }catch (error) {
+  } catch (error) {
     console.error('Error creating checkout session:', error)
     return new Response('Internal Server Error', { status: 500 })
   }

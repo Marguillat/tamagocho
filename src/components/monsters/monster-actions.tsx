@@ -98,11 +98,15 @@ function ActionButton ({
       : 'hover:scale-105 active:scale-95 cursor-pointer hover:shadow-2xl'
 
   // Convertir les classes de couleur gradient en couleurs solides
-  const solidColorClass = colorClass.includes('yellow') ? 'bg-yellow-500'
-    : colorClass.includes('blue') ? 'bg-blue-500'
-    : colorClass.includes('purple') ? 'bg-purple-500'
-    : colorClass.includes('pink') ? 'bg-pink-500'
-    : 'bg-moccaccino-500'
+  const solidColorClass = colorClass.includes('yellow')
+    ? 'bg-yellow-500'
+    : colorClass.includes('blue')
+      ? 'bg-blue-500'
+      : colorClass.includes('purple')
+        ? 'bg-purple-500'
+        : colorClass.includes('pink')
+          ? 'bg-pink-500'
+          : 'bg-moccaccino-500'
 
   return (
     <button

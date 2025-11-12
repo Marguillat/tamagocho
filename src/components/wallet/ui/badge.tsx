@@ -14,7 +14,7 @@ interface BadgeProps {
 export function Badge ({ text, gradient, isPopular = false }: BadgeProps): React.ReactElement {
   // Convertir le gradient en couleur solide
   const bgColor = isPopular ? 'bg-moccaccino-500' : 'bg-lochinvar-500'
-  
+
   if (isPopular) {
     return (
       <div className='absolute -top-6 -right-6 z-20'>

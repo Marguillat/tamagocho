@@ -8,18 +8,17 @@ export async function GET (): Promise<Response> {
     const session = await auth.api.getSession({
       headers: await headers()
     })
-  
+
     if (session === null || session === undefined) {
       return new Response('Unauthorized', { status: 401 })
     }
-  
+
     await connectMongooseToDatabase()
     const monsters = await Monster.find({ ownerId: session.user.id }).exec()
-  
+
     // Sérialisation JSON pour éviter les problèmes de typage Next.js
     return Response.json(monsters)
-    
-  }catch (error) {
+  } catch (error) {
     console.error('Error fetching monsters:', error)
     return new Response('Internal Server Error', { status: 500 })
   }

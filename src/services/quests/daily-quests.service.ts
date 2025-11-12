@@ -14,6 +14,7 @@ import { AVAILABLE_QUESTS, QUEST_SYSTEM_CONFIG, type QuestType } from '@/config/
 import UserDailyQuests, { type DailyQuest } from '@/db/models/daily-quest.model'
 import Wallet from '@/db/models/wallet.model'
 import { connectMongooseToDatabase } from '@/db'
+import type { UserDailyQuestsDocument } from '@/types/quest'
 
 /**
  * Obtient la date actuelle au format YYYY-MM-DD
@@ -60,9 +61,9 @@ function generateRandomQuests (): DailyQuest[] {
  * Sinon, génère de nouvelles quêtes pour aujourd'hui.
  *
  * @param {string} userId - Identifiant de l'utilisateur
- * @returns {Promise<any>} Document UserDailyQuests
+ * @returns {Promise<UserDailyQuestsDocument>} Document UserDailyQuests
  */
-export async function getUserDailyQuests (userId: string): Promise<any> {
+export async function getUserDailyQuests (userId: string): Promise<UserDailyQuestsDocument> {
   await connectMongooseToDatabase()
 
   const currentDate = getCurrentDate()

@@ -8,18 +8,18 @@ async function updateMonsterState (monsterId?: string | null): Promise<void> {
   try {
     // Logique pour mettre à jour l'état du monstre
     console.log(`Mise à jour de l'état du monstre avec l'ID : ${String(monsterId)}`)
-  
+
     const randomState = MONSTER_STATES[Math.floor(Math.random() * MONSTER_STATES.length)]
     console.log(`Nouvel état du monstre : ${randomState}`)
-  
+
     await connectMongooseToDatabase()
     const result = await Monster.updateOne(
       { _id: monsterId },
       { state: randomState }
     ).orFail()
     console.log(`Résultat de la mise à jour en base de données : ${result}`)
-  }catch (error) {
-    console.log("[FAIL] Error updating monster state" + error)
+  } catch (error) {
+    console.log('[FAIL] Error updating monster state' + error)
   }
 }
 

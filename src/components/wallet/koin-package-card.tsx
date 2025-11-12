@@ -45,7 +45,6 @@ export function KoinPackageCard ({
         isPopular={pkg.popular}
       />
 
-
       {/* Contenu */}
       <div className='text-center'>
         {/* Emoji du pack */}

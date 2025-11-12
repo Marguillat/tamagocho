@@ -8,6 +8,8 @@ import { auth } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { getUserDailyQuests } from '@/services/quests/daily-quests.service'
 import { AVAILABLE_QUESTS } from '@/config/quests.config'
+import type { EnrichedQuest } from '@/types/quest'
+import type { DailyQuest } from '@/db/models/daily-quest.model'
 
 export const dynamic = 'force-dynamic'
 
@@ -31,7 +33,7 @@ export async function GET (_request: NextRequest): Promise<NextResponse> {
     const userQuests = await getUserDailyQuests(userId)
 
     // Enrichir les quêtes avec les informations de configuration
-    const enrichedQuests = userQuests.quests.map((quest: any) => {
+    const enrichedQuests: EnrichedQuest[] = userQuests.quests.map((quest: DailyQuest & { toObject: () => DailyQuest }) => {
       const questConfig = AVAILABLE_QUESTS.find(q => q.id === quest.questType)
       return {
         ...quest.toObject(),
