@@ -133,9 +133,6 @@ const userDailyQuestsSchema = new Schema({
   timestamps: true // Ajoute automatiquement createdAt et updatedAt
 })
 
-// Index pour des requêtes rapides par ownerId
-userDailyQuestsSchema.index({ ownerId: 1 })
-
 export interface DailyQuest {
   questType: QuestType
   currentProgress: number

@@ -45,14 +45,13 @@ export const WelcomeHero = memo(function WelcomeHero ({
 
         {/* Titre principal avec gradient */}
         <h1 className='text-4xl font-black text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text leading-tight sm:text-5xl'>
-          Bienvenue dans ton Univers Tamagotcho ! 🎮
+          Bienvenue dans ton Univers Tamagotcho !
         </h1>
 
         {/* Description fun */}
         <p className='text-lg text-gray-700 font-medium leading-relaxed'>
           <span className='text-2xl mr-2'>✨</span>
           Prends soin de tes créatures adorables et vis des aventures inoubliables
-          <span className='inline-block mx-2 text-2xl animate-bounce'>💖</span>
         </p>
       </div>
 

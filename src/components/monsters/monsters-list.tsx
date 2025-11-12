@@ -36,7 +36,7 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
   return (
     <section className={`mt-12 w-full space-y-8 ${className ?? ''}`}>
       {/* Header super fun et engageant */}
-      <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 p-8 shadow-2xl'>
+      <header className='relative overflow-hidden rounded-3xl bg-fuchsia-blue-50 border-2 border-fuchsia-blue-200 p-8 shadow-2xl'>
         {/* Bulles décoratives */}
         <div className='pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/20 blur-2xl' />
         <div className='pointer-events-none absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-white/20 blur-2xl' />
@@ -44,13 +44,11 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
         <div className='relative flex items-center justify-between flex-wrap gap-4'>
           <div className='space-y-3'>
             <div className='flex items-center gap-3'>
-              <span className='text-5xl animate-bounce'>🎮</span>
-              <h2 className='text-4xl font-black text-white drop-shadow-lg'>
+              <h2 className='text-4xl font-black text-fuchsia-blue-700 drop-shadow-lg'>
                 Ta Collection de Créatures
               </h2>
             </div>
-            <p className='text-xl text-white/90 font-medium flex items-center gap-2'>
-              <span className='text-2xl'>✨</span>
+            <p className='text-xl text-fuchsia-blue-700 font-medium flex items-center gap-2'>
               {monsters.length} {monsters.length === 1 ? 'compagnon adorable' : 'compagnons adorables'} prêts pour l&apos;aventure !
             </p>
           </div>
@@ -59,7 +57,7 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
           <div className='flex items-center gap-3'>
             <div className='relative'>
               <div className='absolute inset-0 bg-white rounded-3xl blur-lg opacity-50' />
-              <div className='relative bg-white/90 backdrop-blur-sm rounded-3xl px-8 py-4 shadow-xl ring-4 ring-white/50'>
+              <div className='relative bg-white/90 backdrop-blur-sm rounded-3xl px-8 py-4 shadow-xl ring-4 ring-fuchsia-blue-500/50'>
                 <div className='text-center'>
                   <div className='text-5xl font-black text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text'>
                     {monsters.length}
@@ -75,7 +73,7 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
       </header>
 
       {/* Grille de monstres - Plus spacieuse */}
-      <div className='grid gap-8 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3'>
+      <div className='grid gap-8 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
         {useMemo(() =>
           monsters.map((monster) => {
             const cardKey = monster._id
@@ -101,7 +99,7 @@ function MonstersList ({ monsters, className }: MonstersListProps): React.ReactN
       {/* Message d'encouragement en bas */}
       <div className='text-center py-8'>
         <p className='text-lg text-gray-600 font-medium'>
-          Continue de prendre soin de tes créatures ! 💖
+          Continue de prendre soin de tes créatures !
         </p>
       </div>
     </section>

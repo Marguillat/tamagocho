@@ -90,7 +90,6 @@ export function MonsterAccessories ({
     return (
       <div className='relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-white via-purple-50 to-pink-100 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.2)] ring-8 ring-white/80'>
         <div className='text-center'>
-          <div className='text-6xl mb-4 animate-bounce'>👔</div>
           <p className='text-gray-600 font-bold'>Chargement des accessoires...</p>
         </div>
       </div>
@@ -104,9 +103,7 @@ export function MonsterAccessories ({
           {/* Titre */}
           <div className='text-center mb-6'>
             <h2 className='text-4xl font-black text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text flex items-center justify-center gap-3'>
-              <span className='text-5xl'>👔</span>
               Accessoires
-              <span className='text-5xl'>👔</span>
             </h2>
           </div>
 
@@ -134,9 +131,7 @@ export function MonsterAccessories ({
         {/* Titre */}
         <div className='text-center mb-8'>
           <h2 className='text-4xl font-black text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text flex items-center justify-center gap-3'>
-            <span className='text-5xl'>👔</span>
             Accessoires
-            <span className='text-5xl'>👔</span>
           </h2>
           <p className='text-sm text-gray-600 mt-2'>
             {accessories.length} accessoire{accessories.length > 1 ? 's' : ''} possédé{accessories.length > 1 ? 's' : ''}

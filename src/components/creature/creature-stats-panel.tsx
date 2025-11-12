@@ -13,7 +13,9 @@ interface StatItemProps {
   /** Emoji associé */
   emoji: string
   /** Couleur du gradient */
-  color: string
+  colorBG: string
+  
+  colorText?: string
 }
 
 /**
@@ -27,14 +29,14 @@ interface StatItemProps {
  * @param {StatItemProps} props - Props du composant
  * @returns {React.ReactNode} Ligne de statistique
  */
-export const StatItem = memo(function StatItem ({ label, value, emoji, color }: StatItemProps): React.ReactNode {
+export const StatItem = memo(function StatItem ({ label, value, emoji, colorBG, colorText = 'text-black' }: StatItemProps): React.ReactNode {
   return (
-    <div className={`flex justify-between items-center py-4 px-6 rounded-2xl bg-gradient-to-r ${color} shadow-lg ring-2 ring-white/50 transform hover:scale-105 transition-all duration-300`}>
+    <div className={`flex justify-between items-center py-4 px-6 rounded-2xl ${colorBG} shadow-lg ring-2 ring-white/50 transform hover:scale-105 transition-all duration-300`}>
       <div className='flex items-center gap-3'>
         <span className='text-3xl'>{emoji}</span>
-        <span className='text-white font-bold text-lg'>{label}</span>
+        <span className={`${colorText} font-bold text-lg`}>{label}</span>
       </div>
-      <span className='text-white font-black text-xl'>{value}</span>
+      <span className={` ${colorText} font-black text-xl`}>{value}</span>
     </div>
   )
 })
@@ -93,17 +95,12 @@ export const CreatureStatsPanel = memo(function CreatureStatsPanel ({
   const updatedAtFormatted = useMemo(() => new Date(updatedAt).toLocaleDateString('fr-FR'), [updatedAt])
 
   return (
-    <div className='relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-white via-yellow-50 to-orange-100 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.2)] ring-8 ring-white/80'>
-      {/* Effet de fond */}
-      <div className='pointer-events-none absolute inset-0 bg-gradient-to-br from-yellow-200/20 via-orange-200/20 to-red-200/20 animate-pulse-slow' />
-
+    <div className='relative overflow-hidden rounded-[2rem]  bg-gradient-to-br from-white via-pink-50 to-purple-100 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.2)] ring-8 ring-white/80'>
       <div className='relative'>
         {/* Titre du panneau */}
         <div className='text-center mb-8'>
           <h2 className='text-3xl font-bold text-gray-900 flex items-center justify-center gap-2'>
-            <span className='text-5xl'>📊</span>
             Statistiques
-            <span className='text-5xl'>📊</span>
           </h2>
         </div>
 
@@ -124,25 +121,29 @@ export const CreatureStatsPanel = memo(function CreatureStatsPanel ({
             label='Niveau'
             value={level.toString()}
             emoji='⭐'
-            color='from-yellow-400 to-orange-500'
+            colorBG='bg-orange-100'
+            colorText='text-orange-700'
           />
           <StatItem
             label='État'
             value={stateLabel}
             emoji='💖'
-            color='from-pink-400 to-rose-500'
+            colorBG='bg-rose-100'
+            colorText='text-rose-700'
           />
           <StatItem
             label='Adopté le'
             value={createdAtFormatted}
             emoji='📅'
-            color='from-blue-400 to-cyan-500'
+            colorBG='bg-cyan-100'
+            colorText='text-cyan-700'
           />
           <StatItem
             label='Dernière activité'
             value={updatedAtFormatted}
             emoji='🔄'
-            color='from-purple-400 to-indigo-500'
+            colorBG='bg-indigo-100'
+            colorText='text-indigo-700'
           />
         </div>
       </div>

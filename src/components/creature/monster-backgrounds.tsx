@@ -166,7 +166,6 @@ export function MonsterBackgrounds ({
               className='w-full bg-gradient-to-r from-red-400 to-rose-500 hover:from-red-500 hover:to-rose-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-black py-3 px-6 rounded-2xl shadow-lg ring-2 ring-red-300 transition-all duration-300 hover:scale-105 active:scale-95 disabled:scale-100 disabled:cursor-not-allowed'
             >
               <span className='flex items-center justify-center gap-2'>
-              className='w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg shadow-sm transition-colors duration-200 disabled:cursor-not-allowed'
                 <span>Retirer le background</span>
               </span>
             </button>

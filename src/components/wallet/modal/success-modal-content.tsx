@@ -58,8 +58,7 @@ export function SuccessModalContent ({ onClose }: SuccessModalContentProps): Rea
           gradient='from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700'
           className='text-2xl py-6 px-8 rounded-3xl'
         >
-          <span className='text-3xl'>🎮</span>
-          <span>Continuer l'Aventure</span>
+          <span>Revenir aux créatures</span>
           <span className='text-3xl'>🚀</span>
         </GradientButton>
       </div>

@@ -141,10 +141,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
       <div className='min-h-screen flex items-center justify-center p-4 py-8'>
         <div className='relative max-w-7xl w-full animate-scale-in'>
           {/* Contenu du modal */}
-          <div className='bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl shadow-2xl p-6 md:p-8 relative max-h-[90vh] overflow-y-auto'>
-            {/* Éléments décoratifs */}
-            <div className='absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-300/20 to-orange-400/20 rounded-full blur-3xl' />
-            <div className='absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-br from-pink-300/20 to-purple-400/20 rounded-full blur-3xl' />
+          <div className='bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl shadow-2xl p-6 md:p-8 md:pt-0 relative max-h-[90vh] overflow-y-auto'>
 
             {/* Header sticky avec bouton fermer */}
             <div className='sticky top-0 z-20 bg-gradient-to-br from-purple-50 to-pink-50 pb-4 -mx-6 -mt-6 px-6 pt-6 md:-mx-8 md:-mt-8 md:px-8 md:pt-8 mb-4'>
@@ -160,7 +157,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
               {/* En-tête du modal */}
               <div className='text-center pr-12'>
                 <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-2'>
-                  🛍️ Boutique de {creatureName}
+                  Boutique
                 </h2>
 
                 {/* Affichage du solde */}
@@ -234,7 +231,7 @@ export function ShopModal ({ onClose, creatureName, creatureId }: ShopModalProps
             </div>
 
             {/* Contenu des onglets */}
-            <div className='relative z-10'>
+            <div className='relative z-10 pt-6'>
               {/* Boutique d'accessoires */}
               {activeTab === 'accessories' && (
                 <div className='animate-fade-in-up'>
