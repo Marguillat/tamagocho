@@ -86,6 +86,7 @@ function SignInForm ({ onError }: { onError: (error: string) => void }): React.R
           className='group bg-white flex items-center border-2 border-black px-4 py-2 text-md w-fit gap-2 rounded-md text-black hover:cursor-pointer hover:bg-black hover:text-white transition-all duration-300'
           onClick={(e) => {
             e.preventDefault()
+            setIsLoading(true)
             void signInWithGithub()
           }}
         >
