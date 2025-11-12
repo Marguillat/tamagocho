@@ -20,7 +20,7 @@ export async function POST (req: Request): Promise<Response> {
   // Assurer la connexion DB avant toute opération Mongoose
   try {
     await connectMongooseToDatabase()
-  } catch (err: any) {
+  } catch (err) {
     console.error('Database connection error in webhook:', err)
     return new Response('Database connection failed', { status: 500 })
   }

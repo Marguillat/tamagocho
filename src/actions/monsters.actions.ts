@@ -36,33 +36,38 @@ import { checkAndUpdateQuest } from '@/services/quests/daily-quests.service'
  * })
  */
 export async function createMonster (monsterData: CreateMonsterFormValues): Promise<void> {
-  // Connexion à la base de données
-  await connectMongooseToDatabase()
-
-  // Vérification de l'authentification
-  const session = await auth.api.getSession({
-    headers: await headers()
-  })
-  if (session === null || session === undefined) {
-    throw new Error('User not authenticated')
+  try {
+    // Connexion à la base de données
+    await connectMongooseToDatabase()
+  
+    // Vérification de l'authentification
+    const session = await auth.api.getSession({
+      headers: await headers()
+    })
+    if (session === null || session === undefined) {
+      throw new Error('User not authenticated')
+    }
+  
+    // Création et sauvegarde du monstre
+    const monster = new Monster({
+      ownerId: session.user.id,
+      name: monsterData.name,
+      traits: monsterData.traits,
+      state: monsterData.state,
+      level: monsterData.level,
+      xp: monsterData.xp,
+      isPublic: monsterData.isPublic,
+      maxXp: monsterData.maxXp
+    })
+  
+    await monster.save()
+  
+    // Revalidation du cache pour rafraîchir le dashboard
+    revalidatePath('/app')
+    
+  }catch (error) {
+    console.error('Error creating monster:', error)
   }
-
-  // Création et sauvegarde du monstre
-  const monster = new Monster({
-    ownerId: session.user.id,
-    name: monsterData.name,
-    traits: monsterData.traits,
-    state: monsterData.state,
-    level: monsterData.level,
-    xp: monsterData.xp,
-    isPublic: monsterData.isPublic,
-    maxXp: monsterData.maxXp
-  })
-
-  await monster.save()
-
-  // Revalidation du cache pour rafraîchir le dashboard
-  revalidatePath('/app')
 }
 
 /**
@@ -269,6 +274,7 @@ export async function doActionOnMonster (id: string, action: MonsterAction): Pro
         // Si le monstre a gagné un niveau, mettre à jour la quête d'évolution
         if (leveledUp) {
           await checkAndUpdateQuest(user.id, 'evolve_monster', 1)
+          await checkAndUpdateQuest(user.id, 'reach_monster_level', 1)
         }
 
         // Mettre à jour la quête d'interaction (toutes les actions comptent)
