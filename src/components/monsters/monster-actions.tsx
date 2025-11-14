@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { doActionOnMonster } from '@/actions/monsters.actions'
-import { useMonsterAction, type MonsterAction } from '@/hooks/monsters'
+import { doActionOnMonster } from "@/actions/monsters.actions";
+import { useMonsterAction, type MonsterAction } from "@/hooks/monsters";
 
 /**
  * Props pour le composant MonsterActions
  */
 interface MonsterActionsProps {
   /** Callback appelé lorsqu'une action est déclenchée */
-  onAction: (action: MonsterAction) => void
+  onAction: (action: MonsterAction) => void;
   /** ID du monstre */
-  monsterId: string
+  monsterId: string;
 }
 
 /**
@@ -18,39 +18,39 @@ interface MonsterActionsProps {
  */
 interface ActionDefinition {
   /** Clé de l'action */
-  action: MonsterAction
+  action: MonsterAction;
   /** Emoji représentant l'action */
-  emoji: string
+  emoji: string;
   /** Label textuel de l'action */
-  label: string
+  label: string;
 }
 
 /**
  * Liste des actions disponibles pour interagir avec un monstre
  */
 const AVAILABLE_ACTIONS: ActionDefinition[] = [
-  { action: 'feed', emoji: '🍎', label: 'Nourrir' },
-  { action: 'comfort', emoji: '💙', label: 'Consoler' },
-  { action: 'hug', emoji: '🤗', label: 'Câliner' },
-  { action: 'wake', emoji: '⏰', label: 'Réveiller' }
-]
+  { action: "feed", emoji: "🍎", label: "Nourrir" },
+  { action: "comfort", emoji: "💙", label: "Consoler" },
+  { action: "hug", emoji: "🤗", label: "Câliner" },
+  { action: "wake", emoji: "⏰", label: "Réveiller" },
+];
 
 /**
  * Props pour le composant ActionButton
  */
 interface ActionButtonProps {
   /** Action associée au bouton */
-  action: MonsterAction
+  action: MonsterAction;
   /** Emoji à afficher */
-  emoji: string
+  emoji: string;
   /** Label du bouton */
-  label: string
+  label: string;
   /** Si true, le bouton est dans son état actif */
-  isActive: boolean
+  isActive: boolean;
   /** Si true, le bouton est désactivé */
-  isDisabled: boolean
+  isDisabled: boolean;
   /** Callback au clic */
-  onClick: () => void
+  onClick: () => void;
 }
 
 /**
@@ -72,53 +72,58 @@ interface ActionButtonProps {
  *   onClick={handleFeed}
  * />
  */
-function ActionButton ({
+function ActionButton({
   action,
   emoji,
   label,
   isActive,
   isDisabled,
-  onClick
+  onClick,
 }: ActionButtonProps): React.ReactNode {
   // Couleurs spécifiques par action
   const actionColors: Record<string, string> = {
-    feed: 'from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600 ring-orange-200',
-    comfort: 'from-blue-400 to-indigo-500 hover:from-blue-500 hover:to-indigo-600 ring-blue-200',
-    hug: 'from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 ring-pink-200',
-    wake: 'from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 ring-yellow-200'
-  }
+    feed: "from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600 ring-orange-200",
+    comfort:
+      "from-blue-400 to-indigo-500 hover:from-blue-500 hover:to-indigo-600 ring-blue-200",
+    hug: "from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 ring-pink-200",
+    wake: "from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 ring-yellow-200",
+  };
 
-  const colorClass = (action !== null && action !== undefined) ? actionColors[action] : 'from-gray-400 to-gray-500'
+  const colorClass =
+    action !== null && action !== undefined
+      ? actionColors[action]
+      : "from-gray-400 to-gray-500";
 
-  const baseClass = 'group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-5 rounded-2xl font-black text-white shadow-xl transition-all duration-300'
+  const baseClass =
+    "group relative overflow-hidden flex flex-col items-center justify-center gap-3 px-6 py-5 rounded-2xl font-black shadow-xl transition-all duration-300";
   const activeClass = isActive
-    ? 'scale-95 opacity-75'
+    ? "scale-95 opacity-75"
     : isDisabled
-      ? 'opacity-50 cursor-not-allowed'
-      : 'hover:scale-105 active:scale-95 cursor-pointer hover:shadow-2xl'
+      ? "opacity-50 cursor-not-allowed"
+      : "hover:scale-105 active:scale-95 cursor-pointer hover:shadow-2xl";
 
   // Convertir les classes de couleur gradient en couleurs solides
-  const solidColorClass = colorClass.includes('yellow')
-    ? 'bg-yellow-500'
-    : colorClass.includes('blue')
-      ? 'bg-blue-500'
-      : colorClass.includes('purple')
-        ? 'bg-purple-500'
-        : colorClass.includes('pink')
-          ? 'bg-pink-500'
-          : 'bg-moccaccino-500'
+  const solidColorClass = colorClass.includes("yellow")
+    ? "bg-yellow-100 border-yellow-500 text-yellow-800"
+    : colorClass.includes("blue")
+      ? "bg-blue-100 border-blue-500 text-blue-800"
+      : colorClass.includes("purple")
+        ? "bg-purple-100 border-purple-500 text-purple-800"
+        : colorClass.includes("pink")
+          ? "bg-pink-100 border-pink-500 text-pink-800"
+          : "bg-moccaccino-100 border-moccaccino-500 text-moccaccino-800";
 
   return (
     <button
-      className={`${baseClass} ${solidColorClass} border-2 border-white ${activeClass}`}
+      className={`${baseClass} ${solidColorClass} border-2 ${activeClass}`}
       onClick={onClick}
       disabled={isDisabled}
-      type='button'
+      type="button"
     >
-      <span className='relative text-4xl'>{emoji}</span>
-      <span className='relative text-xs uppercase tracking-wider'>{label}</span>
+      <span className="relative text-4xl">{emoji}</span>
+      <span className="relative text-xs uppercase tracking-wider">{label}</span>
     </button>
-  )
+  );
 }
 
 /**
@@ -137,32 +142,33 @@ function ActionButton ({
  * @example
  * <MonsterActions onAction={(action) => console.log(action)} />
  */
-export function MonsterActions ({ onAction, monsterId }: MonsterActionsProps): React.ReactNode {
-  const { activeAction, triggerAction } = useMonsterAction()
+export function MonsterActions({
+  onAction,
+  monsterId,
+}: MonsterActionsProps): React.ReactNode {
+  const { activeAction, triggerAction } = useMonsterAction();
 
   /**
    * Gère le déclenchement d'une action
    * @param {MonsterAction} action - Action à déclencher
    */
   const handleAction = (action: MonsterAction): void => {
-    triggerAction(action, onAction)
-    void doActionOnMonster(monsterId, action)
-  }
+    triggerAction(action, onAction);
+    void doActionOnMonster(monsterId, action);
+  };
 
   return (
-    <div className='space-y-6'>
+    <div className="space-y-6">
       {/* Titre des actions */}
-      <div className='text-center'>
-        <h3 className='text-2xl font-bold text-gray-900 mb-2'>
-          Actions
-        </h3>
-        <p className='text-sm text-gray-600 font-medium'>
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Actions</h3>
+        <p className="text-sm text-gray-600 font-medium">
           Interagis avec ta créature ! ✨
         </p>
       </div>
 
       {/* Grille de boutons d'action */}
-      <div className='grid grid-cols-2 gap-4'>
+      <div className="grid grid-cols-2 gap-4">
         {AVAILABLE_ACTIONS.map(({ action, emoji, label }) => (
           <ActionButton
             key={action}
@@ -171,17 +177,19 @@ export function MonsterActions ({ onAction, monsterId }: MonsterActionsProps): R
             label={label}
             isActive={activeAction === action}
             isDisabled={activeAction !== null}
-            onClick={() => { handleAction(action) }}
+            onClick={() => {
+              handleAction(action);
+            }}
           />
         ))}
       </div>
 
       {/* Indicateur d'action en cours */}
       {activeAction !== null && (
-        <div className='text-center'>
-          <div className='inline-flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full animate-pulse'>
-            <div className='w-2 h-2 bg-purple-500 rounded-full animate-ping' />
-            <span className='text-sm font-medium text-purple-700'>
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full animate-pulse">
+            <div className="w-2 h-2 bg-purple-500 rounded-full animate-ping" />
+            <span className="text-sm font-medium text-purple-700">
               Action en cours...
             </span>
           </div>
@@ -189,21 +197,22 @@ export function MonsterActions ({ onAction, monsterId }: MonsterActionsProps): R
       )}
 
       {/* Styles pour les animations */}
-      <style jsx>{`
-        @keyframes shine {
-          0% {
-            transform: translateX(-100%) skewX(-12deg);
+      <style jsx>
+        {`
+          @keyframes shine {
+            0% {
+              transform: translateX(-100%) skewX(-12deg);
+            }
+            100% {
+              transform: translateX(200%) skewX(-12deg);
+            }
           }
-          100% {
-            transform: translateX(200%) skewX(-12deg);
-          }
-        }
 
-        .animate-shine {
-          animation: shine 1.5s ease-in-out;
-        }
-      `}
+          .animate-shine {
+            animation: shine 1.5s ease-in-out;
+          }
+        `}
       </style>
     </div>
-  )
+  );
 }
