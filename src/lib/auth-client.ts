@@ -7,3 +7,10 @@ export const signInWithGithub = async () => {
     callbackURL: '/app'
   })
 }
+
+export const signInWithGoogle = async () => {
+  await authClient.signIn.social({
+    provider: 'google',
+    callbackURL: '/app'
+  })
+}
