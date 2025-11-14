@@ -112,7 +112,7 @@ function DashboardContent({
             />
 
             {/* Statistiques en grille horizontale */}
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               {/* Stat 1: Total Compagnons */}
               <div className="rounded-lg bg-moccaccino-50 border-2 border-moccaccino-200 p-5">
                 <div className="flex items-center justify-between">
